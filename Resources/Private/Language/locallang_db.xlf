@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="en" datatype="plaintext" original="messages" date="2019-11-23T11:31:00Z"
+          product-name="webhelp">
+        <header/>
+        <body>
+            <trans-unit id="extension.template.constants.blackboard.flagAllowAlways">
+                <source>Always Javascript ans Styles?: Should the basic resources always be loaded (default: true) or not?</source>
+                <target>Immer Javascript und Styles?: Sollen die Basisressourcen immer geladen werden (Standard: true) oder nicht?</target>
+            </trans-unit>
+            <trans-unit id="extension.template.constants.javaScript.basicLibPath">
+                <source>List of Paths to Javascript: Do you want to use a different basic JavaScript to optimize frontend editing? Then change the path oder add a path of an additional javascript-file to the comma-separated list.</source>
+                <target>Liste der Pfade zu Javascript: Möchten Sie ein anderes grundlegendes JavaScript verwenden, um die Frontend-Bearbeitung zu optimieren? Ändern Sie dann den Pfad oder fügen Sie einen Pfad einer zusätzlichen Javascript-Datei in die kommagetrennte Liste ein.</target>
+            </trans-unit>
+            <trans-unit id="extension.template.constants.stylesheets.additionalStylesheets">
+				<source>List of Paths to Stylesheets: the list of paths is comma-separated and contain all needed stylesheets for the webcomponets.</source>
+                <target>Liste der Pfade zu Stylesheets: Die Liste der Pfade ist durch Kommas getrennt und enthält alle benötigten Stylesheets für die Webcomponets.</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
