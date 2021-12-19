@@ -23,9 +23,9 @@ namespace Porthd\Webhelp\Exception;
  ***************************************************************/
 
 /**
- * An exception thrown if the return value type of a signal is not the expected one.
+ * An exception thrown if there is something, which shoould stop the current process immediately
  */
-class WebhelpException extends \Exception
+class DieException extends \Exception
 {
 
 }

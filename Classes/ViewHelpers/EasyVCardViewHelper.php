@@ -49,7 +49,7 @@ namespace Porthd\Webhelp\ViewHelpers;
  */
 
 use Porthd\Webhelp\Config\WebhelpConf;
-use Porthd\Webhelp\Exception\WebhelpException;
+use Porthd\Webhelp\Exception\DieException;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
@@ -187,7 +187,7 @@ class EasyVCardViewHelper extends AbstractTagBasedViewHelper
     public function render()
     {
         if (!empty($this->arguments[self::OUT_TAG_NAME])) {
-            throw new WebhelpException(
+            throw new DieException(
                 'The argument `' . self::OUT_TAG_NAME . '` is forbidden in this viewhelper `' . self::SELF_NAME . '`.',
                 1627754566
             );

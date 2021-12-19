@@ -18,10 +18,11 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'info@mobger.de',
     'state' => 'experimental',
     'clearCacheOnLoad' => 0,
-    'version' => '10.1.0',
+    'version' => '11.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-10.4.99',
+            'typo3' => '10.4.0--11.5.99',
+            'php' => '7.4.0-8.0.99',
         ],
         'conflicts' => [],
         'suggests' => [],
