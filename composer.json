@@ -2,25 +2,33 @@
     "name": "porthd/webhelp",
     "type": "typo3-cms-extension",
     "description": "Build simple Webcomponents like icalendar with viewhelpers",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.düddelei.de/",
+    "version": "11.1.0",
+    "keywords": [
+        "TYPO3 CMS",
+        "Frontendhelper",
+        "webcomponents",
+        "Extension"
+    ],
     "authors": [
         {
             "name": "Dr. Dieter Porth",
             "role": "Developer"
         }
     ],
-    "license": "GPL-2.0-or-later",
     "require": {
         "typo3/cms-core": "^10.4.0 || ^11.5.0",
         "php": "~7.4.0 || ~8.0.0"
     },
     "autoload": {
         "psr-4": {
-            "Porthd\\Webhelp\\": "Classes"
+            "Porthd\\Webhelp\\": "Classes/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Porthd\\Webhelp\\Tests\\": "Tests"
+            "Porthd\\Webhelp\\Tests\\": "Tests/"
         }
     },
     "replace": {

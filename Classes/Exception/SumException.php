@@ -7,7 +7,7 @@ namespace Porthd\Webhelp\Exception;
  *
  *  Copyright notice
  *
- *  (c) 2021 Dr. Dieter Porth <info@mobger.de>
+ *  (c) 2021 Dr. Dieter Porth <info@mobger.de> - TYPO3-developer
  *
  *  All rights reserved
  *

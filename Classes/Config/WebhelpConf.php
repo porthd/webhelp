@@ -3,13 +3,12 @@
 namespace Porthd\Webhelp\Config;
 
 use PDO;
-use Porthd\Simpledataedit\Editor\Interfaces\CustomEditorInterface;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2021 Dr. Dieter Porth <info@mobger.de>
+ *  (c) 2021 Dr. Dieter Porth <info@mobger.de> - TYPO3-developer
  *
  *  All rights reserved
  *

@@ -6,7 +6,7 @@ namespace Porthd\Webhelp\ViewHelpers;
  *
  *  Copyright notice
  *
- *  (c) 2021 Dr. Dieter Porth <info@mobger.de>
+ *  (c) 2021 Dr. Dieter Porth <info@mobger.de> - TYPO3-developer
  *
  *  All rights reserved
  *
@@ -117,7 +117,7 @@ class EasyTextLogoViewHelper extends AbstractTagBasedViewHelper
     }
 
     /**
-     * render a webcompomnent, which can use the a HTML-text and only children-context or warp children-context in <simpledataedit>-tag
+     * render a webcompomnent, which can use the a HTML-text and only children-context or warp children-context in <popup-info>-tag
      *  The requierements are
      *  a) instanciated editor-class
      *
