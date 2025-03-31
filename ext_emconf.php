@@ -11,18 +11,16 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'webcomponents viewhelper',
-    'description' => 'Build simple Webcomponents like icalendar or vcard with viewhelpers',
+    'title' => 'webcomponents examples',
+    'description' => 'allows you to use simple web components like porthd-icalendar, porthd-vcard or porthd-listselect in your fluid-templates as viewhelper',
     'category' => 'services',
     'author' => 'Dr. Dieter Porth',
     'author_email' => 'info@mobger.de',
     'state' => 'experimental',
-    'clearCacheOnLoad' => 0,
-    'version' => '11.0.0',
+    'version' => '13.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.0-11.5.99',
-            'php' => '7.4.0-8.0.99',
+            'typo3' => '9.5.0-13.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],

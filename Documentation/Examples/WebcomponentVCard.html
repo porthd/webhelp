@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vibe coded: porth's vCard</title>
+</head>
+<body>
+
+<porthd-vcard button-label="Meine vCard speichern"
+             button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
+             file-name="porth-test"
+>
+    <div data-id="FN">Max Mustermann</div>
+    <div data-id="N">Mustermann;Max;;;</div>
+    <div data-id="NICKNAME">Maxi</div>
+    <div data-id="GENDER">M</div>
+    <div data-id="TITLE">Dr.</div>
+    <div data-id="ROLE">Leitender Entwickler</div>
+    <div data-id="ORG">Mustermann GmbH</div>
+    <div data-id="EMAIL">max.mustermann@example.com</div>
+    <div data-id="EMAIL" data-type="work">max@company.com</div>
+    <div data-id="TEL" data-type="home">+49 30 1234567</div>
+    <div data-id="TEL" data-type="work,voice">+49 30 7654321</div>
+    <div data-id="TEL" data-type="cell">+49 171 1234567</div>
+    <div data-id="ADR" data-type="home">;;Musterstraße 1;Berlin;;10115;Deutschland</div>
+    <div data-id="ADR" data-type="work">;;Firmenstraße 2;Berlin;;10117;Deutschland</div>
+    <div data-id="URL">https://www.example.com</div>
+    <div data-id="BDAY">1980-05-20</div>
+    <div data-id="ANNIVERSARY">2010-06-15</div>
+    <div data-id="NOTE">Dies ist eine Beispiel vCard.</div>
+    <div data-id="PHOTO" data-type="JPEG" data-value="URI">https://www.example.com/photo.jpg</div>
+    <div data-id="LOGO" data-type="PNG" data-value="URI">https://www.example.com/logo.png</div>
+    <div data-id="REV">20240329T120000Z</div>
+</porthd-vcard>
+<br/>
+<porthd-vcard
+    button-label="Meine <strong>vCard</strong> speichern"
+    button-style="background: green; color: white; padding: 10px 20px; border-radius: 5px;"
+    file-name="testing"
+>
+
+    <div data-id="FN">Max Mustermann</div>
+    <div data-id="N">Mustermann;Max;;;</div>
+    <div data-id="EMAIL">max@example.com</div>
+    <div data-id="TEL" data-type="home">+49123456789</div>
+</porthd-vcard>
+<br/>
+<porthd-vcard
+    button-label="Meine volle vCard speichern"
+    button-style="background: green; color: white; padding: 10px 20px; border-radius: 5px;">
+
+    <div data-id="FN">Max Mustermann</div>
+    <div data-id="EMAIL">max@example.com</div>
+    <div data-id="TEL">+49123456789</div>
+</porthd-vcard>
+<br/>
+<porthd-vcard
+    button-label="Fehler 1 (ohne Namen) vCard speichern"
+    button-style="background: red; color: white; padding: 10px 20px; border-radius: 5px;">
+
+    <div data-id="EMAIL">max@example.com</div>
+    <div data-id="TEL">+49123456789</div>
+</porthd-vcard>
+<br/>
+<porthd-vcard
+    button-label="Fehler 2 (unbekantes Datum) vCard speichern"
+    button-style="background: red; color: white; padding: 10px 20px; border-radius: 5px;">
+
+    <div data-id="good-or-bad">Vibe-codeing</div>
+    <div data-id="FN">Max Mustermann</div>
+    <div data-id="EMAIL">max@example.com</div>
+    <div data-id="TEL">+49123456789</div>
+</porthd-vcard><br>
+<porthd-vcard
+    button-label="Fehler 3 (ohne Data-id) vCard speichern"
+    button-style="background: red; color: white; padding: 10px 20px; border-radius: 5px;">
+
+    <div>Vibe-codeing</div>
+    <div data-id="FN">Max Mustermann</div>
+    <div data-id="EMAIL">max@example.com</div>
+    <div data-id="TEL">+49123456789</div>
+</porthd-vcard>
+
+
+<script>
+    class VCardGenerator extends HTMLElement {
+        constructor() {
+            super();
+            this.attachShadow({mode: "open"});
+
+            // Button erstellen
+            this.button = document.createElement("button");
+            this.updateButton();
+            this.button.addEventListener("click", () => this.downloadVCard());
+
+            this.shadowRoot.appendChild(this.button);
+        }
+
+        connectedCallback() {
+            this.updateButton();
+        }
+
+        static get observedAttributes() {
+            return ["button-label", "button-style", "file-name"];
+        }
+
+        attributeChangedCallback() {
+            this.updateButton();
+        }
+
+        updateButton() {
+            this.button.innerHTML = this.getAttribute("button-label") || "download vCard";
+            this.button.setAttribute("style", this.getAttribute("button-style") ||
+                "background: #007bff; color: white; padding: 10px 15px; border-radius: 5px; border: none; cursor: pointer;");
+        }
+
+        downloadVCard() {
+            const vCardAttributes = {
+                // PARAM_IN_VCARD : [ Description, flagVALUE, flagTYPE, additional data-Parameter ]
+                "FN": ["Full Name (Required)", 0, 0, '',],
+
+                "ADR": ["Address", 0, 1, '',],
+                "ANNIVERSARY": ["Anniversary", 1, 0, '',],
+                "BDAY": ["Birthday", 1, 0, '',],
+                "CALADRURI": ["A URL to use for sending a scheduling request to the person's calendar", 0, 0, '',],
+                "CALURI": ["A URL to the person's calendar", 0, 0, '',],
+                "CATEGORIES": ["A list of 'tags' that can be used to describe the object represented by this vCard", 0, 0, '',],
+                "CLIENTPIDMAP": ["Used for synchronizing different revisions of the same vCard.", 0, 0, '',],
+                "EMAIL": ["Email Address", 0, 1, '',],
+                "FBURL": ["Defines a URL that shows when the person is 'free' or 'busy' on their calendar.", 0, 0, '',],
+                "GEO": ["Geo-coordinates (V4.0)", 0, 0, '',],
+                "GENDER": ["Gender", 0, 0, '',],
+                "IMPP": ["Defines an instant messenger handle", 0, 0, '',],
+                "KEY": ["Public encryption-key (V4.0)", 0, 0, 'MEDIATYPE,ENCODING',],
+                "KIND": ["Defines the type of entity that this vCard represents: 'application', 'individual', 'group', 'location' or 'organization'; experimental.", 0, 0, '',],
+                "LABEL": ["Language", 0, 1, '',],
+                "LANG": ["Language", 0, 0, '',],
+                "LOGO": ["Company Logo (V4.0)", 1, 0, 'ENCODING',],
+                "MEMBER": ["Defines a member that is part of the group that this vCard represents.", 0, 0, '',],
+                "N": ["Name (V4.0 - optional)", 0, 0, '',],
+                "NICKNAME": ["Nickname", 0, 0, '',],
+                "NOTE": ["Note", 1, 0, 'LANGUAGE',],
+                "ORG": ["Organization", 0, 1, '',],
+                "PHOTO": ["Photo", 1, 1, 'ENCODING,MEDIATYPE',],
+                "RELATED": ["Another entity that the person is related to.", 0, 1, '',],
+                "REV": ["Last Updated", 1, 0, '',],
+                "ROLE": ["Role", 0, 0, '',],
+                "SOUND": ["It specifies the pronunciation of the FN.", 0, 0, '',],
+                "SOURCE": ["A URL that can be used to get the latest version of this vCard.", 0, 0, '',],
+                "TEL": ["Phone Number", 0, 1, '',],
+                "TITLE": ["Title", 0, 0, '',],
+                "TZ": ["Time-zone", 0, 0, '',],
+                "URL": ["Website", 0, 1, 'TITLE',],
+                "XML": ["Any XML data that is attached to the vCar", 0, 1, 'TITLE',],
+            };
+
+            let vcardData = "BEGIN:VCARD\nVERSION:4.0\n";
+            let errors = [];
+            this.querySelectorAll(":not([data-id])").forEach(element => {
+                let lostValue =  element.textContent.trim(); // Entferne TYPE/EXTRA
+                errors.push(`❌ Missing data-id with value:\n\n>>>"${lostValue}"<<<\n\n\nCurrent text-string:\n` + this.innerHTML);
+            });
+
+            // Validation: Missing or invalid data-id values
+            this.querySelectorAll("[data-id]").forEach(element => {
+                let dataId = element.getAttribute("data-id").split(";")[0]; // Entferne TYPE/EXTRA
+                dataId = dataId.toUpperCase();
+                if (!vCardAttributes[dataId]) {
+                    errors.push(`❌ Unknown data-id: ${dataId} → no valid vCard 4.0 attribute.`);
+                }
+            });
+
+            // Check required fields
+            if (!this.querySelector("[data-id='FN']")) errors.push("❌ Required field missing: FN (Full Name) - Case sensitive?");
+
+            // If errors occur, abort
+            if (errors.length > 0) {
+                alert(`Error generating vCard:\n\n${errors.join("\n")}`);
+                return;
+            }
+            // add only valid attributes into vCard
+            // The additional attributes type and value are not checked!!
+            let flagError = false;
+            this.querySelectorAll("[data-id]").forEach(element => {
+                flagError = false;
+                let attr = element.getAttribute("data-id");
+                attr = attr.toUpperCase(); // base-attribute (without TYPE/EXTRA)
+                if (!vCardAttributes.hasOwnProperty(attr)) {
+                    errors.push(`❌ undefined data-id: ${attr} (failed validation of allowed fields in vcard-objects)`);
+                    flagError = true;
+                }
+                let listAdd = ((vCardAttributes[attr][3])?vCardAttributes[attr][3].split(','):[]);
+                let type = ((vCardAttributes[attr][2]) ? element.getAttribute("data-type"): '');
+                let value = ((vCardAttributes[attr][1]) ?element.getAttribute("data-value"):'');
+                let content = element.textContent.trim();
+
+                if (!flagError) {
+                    let vcardLine = attr;
+                    if (type) vcardLine += `;TYPE=${type}`;
+                    if (value) vcardLine += `;VALUE=${value}`;
+                    if (listAdd.length>0) {
+                        listAdd.forEach((param) =>{
+                            let dataparam= 'data-'+ param.toLowerCase();
+                            let datavalue = element.getAttribute(dataparam);
+                            if (datavalue) vcardLine += `;${param}=${datavalue}`;
+                        });
+                    }
+                    vcardLine += `:${content}`;
+                    vcardData += vcardLine + "\n";
+                }
+            });
+
+            vcardData += "END:VCARD";
+            if (errors.length > 0) {
+                alert(`Error generating vCard:\n\n${errors.join("\n")}` + "\n\nGenerated Card-Code:\n\n" + vcardData);
+                return;
+            }
+
+            // Get filename from attribute (default: "contact.vcf")
+            let fileName = this.getAttribute("file-name") || "contact.vcf";
+
+            // If the filename does not end with ".vcf", add it automatically
+            if (!fileName.toLowerCase().endsWith(".vcf")) {
+                fileName += ".vcf";
+            }
+
+            // Make file available for download
+            const blob = new Blob([vcardData], {type: "text/vcard"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    }
+
+    customElements.define("porthd-vcard", VCardGenerator);
+
+</script>
+
+</body>
+</html>

@@ -1,239 +1,180 @@
-# Extension Webhelp
-##A notice
-The extension is currently still in the experimental phase.
-The web components are not very mature yet. I will be happy to receive suggestions for improvement.
-If you have your own code for WebComponets, I'll be happy to include it in this extension.
-Email: info@mobger.de
+# Content
+## Warning
+I have only tested it with TYPO3 12. But it should work with other TYPO3-versions too.
 
+## Goal of the Extension
+The extension provides browser-supported web components for use in templates.
+Web components are helper tags that modify the view and/or interactive behavior.
+The web components were created using [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), so any errors are, of course, not my fault as the developer, but the AI's, because it didn't take all edge cases into account.
 
-## What is the aim of the extension
-It provides view helpers for integrators,
-which in turn allow the use of WebComponents.
-Web componentets are suitable to
-- Offer address data as a VCard for download
-- Offer events as ICalendar files for download
-- Offer contact details as a VCard file for download
-- Easy to integrate pop-up windows, m example for auxiliary tests
-- ....
+## Installation and Use
+1. Install the extension
+1. Using the traditional method
+2. Using composer with `composer require porthd/webhelp`
+2. Check in the install tool area whether the extension configuration meets your requirements.
+   By default, TypoScript uses the `page = PAGE` object to load the JavaScript.
+3. Use the web component tags in your Fluid templates. See the `Resources/Private/Examples` folder for how to use the web component tags in Fluid templates or HTML.
 
-## installation
-Install the extension by downloading it or via composer. Then activate them.
-TypoScript does not need this service.
+## Defined Web Components
 
-## Viewhelper
-Two view helpers are currently defined. You can use the prefix `webhelp:` in the Fluid template.
+Web Component | Task | Links
+-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------
+porthd-vcard | Creates a contact file and converts the included list of data into a downloadable vcf file. The included data is validated. | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) --- [RFC6350 Specification](https://www.rfc-editor.org/rfc/rfc6350)
+porthd-icalendar | Creates an events file and converts an included list of data for one or more events into a downloadable ics file. The included data is validated. | [Specification](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20is%20a%20data%20format%20for%20exchange%20of%20calendar%20content%2C,was%20originally%20defined%20in%20RFC%202445%20%5B10%5D%20in%201998.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png)
+porthd-listselect | Restricts the output of long nested lists to a defined level and allows searching hidden subheadings. | [Overview of menus on the web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown menu for large nesting](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Mediaevent on menus](https://www.mediaevent.de/tutorial/css-responsive-menu.html)
 
-### EasyIcalendar for ICS files
-`<webhelp: easyIcalendar>` allows the creation of an ICS file. You can transfer the necessary information individually, as a JSON string or as a fluid array / model.
-#### Example code in the fluid
-```
+### Parameters in `<porthd-vcard>`
+The web component `<porthd-vcard>` includes a list of HTML tags that define the individual parameters in the vcard file.
+The usage examples can be found here in the documentation in ['Examples/WebcomponentVCard.html'](./Examples/WebcomponentVCard.html).
+The value in `data-id` determines the respective parameter in the subsequent vCard file.
+If necessary, additional parameters may be allowed in the main parameter, such as the TYPE parameter or the VALUE parameter, or similar, as shown in the table below.
+In contrast to the iCalendar Web Component defined in this extension, no other attributes are accepted besides the data attributes mentioned.
+If you add additional data attributes to the included elements, they will be inserted without verification according to the following scheme:
+`<div data-id="ATTACH" data-fmttype="application/postscript">ftp://example.com/pub/reports/r-960812.ps</div>`
+results in the following entry in the iCalendar:
+`ATTACH;FMTTYPE=application/postscript:ftp://example.com/pub/reports/r-960812.ps`.
+Please ensure that a valid combination is always used.
 
-<!-- TYPO3-Fluidtemplate:-->
-<!-- ==================== -->
-<div>
-    <webhelp:easyICalendar
-            description="Meine Beschreibung2"
-            location="Mein Ort2"
-            organizer="IchSchauWeg"
-            contact="info@mobger.de"
-            summary="Test2"
-            url="Irgendwo im Universum2"
-            dateStart="1995-12-17T03:24:00"
-            dateEnd="1995-12-17T05:24:00"
-            fileName="Klaus2.ics"
-    >
-        Mein Event (Limits)
-    </webhelp:easyICalendar>
-    Mein Event (EndDate)
-</div>
+**Table with the validated IDs for included elements**
 
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <easy-icalendar eventJson="{&quot;description&quot;:&quot;Meine Beschreibung2&quot;,&quot;location&quot;:&quot;Mein Ort2&quot;,&quot;summary&quot;:&quot;Test2&quot;,&quot;uid&quot;:&quot;Irgendwo im Universum2&quot;,&quot;url&quot;:&quot;Irgendwo im Universum2&quot;,&quot;dateStart&quot;:&quot;19951217T022400&quot;,&quot;dateEnd&quot;:&quot;19951217T042400&quot;,&quot;duration&quot;:&quot;&quot;,&quot;organizer&quot;:&quot;IchSchauWeg&quot;,&quot;contact&quot;:&quot;info@mobger.de&quot;,&quot;fileName&quot;:&quot;&quot;}">
-        Mein Event (Limits)
-    </easy-icalendar>
-    Mein Event (EndDate)
-</div>
+Parameter | Definition | `data-value` | `data-type` | `data-`*
+--|--|--|--|--
+ADR | Address | 0 | 1 |
+ANNIVERSARY | Anniversary | 1 | 0 |
+BDAY | Birthday | 1 | 0 |
+BIRTHPLACE | Person's birthplace | 0 | 0 |
+CALADRURI | URL to send an appointment request to the person's calendar | 0 | 0 |
+CALURI | URL to the person's calendar | 0 | 0 |
+CATEGORIES | List of tags to describe the object represented by this vCard | 0 | 0 |
+CLIENTPIDMAP | Used to synchronize different revisions of the same vCard. | 0 | 0 |
+DEATHDATE | Person's death date | 0 | 0 |
+DEATHPLACE | Person's death place | 0 | 0 |
+EMAIL | Email address | 0 | 1 |
+EXPERTISE | Person's field of expertise | 0 | 0 |
+FBURL | Defines a URL that indicates when the person is free or busy in their calendar., 0, 0 |
+**FN** | **Full Name (Required)** | **0** | **0** | ** **
+GENDER | Gender | 0 | 0 |
+GEO | Geocoordinates (V4.0) | 0 | 0 |
+HOBBY | Person's leisure activity | 0 | 0 |
+IMPP | Username for an instant messenger. This was included in the official vCard specification in version 4.0. | 0 | 0 |
+INTEREST | Leisure activity the person is interested in, but not necessarily engaged in. | 0 | 0 |
+KEY | Public encryption key (V4.0) | 0 | 0 | MEDIATYPE,ENCODING
+KIND | Defines the entity type this vCard represents: 'Application' | 'Individual' | 'Group' | 'Location' or 'Organization'; experimental., 0, 0 | ',
+LABEL | Language | 0 | 1 |
+LANG | Language | 0 | 0 |
+LOGO | Company logo (V4.0) | 1 | 0 | ENCODING
+MEMBER | Defines a member of the group this vCard represents. | 0 | 0 |
+N | Name (V4.0 – optional) | 0 | 0 |
+NICKNAME | Nickname | 0 | 0 |
+NOTE | Note | 1 | 0 | LANGUAGE
+ORG | Organization | 0 | 1 |
+ORG-DIRECTORY | URI for the person's workplace; this can be used to retrieve information about the person's employees. | 0 | 0 |
+PHOTO | Photo | 1 | 1 | ENCODING,MEDIATYPE
+RELATED | Another entity with which the person is related. | 0 | 1 |
+REV | Last updated | 1 | 0 |
+ROLE | Role | 0 | 0 |
+SOUND | It specifies the pronunciation of the FN., 0, 0 |
+SOURCE | A URL where the latest version of this vCard can be retrieved. | 0 | 0 |
+TEL | Telephone number | 0 | 1 |
+TITLE | Title | 0 | 0 |
+TZ | Time zone | 0 | 0 |
+URL | Website | 0 | 1 | TITLE
+XML | All XML data associated with the vCard | 0 | 1 | TITLE
 
+For precise content usage, please refer to the vCard definition [on Wikipedia](https://en.wikipedia.org/wiki/VCard) or [on the specification](https://www.rfc-editor.org/rfc/rfc6350.html).
 
-<!-- TYPO3-Fluidtemplate:-->
-<!-- ==================== -->
-<div>
-    <webhelp:easyICalendar
-            description="Meine Beschreibung"
-            location="Mein Ort"
-            organizer="IchSchauWeg"
-            contact="info@mobger.de"
-            summary="Test"
-            url="Irgendwo im Universum"
-            dateStart="1995-12-17T03:24:00"
-            dateEnd=""
-            duration="PT12H"
-            fileName="Klaus.ics"
-    >
-        Mein Event (Duration)
-    </webhelp:easyICalendar>
-</div>
+To make the file available, a button is defined in the shadow DOM in the web component.
+The attributes can be used to define the appearance and text of the button.
 
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <easy-icalendar eventJson="{&quot;description&quot;:&quot;Meine Beschreibung&quot;,&quot;location&quot;:&quot;Mein Ort&quot;,&quot;summary&quot;:&quot;Test&quot;,&quot;uid&quot;:&quot;Irgendwo im Universum&quot;,&quot;url&quot;:&quot;Irgendwo im Universum&quot;,&quot;dateStart&quot;:&quot;19951217T022400&quot;,&quot;dateEnd&quot;:&quot;&quot;,&quot;duration&quot;:&quot;PT12H&quot;,&quot;organizer&quot;:&quot;IchSchauWeg&quot;,&quot;contact&quot;:&quot;info@mobger.de&quot;,&quot;fileName&quot;:&quot;&quot;}">
-        Mein Event (Duration)
-    </easy-icalendar>
-</div>
+**Attributes in `<porthd-vcard>`**
 
+Attributes | Function
+--|--
+button-label | Text of the button, where TEXT can also contain HTML and SVG tags.
+button-style | CSS properties for the button's style element in the Shadow DOM
+file-name | Name for the file to be downloaded
 
-<!-- TYPO3-Fluidtemplate:-->
-<!-- ==================== -->
-<div>
-    <webhelp:easyICalendar
-            fluidData="{description:'Meine Beschreibung2',
-                                    location:'Mein Ort2',
-                                    summary:'Test2',
-                                    url:'Irgendwo im Universum2',
-                                    dateStart:'1995-12-17T03:24:00',
-                                    dateEnd:'1995-12-17T05:24:00',
-                                    duration:'',
-                                    organizer:'IchSchauWeg',
-                                    fileName:'Klaus2.ics',
-                        contact:'info@mobger.de'}"
-    >
-        Mein Event (FluidData)
-    </webhelp:easyICalendar>
-</div>
+### Parameters in `<porthd-icalendar>`
+The web component `<porthd-icalendar>` includes a list of HTML tags that define the individual parameters in the icalendar file.
+The usage examples can be found here in the documentation in ['Examples/WebcomponentICalendar.html'](./Examples/WebcomponentICalendar.html).
+If you add additional data attributes to the included elements, they will be inserted without verification according to the following scheme:
+`<div data-id="ATTACH" data-fmttype="application/postscript">ftp://example.com/pub/reports/r-960812.ps</div>`
+results in the following entry in the iCalendar:
+`ATTACH;FMTTYPE=application/postscript:ftp://example.com/pub/reports/r-960812.ps`.
+Please ensure that a valid combination is always used.
 
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <easy-icalendar eventJson="{&quot;description&quot;:&quot;Meine Beschreibung2&quot;,&quot;location&quot;:&quot;Mein Ort2&quot;,&quot;summary&quot;:&quot;Test2&quot;,&quot;uid&quot;:&quot;Irgendwo im Universum2&quot;,&quot;url&quot;:&quot;Irgendwo im Universum2&quot;,&quot;dateStart&quot;:&quot;19951217T022400&quot;,&quot;dateEnd&quot;:&quot;19951217T042400&quot;,&quot;duration&quot;:&quot;&quot;,&quot;organizer&quot;:&quot;IchSchauWeg&quot;,&quot;contact&quot;:&quot;info@mobger.de&quot;,&quot;fileName&quot;:&quot;&quot;}">
-        Mein Event (FluidData)
-    </easy-icalendar>
-</div>
+**Table with the validated IDs for included elements**
 
+data-id | Description
+-----|-----
+ATTACH | Attachments (e.g., PDF agenda)
+ATTENDEE | Event attendees
+BEGIN | always with VEVENT - Define a new event in the file. Not required for a single event. Only directly after END
+CALSCALE | Calendar scale (e.g., GREGORIAN)
+CATEGORIES | Event categories
+CLASS | Visibility (PUBLIC, PRIVATE, CONFIDENTIAL)
+CREATED | Creation time
+DESCRIPTION | Longer description of the event
+DTEND | End time of the event
+DTSTAMP | Creation timestamp (required)
+DTSTART | Start time of the event (required)
+END | always with VEVENT - Define a new event in the file. Not required for a single event. BEGIN must follow to define the next event
+EXDATE | Exceptions for recurrences
+GEO | Geographical coordinates (latitude; longitude)
+LAST-MODIFIED | Time of last change
+LOCATION | Event location
+METHOD | Calendar method (e.g., PUBLISH)
+ORGANIZER | Organizer
+PRIORITY | Priority (1-9, 1 = highest)
+RECURRENCE-ID | Reference to a recurring event
+RRULE | Rule for recurring events
+SEQUENCE | Number of changes to the event
+STATUS | Status (e.g., CONFIRMED, CANCELLED)
+SUMMARY | Short description of the event
+TRANSP | Transparency (OPAQUE = occupied, TRANSPARENT = free)
+UID | Unique identification number of the event (required)
+URL | Web link to the event
+X-WR-CALNAME | Display name of the calendar
+X-WR-TIMEZONE | Calendar time zone
 
-<!-- TYPO3-Fluidtemplate:-->
-<!-- ==================== -->
-<div>
-    <!-- prohibit Fluid from building an array from JSON -->
-    <f:alias map="{jsonOneFluid: '{\" description\":\"Meine Beschreibung2\",\"location\":\"Mein Ort2\",\"summary\":\"Test2\",',
-                   jsonTwoFluid :'\"url\":\"Irgendwo im Universum2\",\"dateStart\":\"1995-12-17T03:24:00\",\"dateEnd\":\"1995-12-17T05:24:00\",\"duration\":\"\",\"organizer\":\"IchSchauWeg\",\"fileName\":\"Klaus2.ics\",\"contact\":\"info@mobger.de\"}'}">
-    <webhelp:easyICalendar
-            jsonData="{jsonOneFluid}{jsonTwoFluid}"
-    >
-        Mein Event (JsonData)
-    </webhelp:easyICalendar>
-    </f:alias>
-</div>
+**Attributes in `<porthd-vcard>`**
+This web component has four attributes. Two are used to define the button, one is the ProdID for the iCalendar entry
 
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <!-- prohibit Fluid from building an array from JSON -->
+Attributes | Function
+--|--
+button-label | Text of the button, where TEXT can also contain HTML and SVG tags.
+button-style | CSS properties for the button's style element in the Shadow DOM
+file-name | Name for the file being downloaded; the '.ics' extension is always appended.
+prodid | Identifier for generating the iCalendar file. This entry is not standardized.
 
-    <easy-icalendar eventJson="{&quot;description&quot;:&quot;Test2&quot;,&quot;location&quot;:&quot;Mein Ort2&quot;,&quot;summary&quot;:&quot;Test2&quot;,&quot;uid&quot;:&quot;Irgendwo im Universum2&quot;,&quot;url&quot;:&quot;Irgendwo im Universum2&quot;,&quot;dateStart&quot;:&quot;19951217T022400&quot;,&quot;dateEnd&quot;:&quot;19951217T042400&quot;,&quot;duration&quot;:&quot;&quot;,&quot;organizer&quot;:&quot;IchSchauWeg&quot;,&quot;contact&quot;:&quot;info@mobger.de&quot;,&quot;fileName&quot;:&quot;&quot;}">
-        Mein Event (JsonData)
-    </easy-icalendar>
-</div>
-```
+### Parameters in `<porthd-listselect>`
 
-### EasyVCard for ICS files
-`<webhelp: easyVCard>` allows the creation of an ICS file. You can transfer the necessary information individually, as a JSON string or as a fluid array / model. The use is the same as above for `<webhelp: easyIcalendar>`.
-#### Example code in the fluid
-```
-<!-- example input (TYPO3-template)-->
-<!-- ===================================== -->
-     <webhelp:easyVCard
-                                n="Porth;Dieter;;Dr;"
-                                fn="Dr. Dieter Porth"
-                                adr="{first:';;Grünenstraße 23;Bremen;;28199;Germany'}"
-                                adrtype="{first:'TYPE=home;LABEL=\"Grünenstraße 23\n28199 Bremen\nDeutschland\"'}"
-                        email="info@mobger.de"
-                        tel="{first: 'tel:049-421-51483548', second:'+49-160-99180688'}"
-                        teltype="{first:'TYPE=home,voice',second:'TYPE=mobile,voice'}"
-                        url="https://www.düddelei.de"
-                        uid="https://www.mobger.de/"
-                        role="TYPO3-Developer"
-     >
-         my Imprint (detailData needed)
-     </webhelp:easyVCard>
+The web component `<porthd-listselect>` includes a nested list of HTML tags that can represent, for example, a complex menu, a site's sitemap, an organizational chart, or a table of contents. It allows easy filtering by level and/or keywords, which are offered according to the autocomplete principle.
+An example of use can be found here in the documentation in ['Examples/WebcomponentListSelectFilter.html'](./Examples/WebcomponentListSelectFilter.html).
+The web component provides a relatively large number of attributes for configuring the filter form.
 
-<!-- example output-->
-<!-- ===============================-->
-    <easy-vcard eventJson="{&quot;n&quot;:&quot;Porth;Dieter;;Dr;&quot;,&quot;uid&quot;:&quot;https:\/\/www.d\u00fcddelei.de&quot;,&quot;email&quot;:&quot;info@mobger.de&quot;,&quot;fn&quot;:&quot;Dr. Dieter Porth&quot;,&quot;geo&quot;:&quot;&quot;,&quot;logo&quot;:&quot;&quot;,&quot;note&quot;:&quot;&quot;,&quot;org&quot;:&quot;private&quot;,&quot;photo&quot;:&quot;&quot;,&quot;role&quot;:&quot;TYPO3-Developer&quot;,&quot;tz&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/www.d\u00fcddelei.de&quot;,&quot;adr&quot;:[&quot;;TYPE=TYPE=home;LABEL=\&quot;Gr\u00fcnenstra\u00dfe 23\\n28199 Bremen\\nDeutschland\&quot;:;;Gr\u00fcnenstra\u00dfe 23;Bremen;;28199;Germany&quot;],&quot;key&quot;:&quot;&quot;,&quot;keytype&quot;:&quot;&quot;,&quot;tel&quot;:[&quot;;MEDIATYPE=TYPE=mobile,voice:+49-160-99180688&quot;,&quot;;MEDIATYPE=TYPE=home,voice:tel:049-421-51483548&quot;],&quot;filename&quot;:&quot;&quot;}">
-         my Imprint (detailData needed)
-     </easy-vcard>
-```
+**Attributes in `<porthd-listselect>`**
 
-### EasyTextLogo for logo-based popups
-`<webhelp: easyTextLogo>` expects an (HTML) text and the path to a logo.
-If a logo is missing, the stop sign is used as the default logo.
-#### Example code in the fluid
-```
-<!-- TYPO3-Fluidtemplate:-->
-<!-- ==================== -->
-<div>
-    <webhelp:EasyTextLogo
-            value="Hallo Welt, morgen sind wir schon weiter. Heute stehen wir vor dem Abgrund; die Hungerkriege haben längst begonnen, wie die Corona-Maßnahmen in den Entwicklungsländern zeigen."
-            logopath="EXT:webhelp/Resources/Public/Icons/Cursor/DownloadCursor.svg"
-    />
-</div>
+Attributes | Function
+--|--
+level | Level to be displayed for nested lists by default or after a reset
+filter | Term to be entered into the search box for the filter
+list-tags | Selectors or HTML tags that each enclose a list element and/or a nested list. The :where() pseudo-class is used for selection.
+search-length | Minimum number of letters that must be entered into the search box
+label-range | Text identifier before the slider for setting the displayed nesting depth
+label-search | Text identifier before the input field for filtering
+label-reset | Text identifier for the reset button
+placeholder | Text displayed in the empty input field for filtering
+label-style | List of CSS properties to assign to the two label fields. This is analogous to the style field in normal tags.
+input-style | List of CSS properties to assign to the input field. This is analogous to the style field in normal tags.
+range-style | List of CSS properties to assign to the range field. This is analogous to the style field in normal tags. Pseudo-classes are not transferred.
+button-style | List of CSS properties to assign to the reset button. This is analogous to the style field in normal tags.
+trim | The words for autocomplete can be trimmed by the characters, so that, for example, brackets without spaces before a word do not appear in the autocomplete.
 
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <popup-info
-            value="Hallo Welt, morgen sind wir schon weiter. Heute stehen wir vor dem Abgrund; die Hungerkriege haben längst begonnen, wie die Corona-Maßnahmen in den Entwicklungsländern zeigen."
-            logopath="EXT:webhelp/Resources/Public/Icons/Cursor/DownloadCursor.svg"
-            my-text-json="&quot;Hallo Welt, morgen sind wir schon weiter. Heute stehen wir vor dem Abgrund; die Hungerkriege haben l\u00e4ngst begonnen, wie die Corona-Ma\u00dfnahmen in den Entwicklungsl\u00e4ndern zeigen.&quot;"
-            my-logo="/typo3conf/ext/webhelp/Resources/Public/Icons/Cursor/DownloadCursor.svg">
-    </popup-info>
-</div>
+## Experiment
 
+### Parameters in ``<porth-modal>``
 
-<!-- TYPO3-Fluidtemplate:-->
-<!-- &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<div>
-    <webhelp:EasyTextLogo
-            value="Hallo Welt, alles ist super; dann vieler Politiker, die +über Forschung und Technik reden, oder?"/>
-</div>
-
-<!--Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <popup-info value="Hallo Welt, alles ist Super"
-                my-ext="Hallo Welt, alles ist Super"
-                my-logo="">
-
-    </popup-info>
-</div>
-
-
-<!-- TYPO3-Fluidtemplate:-->
-<!-- &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<webhelp:easyTextLogo>
-    <h1>Hallo Welt,</h1>
-    <div>Ohne Klimaschutzmaßnahmen muss bis 2050 die Menschheitsmasse auf 4G Menschen ausgedünnt werden, weil Öl und
-        Phosphate als Dünger fehlen. <br/> Ohne Klimaschutzmaßnahmen wird dank Verbot der Pfanzenschutzmitteln 2050 die
-        Menschheitsmasse durch Verhungern auf 3G Menschen ausgedünnt. Öl und Phosphate als Dünger fehlen auch dann, weil
-        die Rohstoffe in Elektroautos investiert wurden. <br> Heil dem Ökofaschismus!
-    </div>
-</webhelp:easyTextLogo>
-
-<!-- Output (Frontend-HTML / Firefox):-->
-<!-- ==================== -->
-<div>
-    <popup-info my-ext="&amp;lt;h1&amp;gt;Hallo Welt&amp;lt;/h1&amp;gt;&amp;lt;div&amp;gt;alles ist Super.&amp;lt;/div&amp;gt;"
-                my-logo="">
-    </popup-info>
-</div>
-```
-
-## Develop your own web components?
-### Viewhelper
-You can write and use your own view helpers and JavaScript code.
-### Extension for JavaScript and stylesheets
-Using the constant editor for the extension `webhelp` you can specify the paths to your JavaScript and CSS files in the comma-separated lists, so that the JavaScript and the stylesheets are uploaded thanks to a middleware.
-
-## to dos
+This is a poor product of vibe-coding with ChatGPT because the modal isn't even easily centered.
+The negative example can be found here in the documentation in ['Examples/WebcomponentModal.html'](./Examples/WebcomponentModal.html).
+Perhaps I used the wrong prompting, or there's a technical solution that the system hasn't learned yet and can't come up with due to a lack of creativity.

@@ -1,10 +1,12 @@
 <?php
 
+defined('TYPO3') || defined('TYPO3_MODE') || die('Access denied in ' . __FILE__ . '.');
+
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2021 Dr. Dieter Porth <info@mobger.de> - TYPO3-developer
+ *  (c) 2020 Dr. Dieter Porthd <info@mobger.de>
  *
  *  All rights reserved
  *
@@ -19,15 +21,26 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+call_user_func(function () {
+    $extensionName = 'webhelp';
+    $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    );
+    $pageName = (string)$extensionConfiguration->get($extensionName, 'typoscriptPageName');
+    $pageName = empty($pageName) ? 'page' : trim($pageName);
+    foreach ([
+                 'flagVCard' => 'WebcomponentVCard.js',
+                 'flagICalendar' => 'WebcomponentICalendar.js',
+                 'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',
+             ] as $webComponentId => $webComponentJsFile) {
+        $flagComponent = (bool)$extensionConfiguration->get($extensionName, $webComponentId);
 
-call_user_func(
-    function () {
-
-        // declare namespace in fluid-taemplates
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['webhelp'] = ['Porthd\\Webhelp\\ViewHelpers'];
-
+        if ($flagComponent) {
+            $typoScript = $pageName . '.includeJSFooter.webhelp_' . $webComponentId .
+                ' = EXT:webhelp/Resources/Public/JavaScript/' . $webComponentJsFile;
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
+                $typoScript
+            );
+        }
     }
-);
+});
