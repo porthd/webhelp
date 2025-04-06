@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>URL Breadcrumb – Komplett mit error-text & Tests</title>
+    <style>
+        .breadcrumb a {
+            text-decoration: none;
+            color: red;
+        }
+        .breadcrumb span {
+            margin: 0 4px;
+        }
+        .breadcrumb .error {
+            color: darkred;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Test 0 – separator fehlt, mit Domain und Hash wird ignoriert</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1#meinHäsh"
+    parameter-text="Param"
+    show-domain="1"
+    error-text="Fehler: URL fehlt oder ungültig">
+</porthd-breadcrumb>
+<h2>Test 1 – separator fehlt, mit Domain</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1"
+    parameter-text="Param"
+    show-domain="1"
+    error-text="Fehler: URL fehlt oder ungültig">
+</porthd-breadcrumb>
+
+<h2>Test 2 – parameter-text fehlt, mit Domain</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1"
+    separator=" » "
+    show-domain="1"
+    error-text="Fehlerhafte URL">
+</porthd-breadcrumb>
+
+<h2>Test 3 – show-domain fehlt, mit Domain</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1"
+    separator=" ➜ "
+    parameter-text="Filter aktiv"
+    error-text="Ungültiger Link">
+</porthd-breadcrumb>
+
+<h2>Test 4 – error-text fehlt, mit Domain</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1"
+    separator=" / "
+    parameter-text="Parameter aktiv"
+    show-domain="1">
+</porthd-breadcrumb>
+
+<h2>Test 5 – href fehlt, mit Domain</h2>
+<porthd-breadcrumb
+    separator=" / "
+    parameter-text="Fehlender Link"
+    show-domain="1"
+    error-text="Link nicht gefunden">
+</porthd-breadcrumb>
+
+<!-- Relativ identische Tests ohne Domain -->
+<h2>Test 6 – separator fehlt, ohne Domain</h2>
+<porthd-breadcrumb
+    href="/luecken_buesser/helfen/buessen?x=1"
+    parameter-text="Param"
+    show-domain="1"
+    error-text="Fehler: URL fehlt oder ungültig">
+</porthd-breadcrumb>
+
+<h2>Test 7 – parameter-text fehlt, ohne Domain</h2>
+<porthd-breadcrumb
+    href="/luecken_buesser/helfen/buessen?x=1"
+    separator=" » "
+    show-domain="1"
+    error-text="Fehlerhafte URL">
+</porthd-breadcrumb>
+
+<h2>Test 8 – show-domain fehlt, ohne Domain</h2>
+<porthd-breadcrumb
+    href="/luecken_buesser/helfen/buessen?x=1"
+    separator=" ➜ "
+    parameter-text="Filter aktiv"
+    error-text="Ungültiger Link">
+</porthd-breadcrumb>
+
+<h2>Test 9 – error-text fehlt, ohne Domain</h2>
+<porthd-breadcrumb
+    href="/luecken_buesser/helfen/buessen?x=1"
+    separator=" / "
+    parameter-text="Parameter aktiv"
+    show-domain="1">
+</porthd-breadcrumb>
+
+<h2>Test 10 – href fehlt, ohne Domain</h2>
+<porthd-breadcrumb
+    separator=" / "
+    parameter-text="Fehlender Link"
+    show-domain="1"
+    error-text="Link nicht gefunden">
+</porthd-breadcrumb>
+
+<h2>Test 11 – Nutzung von Callback von Leerzeichen und deutschen Sonderzeichen</h2>
+<porthd-breadcrumb
+    href="https://example.com/luecken_buesser/helfen/buessen?x=1"
+    show-domain="1"
+    callback="retransformUmlaut"
+    error-text="Fehler: URL fehlt oder ungültig">
+</porthd-breadcrumb>
+
+<script>
+
+    function retransformUmlaut(data) {
+        // Ersetze Unterstriche durch Leerzeichen
+        let result = data.replace(/_/g, '&nbsp;');
+
+        // Ersetze spezielle Zeichenkombinationen
+        result = result
+            .replace(/ae/g, 'ä')
+            .replace(/oe/g, 'ö')
+            .replace(/ue/g, 'ü')
+            .replace(/Ae/g, 'Ä')
+            .replace(/Oe/g, 'Ö')
+            .replace(/Ue/g, 'Ü')
+            .replace(/ss/g, 'ß');
+
+        return result;
+    }
+
+    class PorthDBreadcrumb extends HTMLElement {
+        connectedCallback() {
+            const hrefAttr = this.getAttribute('href');
+            const separator = this.getAttribute('separator') ?? '<span>&nbsp;/&nbsp;</span>';
+            const paramText = this.getAttribute('parameter-text');
+            const showDomainRaw = (this.getAttribute('show-domain') || '').toLowerCase();
+            const errorText = this.getAttribute('error-text') || 'URL missing or not valid';
+            const showDomain = showDomainRaw === 'true' || showDomainRaw === '1';
+
+            const callback = this.getAttribute('callback');
+
+            const container = document.createElement('span');
+            container.className = 'breadcrumb';
+
+            let url;
+            try {
+                const base = window.location.origin + '/';
+                if (!hrefAttr?.trim()) throw new Error('Missing href');
+                url = new URL(hrefAttr, base);
+            } catch (e) {
+                const errorSpan = document.createElement('span');
+                errorSpan.className = 'error';
+                errorSpan.textContent = errorText;
+                container.appendChild(errorSpan);
+                this.appendChild(container);
+                return;
+            }
+
+            const origin = url.origin !== 'null' ? url.origin : '';
+            const domain = url.hostname;
+            const parts = url.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+            const hasParams = !!url.search;
+
+            const addSeparator = () => {
+                const sep = document.createElement('span');
+                sep.innerHTML = separator;
+                container.appendChild(sep);
+            };
+
+            if (showDomain && origin && domain) {
+                const domainLink = document.createElement('a');
+                domainLink.href = origin;
+                domainLink.textContent = domain;
+                container.appendChild(domainLink);
+                if (parts.length > 0 || hasParams) addSeparator();
+            }
+
+            parts.forEach((part, index) => {
+                const path = origin + '/' + parts.slice(0, index + 1).join('/') + '/';
+                const a = document.createElement('a');
+                a.href = path;
+                let data = decodeURIComponent(part);
+                if (callback && typeof window[callback] === 'function') {
+                    data = window[callback](data);
+                }
+
+                a.innerHTML = data;
+                container.appendChild(a);
+                if (index < parts.length - 1 || hasParams) {
+                    addSeparator();
+                }
+            });
+
+            if (hasParams) {
+                const paramLink = document.createElement('a');
+                paramLink.href = url.href;
+                paramLink.innerHTML = paramText?.trim() ? paramText : 'plus parameter';
+                container.appendChild(paramLink);
+            }
+
+            this.appendChild(container);
+        }
+    }
+
+    customElements.define('porthd-breadcrumb', PorthDBreadcrumb);
+</script>
+
+</body>
+</html>

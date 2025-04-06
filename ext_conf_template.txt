@@ -6,4 +6,12 @@ flagVCard = 1
 flagICalendar = 1
 # cat=flag/flagListSelectFilter; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_filteredmenue
 flagListSelectFilter = 1
+# cat=flag/flagAjax; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_ajax
+flagAjax = 1
+# cat=flag/flagAjax; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_timezone
+flagTimeZone = 1
+# cat=flag/flagBreadcrumb; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_breadcrumb
+flagBreadcrumb = 1
+# cat=flag/flagInfomodal; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_infomodal
+flagInfomodal = 1
 

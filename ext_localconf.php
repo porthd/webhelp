@@ -29,9 +29,13 @@ call_user_func(function () {
     $pageName = (string)$extensionConfiguration->get($extensionName, 'typoscriptPageName');
     $pageName = empty($pageName) ? 'page' : trim($pageName);
     foreach ([
-                 'flagVCard' => 'WebcomponentVCard.js',
+                 'flagAjax' => 'WebcomponentAjax.js',
+                 'flagBreadcrumb' => 'WebcomponentBreadcrumb.js',
                  'flagICalendar' => 'WebcomponentICalendar.js',
+                 'flagInfomodal' => 'WebcomponentInfomodal.js',
                  'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',
+                 'flagTimeZone' => 'WebcomponentTimeZone.js',
+                 'flagVCard' => 'WebcomponentVCard.js',
              ] as $webComponentId => $webComponentJsFile) {
         $flagComponent = (bool)$extensionConfiguration->get($extensionName, $webComponentId);
 

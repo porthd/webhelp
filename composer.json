@@ -4,7 +4,6 @@
     "description": "Build simple Webcomponents like icalendar with viewhelpers",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.düddelei.de/",
-    "version": "13.0.0",
     "keywords": [
         "TYPO3 CMS",
         "Frontendhelper",
