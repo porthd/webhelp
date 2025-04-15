@@ -1,17 +1,19 @@
 # cat=general/typoscriptPageName; type=string; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.typoscriptPageName
 typoscriptPageName = page
-# cat=flag/vCard; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_vcard
-flagVCard = 1
-# cat=flag/iCalendar; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_icalendar
-flagICalendar = 1
-# cat=flag/flagListSelectFilter; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_filteredmenue
-flagListSelectFilter = 1
 # cat=flag/flagAjax; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_ajax
 flagAjax = 1
-# cat=flag/flagAjax; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_timezone
-flagTimeZone = 1
 # cat=flag/flagBreadcrumb; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_breadcrumb
 flagBreadcrumb = 1
+# cat=flag/flagCodeview; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_codeview
+flagCodeview = 1
+# cat=flag/iCalendar; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_icalendar
+flagICalendar = 1
 # cat=flag/flagInfomodal; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_infomodal
 flagInfomodal = 1
+# cat=flag/flagListSelectFilter; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_listselectfilter
+flagListSelectFilter = 1
+# cat=flag/flagAjax; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_timezone
+flagTimeZone = 1
+# cat=flag/vCard; type=boolean; label=LLL:EXT:webhelp/Resources/Private/Language/locallang_db.xlf:extension.template.constants.flag.webcomponent_vcard
+flagVCard = 1
 

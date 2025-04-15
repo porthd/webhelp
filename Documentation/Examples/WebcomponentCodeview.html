@@ -1,0 +1,243 @@
+<!-- Ändere den Code so, dass der Button für den dark-Light-Mode nur auf das jeweilige Webcomponent wirkt. -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Viewer Component</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css" id="theme-stylesheet">
+    <style>
+        porthd-codeview pre {
+            background: none;
+            padding: 1em;
+            overflow-x: auto;
+            margin: 0;
+        }
+        porthd-codeview button.copy-button,
+        porthd-codeview button.theme-toggle {
+            position: absolute;
+            top: 0.5em;
+            z-index: 1;
+            background: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 0.2em 0.5em;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        porthd-codeview button.copy-button {
+            right: 2.5em;
+        }
+        porthd-codeview button.theme-toggle {
+            right: 0.5em;
+        }
+        porthd-codeview {
+            display: block;
+            position: relative;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>PHP ohne &lt;script&gt;-Tag</h2>
+<porthd-codeview language="php" theme="dark" line-numbers button-label='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10 1.5A1.5 1.5 0 0 0 8.5 0h-5A1.5 1.5 0 0 0 2 1.5v11A1.5 1.5 0 0 0 3.5 14H4v-1h-.5a.5.5 0 0 1-.5-.5v-11A.5.5 0 0 1 3.5 1h5a.5.5 0 0 1 .5.5V2h1V1.5z"/><path d="M4.5 3A1.5 1.5 0 0 0 3 4.5v10A1.5 1.5 0 0 0 4.5 16h7A1.5 1.5 0 0 0 13 14.5v-10A1.5 1.5 0 0 0 11.5 3h-7zm0 1h7a.5.5 0 0 1 .5.5V6h-8V4.5a.5.5 0 0 1 .5-.5zm-.5 3h8v6.5a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5V7z"/></svg>' theme-button-label='🌞/🌜'>
+    &lt;?php
+    echo "Hallo Welt!";
+    ?&gt;
+</porthd-codeview>
+<h2>PHP mit &lt;script&gt;-Tag</h2>
+<porthd-codeview language="php" theme="dark" line-numbers button-label='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10 1.5A1.5 1.5 0 0 0 8.5 0h-5A1.5 1.5 0 0 0 2 1.5v11A1.5 1.5 0 0 0 3.5 14H4v-1h-.5a.5.5 0 0 1-.5-.5v-11A.5.5 0 0 1 3.5 1h5a.5.5 0 0 1 .5.5V2h1V1.5z"/><path d="M4.5 3A1.5 1.5 0 0 0 3 4.5v10A1.5 1.5 0 0 0 4.5 16h7A1.5 1.5 0 0 0 13 14.5v-10A1.5 1.5 0 0 0 11.5 3h-7zm0 1h7a.5.5 0 0 1 .5.5V6h-8V4.5a.5.5 0 0 1 .5-.5zm-.5 3h8v6.5a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5V7z"/></svg>' theme-button-label='🌞/🌜'>
+    <script type="text/plain" >
+        <?php
+        echo "Hallo Welt!";
+        ?>
+    </script>
+</porthd-codeview>
+
+<h2>HTML mit &lt;script&gt;-Tag (HTML)</h2>
+<porthd-codeview language="html" theme="dark" line-numbers>
+    <script type="text/plain" >
+        <!DOCTYPE html>
+        <html>
+          <head><title>Beispiel</title></head>
+          <body><h1>Hallo Welt</h1></body>
+        </html>
+    </script>
+</porthd-codeview>
+
+<h2>HTML mit &lt;script&gt;-Tag (CSS) </h2>
+<porthd-codeview language="css">
+    <script type="text/plain" >
+        body {
+          background-color: #f0f0f0;
+          color: #333;
+        }
+    </script>
+</porthd-codeview>
+
+<h2>Unterscheidung Dark/Light-Mode</h2>
+<h3>Theme: fehlt</h3>
+<porthd-codeview language="javascript"  button-label="Code kopieren" theme-button-label="Theme wechseln">
+    <script type="text/plain">
+        const hello = () => console.log('Hallo Welt!');
+        hello();
+    </script>
+</porthd-codeview>
+<h3>Theme: light</h3>
+<porthd-codeview language="javascript" theme="light" button-label="Code kopieren" theme-button-label="Theme wechseln">
+    <script type="text/plain">
+        const hello = () => console.log('Hallo Welt!');
+        hello();
+    </script>
+</porthd-codeview>
+<h3>Theme: dark</h3>
+<porthd-codeview language="css" theme="dark" line-numbers>
+    <script type="text/plain">
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </script>
+</porthd-codeview>
+<script>
+    /**
+     * The PorthDCodeView class extends the HTMLElement and provides a custom web component
+     * for rendering syntax-highlighted code blocks with additional features such as:
+     * - Theme toggling between light and dark modes.
+     * - Copying code content to the clipboard.
+     * - Optional line numbering for code blocks.
+     *
+     * This class leverages the Prism.js library for syntax highlighting and supports
+     * multiple languages, themes, and configurations via attributes.
+     *
+     * Attributes:
+     * - language: Specifies the programming language for syntax highlighting. Defaults to "markup".
+     * - theme: Sets the theme for the code block. Accepts "light" or "dark". Defaults to "light".
+     * - line-numbers: A boolean attribute. If present, it displays line numbers alongside the code.
+     * - button-label: Custom label for the copy button. Defaults to "Copy".
+     * - theme-button-label: Custom label for the theme toggle button. Defaults to "Toggle Theme".
+     * - cdn: URL base for loading Prism.js assets. Defaults to "https://cdn.jsdelivr.net/npm/prismjs".
+     *
+     * Lifecycle Method:
+     * - connectedCallback(): Initializes the component, loads necessary scripts and styles,
+     *   applies the chosen theme, and sets up event listeners for the copy and theme toggle buttons.
+     *   It extracts raw code from the component content and highlights it using Prism.js.
+     */
+    class PorthDCodeView extends HTMLElement {
+        async connectedCallback() {
+            // Standardwerte für Attribute
+            const lang = this.getAttribute('language') || 'markup';
+            let theme = this.getAttribute('theme') || 'light'; // Standard-Theme ist "light"
+            const showLines = this.hasAttribute('line-numbers');
+            const buttonLabel = this.getAttribute('button-label') || 'Copy';
+            const themeToggleLabel = this.getAttribute('theme-button-label') || 'Toggle Theme';
+            const cdnBase = this.getAttribute('cdn') || 'https://cdn.jsdelivr.net/npm/prismjs';
+
+            // Erzeuge ein Shadow-DOM
+            const shadow = this.attachShadow({ mode: 'open' });
+
+            // Hilfsfunktionen zum Laden von CSS und Javascript
+            const loadCSS = href =>
+                new Promise(resolve => {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = href;
+                    link.onload = resolve; // Warten, bis das CSS vollständig geladen wurde
+                    shadow.appendChild(link);
+                });
+
+            const loadScript = src =>
+                new Promise(resolve => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = resolve;
+                    document.head.appendChild(script); // Skripte werden global geladen
+                });
+
+            // Lade Prism.js und Plugins, falls nicht bereits vorhanden
+            if (typeof Prism === 'undefined') {
+                // Prism.js und wichtige Plugins laden
+                await loadScript(`${cdnBase}/prism.js`);
+                await loadScript(`${cdnBase}/plugins/line-numbers/prism-line-numbers.min.js`);
+                await Promise.all(
+                    ['markup', 'javascript', 'css'].map(lang =>
+                        loadScript(`${cdnBase}/components/prism-${lang}.min.js`)
+                    )
+                );
+            }
+
+            // Lade das passende Theme-CSS vor der Syntax-Hervorhebung
+            const applyTheme = async theme => {
+                const themeHref =
+                    theme === 'dark'
+                        ? `${cdnBase}/themes/prism-okaidia.css`
+                        : `${cdnBase}/themes/prism.css`;
+                await loadCSS(themeHref); // Warten, bis CSS geladen ist
+            };
+
+            // Baue das interne HTML im Shadow DOM
+            shadow.innerHTML = `
+            <style>
+                :host {
+                    display: block;
+                    position: relative;
+                }
+                button {
+                    position: absolute;
+                    top: 0.5em;
+                    right: 0.5em;
+                    margin: 0 0.5em;
+                    z-index: 1;
+                    padding: 0.5em 1em;
+                    cursor: pointer;
+                }
+                pre {
+                    margin: 0;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    overflow: auto;
+                }
+            </style>
+            <button class="theme-toggle">${themeToggleLabel}</button>
+            <button class="copy-button" style="right: 2.5em;">${buttonLabel}</button>
+            <pre class="${showLines ? 'line-numbers' : ''}"><code class="language-${lang}"></code></pre>
+        `;
+
+            // Extrahiere den rohen Code entweder aus einem <script> oder dem inneren Text des Elements
+            const scriptTag = this.querySelector('script[type="text/plain"]');
+            const rawCode = scriptTag ? scriptTag.textContent : this.textContent.trim();
+
+            // Wende das initiale Theme an
+            await applyTheme(theme);
+
+            // Setze den Code in die <code>-Box
+            const codeElement = shadow.querySelector('pre > code');
+            codeElement.textContent = rawCode;
+
+            // Syntax-Hervorhebung anwenden
+            Prism.highlightElement(codeElement);
+
+            // Event-Listener für den Kopier-Button hinzufügen
+            shadow.querySelector('.copy-button').addEventListener('click', () => {
+                navigator.clipboard.writeText(rawCode).then(() => {
+                    const copyBtn = shadow.querySelector('.copy-button');
+                    copyBtn.textContent = '✓';
+                    setTimeout(() => (copyBtn.textContent = buttonLabel), 1500);
+                });
+            });
+
+            // Event-Listener für den Theme-Umschalter hinzufügen
+            shadow.querySelector('.theme-toggle').addEventListener('click', async () => {
+                theme = this.getAttribute('theme') === 'dark' ? 'light' : 'dark';
+                this.setAttribute('theme', theme);
+                await applyTheme(theme); // Theme wechseln
+                Prism.highlightElement(codeElement); // Syntax-Hervorhebung neu anwenden
+            });
+        }
+    }
+
+    // Registriere die benutzerdefinierte Komponente im Browser
+    customElements.define('porthd-codeview',PorthDCodeView);
+</script>
+
+</body>
+</html>

@@ -31,6 +31,7 @@ call_user_func(function () {
     foreach ([
                  'flagAjax' => 'WebcomponentAjax.js',
                  'flagBreadcrumb' => 'WebcomponentBreadcrumb.js',
+                 'flagCodeview' => 'WebcomponentCodeview.js',
                  'flagICalendar' => 'WebcomponentICalendar.js',
                  'flagInfomodal' => 'WebcomponentInfomodal.js',
                  'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',

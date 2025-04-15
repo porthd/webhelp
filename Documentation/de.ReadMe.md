@@ -27,6 +27,7 @@ Die Webcomponents wurde via [vibe coding](https://en.wikipedia.org/wiki/Vibe_cod
 |--------------------------------------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [porthd-ajax](#parameter-in-porthd-ajax)               |  Content nachladen                   | Hole per HTTP-Request von einer definierten URL Daten oder HTML-Fragmente und inkludiere sie in das eigene Tag des Webcomponent. Ein Button für mehrfache Abfragen kan gesetzt werden. Gegebenenfalls kann zur Aufbereitung der Daten eine Callback ins Webcomponent eingeführt werden.                                      | [Ajax-Erläuterungen (deutsch)](https://de.wikipedia.org/wiki/Ajax_(Programmierung)) [Ajax-Erläuterungen (englisch)](https://en.wikipedia.org/wiki/Ajax_(programming))                                                                                                                                                                                                                                     |
 | [porthd-breadcrumb](#parameter-in-porthd-breadcrumb)   | Sprechenden Lin in Breadcrumb        | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Gedanken zur Breadcrumb-Navigation in Englisch](https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/) [Codebeispiel für gute Breadcrumb-Navigationshilfe in Deutsch](https://web.dev/patterns/components/breadcrumbs?hl=de)                                                                                                                                  |
+| [porthd-codeview](#parameter-in-porthd-codeview)     | Code-Ansicht                            | Es handelt sich um eine anpassbare Webkomponente zur Darstellung von Code mit Syntax-Hervorhebung, unterstützt durch Themes, Zeilennummern und die Möglichkeit, den Code in die Zwischenablage zu kopieren.                                                                                                                                                                                                                              | [Prism-Dokumentation in Englisch](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                         |
 | [porthd-icalendar](#parameter-in-porthd-icalendar)     | HTML-Event-Daten als ics-Datei anbieten | Erstellt einen Events-Termin-Datei und wandelt eine inkludierte Liste mit Daten zu einem oder mehreren Events in eine downloadbare ics-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                    | [Spezifikation](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20ist%20ein%20Datenformat%20zum%20Austausch%20von%20Kalenderinhalten%2C,wurde%20urspr%C3%BCnglich%201998%20in%20RFC%202445%20%5B10%5D%20definiert.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
 | [porthd-infomodal](#parameter-in-porthd-infomodal)     | Info-Popup per Template definieren   | erfordert die Definition von einem Template für das Modalfenster mit Schließen-Button und einem inkludierten Startbutton, um so die Ausgabe von einem Modal-Fenster zur Information zur Verfügung zu stellen. Über die Attribute `data-*` und gleichnamigen Slots im &lt;template&gt; sind dynamische Modal-Fenster möglich. | [Erläuterungen zu Modal-Fenstern in Deutsch](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                          |
 | [porthd-listselect](#parameter-in-porthd-listselect)   | Mega-Menüs interaktiv steuern/filtern | Beschränkte die Ausgabe von langen verschachtelten Listen auf einen definierten Level und erlaubt die Suche verborgenen Teilüberschriften.                                                                                                                                                                                   | [Übersicht zu Menüs im Web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown-Menü für große Verschachtelung](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Mediaevent zu Menüs](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                         |
@@ -507,3 +508,137 @@ Das Web-Component kann direkt in HTML eingebunden oder als Modul in moderne Java
 - Unterstützung für benutzerdefinierte Templates
 - Mehrsprachigkeit (i18n)
 - Dynamisches Nachladen der URL oder automatisches Lesen aus `window.location`
+
+### Parameter in `PorthDCodeView`
+
+Die Klasse `PorthDCodeView` ist eine individuelle Webkomponente, die Quellcode mit Syntax-Hervorhebung anzeigt. Sie bietet Funktionen wie **Thema-Umschaltung**, **Kopier-Button** und Unterstützung für **Zeilennummern**. Dank des **Shadow DOM** wird eine isolierte und sichere Darstellung garantiert. Die Komponente verwendet **PrismJS** zur Syntax-Hervorhebung.
+
+Beispiele zur Nutzung finden Sie hier in der Dokumentation unter ['Examples/WebcomponentCodeview.html'](./Examples/WebcomponentCodeview.html).
+
+---
+
+#### Übersicht
+
+Die `PorthDCodeView`-Klasse ist eine benutzerdefinierte `HTMLElement`-Erweiterung, die es ermöglicht, Code direkt in der eigenen Applikation hervorzuheben. Zusätzlich können Light/Dark-Themes und Zeilennummern mit wenig Aufwand konfiguriert werden.
+
+---
+
+#### Attribute
+
+Die Web-Komponente unterstützt mehrere HTML-Attribute zur Konfiguration. Nachfolgend eine detaillierte Auflistung dieser Attribute:
+
+| **Attribut**           | **Typ**       | **Erforderlich?** | **Beschreibung**                                                                                                                                                    | **Standardwert**                  |
+|-------------------------|---------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `language`             | `String`      | Nein               | Gibt die Sprache des Codes an. Beispiele: `markup`, `javascript`, `php`, `css`. PrismJS-Komponenten werden entsprechend geladen.                                     | `markup`                          |
+| `theme`                | `String`      | Nein               | Bestimmt das anfängliche Thema der Syntax-Hervorhebung. Werte: `light`, `dark`.                                                                                     | `light`                           |
+| `line-numbers`         | `Boolean`     | Nein               | Wenn dieses Attribut gesetzt ist, werden **Zeilennummern** eingeblendet.                                                                                           | Nicht gesetzt                     |
+| `button-label`         | `String`      | Nein               | Definiert den Text, der für den Kopieren-Button angezeigt wird. Beispiel: `Copy`.                                                                                   | `Copy`                            |
+| `theme-button-label`   | `String`      | Nein               | Text für den Theme-Umschalter. Sollte den Zweck für Nutzer verdeutlichen. Beispiele: `🌞/🌜`, `Toggle Theme`.                                                        | `Toggle Theme`                    |
+| `cdn`                  | `String`      | Nein               | Gibt die Basis-URL an, von der PrismJS und seine Komponenten geladen werden. Falls keine Angabe erfolgt, wird das offizielle CDN von PrismJS verwendet.              | `https://cdn.jsdelivr.net/npm/prismjs` |
+
+---
+
+#### Funktionsweise
+
+##### 1. **Syntaxhervorhebung**
+- Die Syntaxhervorhebung wird durch PrismJS umgesetzt.
+- Bei der Initialisierung wird das Attribut `language` verwendet, um die richtige Sprachkomponente zu laden.
+- Der Codeinhalt wird standardmäßig in ein `<code>`-Tag innerhalb eines `<pre>`-Containers eingefügt und anschließend hervorgehoben.
+
+##### 2. **Thema-Umschaltung**
+- Die Attribute `theme` und `theme-button-label` erlauben die Konfiguration eines Theme-Toggles zwischen `light` und `dark`.
+- Das Umschalten des Themes wird asynchron ausgeführt, wobei das korrekt zugehörige PrismJS-CSS nachgeladen wird.
+
+##### 3. **Zeilennummern**
+- Wenn das Attribut `line-numbers` gesetzt ist, wird dem `<pre>`-Element die Klasse `line-numbers` zugewiesen.
+- Zeilennummern werden mithilfe des PrismJS-Plugins automatisch generiert.
+
+##### 4. **Kopierbutton**
+- Der Text des Kopier-Buttons wird über `button-label` definiert.
+- Der Button kopiert den vollständigen Codeinhalt in die Zwischenablage.
+
+---
+
+#### Verwendung
+
+##### **Code-Block mit Standard-Light-Theme**
+```html
+<porthd-codeview language="javascript">
+    <script type="text/plain">
+console.log("Hallo Welt!");
+    </script>
+</porthd-codeview>
+```
+
+##### **Dark-Theme mit Zeilennummern und angepasstem Button-Text**
+```html
+<porthd-codeview language="php" theme="dark" line-numbers button-label="Kopiere Code" theme-button-label="Wechseln">
+    <script type="text/plain">
+<?php
+echo "Hallo Welt!";
+?>
+    </script>
+</porthd-codeview>
+```
+
+##### **Anpassen des PrismJS-CDN**
+```html
+<porthd-codeview language="html" cdn="https://example-cdn.com/prismjs" theme="light">
+    <script type="text/plain">
+<div>
+    <h1>Hallo Welt!</h1>
+</div>
+    </script>
+</porthd-codeview>
+```
+
+---
+
+#### Methodendetails
+
+##### `connectedCallback()`
+Die Methode wird automatisch ausgeführt, wenn das Element in das DOM eingefügt wird. Sie initialisiert die Komponente, indem sie folgende Schritte ausführt:
+1. **Attribute laden**: Ermittelt alle relevanten Attribute wie `theme`, `language`, etc.
+2. **Shadow-DOM erstellen**: Baut sicher ein Shadow-DOM für isolierte Styles und Inhalte.
+3. **PrismJS laden**, wenn es nicht verfügbar ist:
+    - PrismJS-Core, Sprachkomponenten (`markup`, `javascript`, `css`) und das Plugin für Zeilennummern werden dynamisch geladen.
+4. **Interne Buttons hinzufügen**:
+    - Ein **Kopier-Button** wird erstellt und mit einem Event-Listener versehen, um den Code in die Zwischenablage zu kopieren.
+    - Ein **Theme-Toggle-Button** schaltet das Theme und lädt die entsprechenden CSS-Dateien nach.
+5. **Code übernehmen**:
+    - Entweder vom `<script>`-Tag oder dem Inhalt des Tags, in dem die Komponente definiert wird.
+6. **Syntax-Hervorhebung** mit PrismJS auf den Code anwenden.
+
+##### `applyTheme(theme: string)`
+Private Hilfsmethode, die das entsprechende PrismJS-Stylesheet (entweder `light` oder `dark`) basierend auf dem gewünschten `theme` lädt. Die Methode wird sowohl beim Initialisieren als auch beim Umschalten zwischen den Themen aufgerufen.
+
+```javascript
+const applyTheme = async theme => {
+    const themeHref =
+        theme === 'dark'
+            ? `${cdnBase}/themes/prism-okaidia.css`
+            : `${cdnBase}/themes/prism.css`;
+    await loadCSS(themeHref);
+};
+```
+
+---
+
+#### Tests
+
+Hier sind Beispiele, um sicherzustellen, dass die Komponente wie erwartet funktioniert:
+
+##### **Test: Kopier-Button**
+1. Richte eine `porthd-codeview`-Instanz ein und stelle sicher, dass ein Button mit der Beschriftung des `button-label` sichtbar ist.
+2. Klicke auf den Button und überzeug dich, dass der Code in die Zwischenablage kopiert wurde.
+
+##### **Test: Theme-Toggle**
+1. Richte eine Instanz mit `theme="dark"` ein und überprüfe, dass das `prism-okaidia.css`-Theme geladen wird.
+2. Klicke auf den Theme-Toggle-Button und überprüfe, ob das `light`-Theme geladen wird.
+
+---
+
+#### Einschränkungen
+- Themes werden asynchron geladen, was zu kurzem Flackern führen kann.
+- Benutzer müssen sicherstellen, dass PrismJS über das definierte CDN verfügbar ist.
+- Nur standardmäßige Sprachkomponenten (`markup`, `javascript`, `css`) werden automatisch geladen. Zusätzliche Sprachen müssen manuell angepasst werden.

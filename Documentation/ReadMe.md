@@ -23,15 +23,16 @@ The web components were created using [vibe coding](https://en.wikipedia.org/wik
 
 ## Defined Web Components
 
-| Web Component (internal link)                    | slogan                                   | Task                                                                                                                                                                                                                                                                                        | Links                                                                                                                                                                                                                                                                                                                                                                                                |
-|-------------------------------------------------------|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [porthd-ajax](#parameters-in-porthd-ajax)             | Reload content                           | Fetch data or HTML fragments from a defined URL via HTTP request and include them in the web component's own tag. A button for multiple queries can be set. If necessary, a callback can be introduced into the web component to prepare the data.                                          | [Ajax explanations (German)](https://de.wikipedia.org/wiki/Ajax_(programming)) [Ajax explanations (English)](https://en.wikipedia.org/wiki/Ajax_(programming))                                                                                                                                                                                                                                      |
-| [porthd-breadcrumb](#parameters-in-porthd-breadcrumb) | Talking link in breadcrumb               | Convert a time from one time zone to another and present it                                                                                                                                                                                                                                 |
-| [porthd-icalendar](#parameters-in-porthd-icalendar)   | Provide HTML event data as an ics file   | Creates an events appointment file and converts an included list of data for one or more events into a downloadable ics file. The included data is validated.                                                                                                                               | [Specification](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20is%20a%20data%20format%20for%20exchange%20of%20calendar%20contents%2C,was%20originally%20defined%20in%20RFC%202445%20%5B10%5D%20in%201998.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
-| [porthd-infomodal](#parameters-in-porthd-infomodal)   | Define info popups using a template      | requires the definition of a template for the modal window with a close button and an included start button to provide the output of a modal window for information purposes. Dynamic modal windows are possible using the `data-*` attribute and slots of the same name in the <template>. | [Explanations of modal windows in German](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                         |
-| [porthd-listselect](#parameters-in-porthd-listselect) | Interactively control/filter mega menus  | Restricts the output of long nested lists to a defined level and allows searching hidden subheadings.                                                                                                                                                                                       | [Overview of menus on the web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown menu for large nesting](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Media event on menus](https://www.mediaevent.de/tutorial/css-responsive-menu.html) |
-| [porthd-timezone](#parameters-in-porthd-timezone)     | Time zone conversion for dates           | Convert a time from one time zone to another and present the result within the web component's tag. The start time must either be included in the tag or be in the `datetime` attribute.                                                                                                    | [Explanations of the time zone in German](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                           |
-| [porthd-vcard](#parameters-in-porthd-vcard)           | Provide HTML contact data as a vcf file  |  Creates a contact file and converts the included list of data into a downloadable vcf file. The included data is validated.                                                                                                                                                                | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) --- [RFC6350 Specification](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                       |
+| Web Component (internal link)                         | slogan                                  | Task                                                                                                                                                                                                                                                                                        | Links                                                                                                                                                                                                                                                                                                                                                                                               |
+|-------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [porthd-ajax](#parameters-in-porthd-ajax)             | Reload content                          | Fetch data or HTML fragments from a defined URL via HTTP request and include them in the web component's own tag. A button for multiple queries can be set. If necessary, a callback can be introduced into the web component to prepare the data.                                          | [Ajax explanations (German)](https://de.wikipedia.org/wiki/Ajax_(programming)) [Ajax explanations (English)](https://en.wikipedia.org/wiki/Ajax_(programming))                                                                                                                                                                                                                                      |
+| [porthd-breadcrumb](#parameters-in-porthd-breadcrumb) | Talking link in breadcrumb              | Convert a time from one time zone to another and present it                                                                                                                                                                                                                                 |
+| [porthd-codeview](#parameters-in-porthd-codeview)     | Code viewer                            | It is a customizable web component for rendering syntax-highlighted code snippets with support for themes, line numbers, and clipboard copying.                                                                                                                                                                                                                              | [prism-Dokumentation in English](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                         |
+| [porthd-icalendar](#parameters-in-porthd-icalendar)   | Provide HTML event data as an ics file  | Creates an events appointment file and converts an included list of data for one or more events into a downloadable ics file. The included data is validated.                                                                                                                               | [Specification](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20is%20a%20data%20format%20for%20exchange%20of%20calendar%20contents%2C,was%20originally%20defined%20in%20RFC%202445%20%5B10%5D%20in%201998.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
+| [porthd-infomodal](#parameters-in-porthd-infomodal)   | Define info popups using a template     | requires the definition of a template for the modal window with a close button and an included start button to provide the output of a modal window for information purposes. Dynamic modal windows are possible using the `data-*` attribute and slots of the same name in the <template>. | [Explanations of modal windows in German](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                                                                                                                           |
+| [porthd-listselect](#parameters-in-porthd-listselect) | Interactively control/filter mega menus | Restricts the output of long nested lists to a defined level and allows searching hidden subheadings.                                                                                                                                                                                       | [Overview of menus on the web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown menu for large nesting](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Media event on menus](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                                                                                                   |
+| [porthd-timezone](#parameters-in-porthd-timezone)     | Time zone conversion for dates          | Convert a time from one time zone to another and present the result within the web component's tag. The start time must either be included in the tag or be in the `datetime` attribute.                                                                                                    | [Explanations of the time zone in German](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                                                                                                                                   |
+| [porthd-vcard](#parameters-in-porthd-vcard)           | Provide HTML contact data as a vcf file | Creates a contact file and converts the included list of data into a downloadable vcf file. The included data is validated.                                                                                                                                                                 | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) --- [RFC6350 Specification](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                                                                                                                               |
 
 ### Parameters in porthd-vcard
 The web component `<porthd-vcard>` includes a list of HTML tags that define the individual parameters in the vcard file.
@@ -504,3 +505,136 @@ The web component can be embedded directly in HTML or integrated as a module int
 - Multilingual (i18n)
 - Dynamic reloading of the URL or automatic reading from `window.location`
 
+### Parameters in PorthDCodeView
+
+The `PorthDCodeView` class is a custom web component that displays source code with syntax highlighting. It provides features like **theme toggling**, **copy button**, and support for **line numbers**. Thanks to the **Shadow DOM**, it ensures isolated and secure rendering. The component uses **PrismJS** for syntax highlighting.
+
+---
+
+#### Overview
+
+The `PorthDCodeView` class is a custom `HTMLElement` extension that allows rendering highlighted code snippets directly in your application. Additionally, it supports light/dark themes and line numbers with minimal configuration.
+
+A usage examples can be found here in the documentation in ['Examples/WebcomponentCodeview.html'](./Examples/WebcomponentCodeview.html).
+
+---
+
+#### Attributes
+
+The web component supports multiple HTML attributes for configuration. Below is a detailed list of these attributes:
+
+| **Attribute**           | **Type**       | **Required?** | **Description**                                                                                                                                     | **Default Value**                 |
+|--------------------------|----------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `language`              | `String`       | No            | Specifies the language of the code. Examples: `markup`, `javascript`, `php`, `css`. PrismJS language components are loaded accordingly.             | `markup`                          |
+| `theme`                 | `String`       | No            | Specifies the initial theme for syntax highlighting. Values: `light`, `dark`.                                                                       | `light`                           |
+| `line-numbers`          | `Boolean`      | No            | If this attribute is set, **line numbers** will be displayed alongside the code.                                                                    | Not set                           |
+| `button-label`          | `String`       | No            | Defines the text for the copy button. Example: `Copy`.                                                                                              | `Copy`                            |
+| `theme-button-label`    | `String`       | No            | Text for the theme toggle button, clearly defining its purpose for users. Examples: `🌞/🌜`, `Toggle Theme`.                                          | `Toggle Theme`                    |
+| `cdn`                   | `String`       | No            | Specifies the base URL used to load PrismJS and its components. If not set, the official PrismJS CDN is used.                                        | `https://cdn.jsdelivr.net/npm/prismjs` |
+
+---
+
+#### Functionality
+
+##### 1. **Syntax Highlighting**
+- Syntax highlighting is implemented using PrismJS.
+- During initialization, the `language` attribute is used to load the appropriate PrismJS language component.
+- The code content is injected into a `<code>` element within a `<pre>` container and then highlighted.
+
+##### 2. **Theme Toggling**
+- The `theme` and `theme-button-label` attributes enable configuring a toggle between `light` and `dark` themes.
+- Switching themes is asynchronous and fetches the corresponding CSS file dynamically.
+
+##### 3. **Line Numbers**
+- If the `line-numbers` attribute is set, the `<pre>` element is assigned the `line-numbers` class.
+- Line numbers are automatically generated using PrismJS plugins.
+
+##### 4. **Copy Button**
+- The text for the copy button is defined via the `button-label` attribute.
+- The button copies the full content of the code snippet to the clipboard.
+
+---
+
+#### Usage
+
+##### **Code block with default light theme**
+```html
+<porthd-codeview language="javascript">
+    <script type="text/plain">
+console.log("Hello World!");
+    </script>
+</porthd-codeview>
+```
+
+##### **Dark theme with line numbers and customized button text**
+```html
+<porthd-codeview language="php" theme="dark" line-numbers button-label="Copy Code" theme-button-label="Switch">
+    <script type="text/plain">
+<?php
+echo "Hello World!";
+?>
+    </script>
+</porthd-codeview>
+```
+
+##### **Customizing the PrismJS CDN**
+```html
+<porthd-codeview language="html" cdn="https://example-cdn.com/prismjs" theme="light">
+    <script type="text/plain">
+<div>
+    <h1>Hello World!</h1>
+</div>
+    </script>
+</porthd-codeview>
+```
+
+---
+
+#### Method Details
+
+##### `connectedCallback()`
+This method is executed automatically when the element is added to the DOM. It initializes the component by performing the following steps:
+1. **Load attributes**: Retrieves all relevant attributes like `theme`, `language`, etc.
+2. **Create Shadow DOM**: Safely builds a Shadow DOM for isolated styles and content.
+3. **Load PrismJS** if it is not already available:
+    - Loads the PrismJS core, language components (`markup`, `javascript`, `css`), and the line numbers plugin dynamically.
+4. **Add internal buttons**:
+    - A **copy button** is created and equipped with an event listener to copy the code to the clipboard.
+    - A **theme toggle button** is created to switch themes and dynamically load corresponding CSS files.
+5. **Retrieve code**:
+    - Retrieves the raw code either from a `<script>` element or the tag’s inner content.
+6. **Apply syntax highlighting** to the code using PrismJS.
+
+##### `applyTheme(theme: string)`
+A private helper method that loads the corresponding PrismJS CSS file (either `light` or `dark`) depending on the desired theme. The method is called both during initialization and whenever the theme is toggled.
+
+```javascript
+const applyTheme = async theme => {
+    const themeHref =
+        theme === 'dark'
+            ? `${cdnBase}/themes/prism-okaidia.css`
+            : `${cdnBase}/themes/prism.css`;
+    await loadCSS(themeHref);
+};
+```
+
+---
+
+#### Tests
+
+Here are some examples to ensure the component works as expected:
+
+##### **Test: Copy Button**
+1. Set up a `porthd-codeview` instance and ensure a button with the **`button-label` text** is visible.
+2. Click the button and verify that the code is copied to the clipboard.
+
+##### **Test: Theme Toggle**
+1. Set up an instance with `theme="dark"` and confirm that the `prism-okaidia.css` theme is loaded.
+2. Click the theme toggle button and verify that the `light` theme is loaded.
+
+---
+
+#### Limitations
+- Themes are loaded asynchronously, which might cause brief flickering during loading.
+- Users need to ensure that PrismJS is accessible from the specified CDN.
+- Only default language components (`markup`, `javascript`, `css`) are loaded automatically. Additional languages must be manually configured.
