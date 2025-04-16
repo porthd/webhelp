@@ -127,4 +127,4 @@ class PorthDInfoModal extends HTMLElement {
   }
 }
 
-customElements.define('porthd-infomodal', PorthDInfoModal);
+export default PorthDInfoModal;

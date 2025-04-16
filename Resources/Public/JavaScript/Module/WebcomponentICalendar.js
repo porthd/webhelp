@@ -164,4 +164,5 @@ class PorthDICalendarEventGenerator extends HTMLElement {
   }
 }
 
-customElements.define("porthd-icalendarevent", PorthDICalendarEventGenerator);
+
+export default PorthDICalendarEventGenerator;

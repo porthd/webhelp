@@ -1,3 +1,4 @@
+
 class PorthDTimezone extends HTMLElement {
   constructor() {
     super();
@@ -100,5 +101,5 @@ class PorthDTimezone extends HTMLElement {
   }
 }
 
-customElements.define('porthd-timezone', PorthDTimezone);
 
+export default PorthDTimezone

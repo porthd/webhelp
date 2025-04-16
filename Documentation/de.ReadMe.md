@@ -23,102 +23,374 @@ Die Webcomponents wurde via [vibe coding](https://en.wikipedia.org/wiki/Vibe_cod
 
 ## Definierte Webcomponents
 
-| Web-Component (intern verlinkt)                        | slogan                               | Aufgabe                                                                                                                                                                                                                                                                                                                      | Links                                                                                                                                                                                                                                                                                                                                                                                                     |
-|--------------------------------------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [porthd-ajax](#parameter-in-porthd-ajax)               |  Content nachladen                   | Hole per HTTP-Request von einer definierten URL Daten oder HTML-Fragmente und inkludiere sie in das eigene Tag des Webcomponent. Ein Button für mehrfache Abfragen kan gesetzt werden. Gegebenenfalls kann zur Aufbereitung der Daten eine Callback ins Webcomponent eingeführt werden.                                      | [Ajax-Erläuterungen (deutsch)](https://de.wikipedia.org/wiki/Ajax_(Programmierung)) [Ajax-Erläuterungen (englisch)](https://en.wikipedia.org/wiki/Ajax_(programming))                                                                                                                                                                                                                                     |
-| [porthd-breadcrumb](#parameter-in-porthd-breadcrumb)   | Sprechenden Lin in Breadcrumb        | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Gedanken zur Breadcrumb-Navigation in Englisch](https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/) [Codebeispiel für gute Breadcrumb-Navigationshilfe in Deutsch](https://web.dev/patterns/components/breadcrumbs?hl=de)                                                                                                                                  |
-| [porthd-codeview](#parameter-in-porthd-codeview)     | Code-Ansicht                            | Es handelt sich um eine anpassbare Webkomponente zur Darstellung von Code mit Syntax-Hervorhebung, unterstützt durch Themes, Zeilennummern und die Möglichkeit, den Code in die Zwischenablage zu kopieren.                                                                                                                                                                                                                              | [Prism-Dokumentation in Englisch](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                         |
-| [porthd-icalendar](#parameter-in-porthd-icalendar)     | HTML-Event-Daten als ics-Datei anbieten | Erstellt einen Events-Termin-Datei und wandelt eine inkludierte Liste mit Daten zu einem oder mehreren Events in eine downloadbare ics-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                    | [Spezifikation](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20ist%20ein%20Datenformat%20zum%20Austausch%20von%20Kalenderinhalten%2C,wurde%20urspr%C3%BCnglich%201998%20in%20RFC%202445%20%5B10%5D%20definiert.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
-| [porthd-infomodal](#parameter-in-porthd-infomodal)     | Info-Popup per Template definieren   | erfordert die Definition von einem Template für das Modalfenster mit Schließen-Button und einem inkludierten Startbutton, um so die Ausgabe von einem Modal-Fenster zur Information zur Verfügung zu stellen. Über die Attribute `data-*` und gleichnamigen Slots im &lt;template&gt; sind dynamische Modal-Fenster möglich. | [Erläuterungen zu Modal-Fenstern in Deutsch](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                          |
-| [porthd-listselect](#parameter-in-porthd-listselect)   | Mega-Menüs interaktiv steuern/filtern | Beschränkte die Ausgabe von langen verschachtelten Listen auf einen definierten Level und erlaubt die Suche verborgenen Teilüberschriften.                                                                                                                                                                                   | [Übersicht zu Menüs im Web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown-Menü für große Verschachtelung](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Mediaevent zu Menüs](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                         |
-| [porthd-timezone](#parameter-in-porthd-timezone)       | Zeitzoneumrechnung für Datum         | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Erläuterungen zur Zeitzone in Deutsch](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                                                             |
-| [porthd-vcard](#parameter-in-porthd-vcard)             | HTML-Kontaktdaten als vcf-Datei anbieten |  Erstelt eine Kontakt-Datei und wandelt die inkludierte Liste von Daten in eine downloadbare vcf-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                                                          | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) ---  [RFC6350-Spezifikation](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                                                       |
+| Web-Component (intern verlinkt)                                    | slogan                                   | Aufgabe                                                                                                                                                                                                                                                                                                                      | Links                                                                                                                                                                                                                                                                                                                                                                                                     |
+|--------------------------------------------------------------------|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [porthd-ajax](#parameter-in-porthd-ajax)                           | Content nachladen                        | Hole per HTTP-Request von einer definierten URL Daten oder HTML-Fragmente und inkludiere sie in das eigene Tag des Webcomponent. Ein Button für mehrfache Abfragen kan gesetzt werden. Gegebenenfalls kann zur Aufbereitung der Daten eine Callback ins Webcomponent eingeführt werden.                                      | [Ajax-Erläuterungen (deutsch)](https://de.wikipedia.org/wiki/Ajax_(Programmierung)) [Ajax-Erläuterungen (englisch)](https://en.wikipedia.org/wiki/Ajax_(programming))                                                                                                                                                                                                                                     |
+| [porthd-bar-chart-table](#parameter-in-porthd-barchart-from-table) | Chart zu Tabelle                         | Transformiere Daten aus einer Tabelle in ein Balkendiagramm und biete dem Nutzer verschiedene Auswahlmöglichkeiten.                                                                                                                                                                                                          | ---                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [porthd-breadcrumb](#parameter-in-porthd-breadcrumb)               | Sprechenden Lin in Breadcrumb            | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Gedanken zur Breadcrumb-Navigation in Englisch](https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/) [Codebeispiel für gute Breadcrumb-Navigationshilfe in Deutsch](https://web.dev/patterns/components/breadcrumbs?hl=de)                                                                                                                                  |
+| [porthd-codeview](#parameter-in-porthd-codeview)                   | Code-Ansicht                             | Es handelt sich um eine anpassbare Webkomponente zur Darstellung von Code mit Syntax-Hervorhebung, unterstützt durch Themes, Zeilennummern und die Möglichkeit, den Code in die Zwischenablage zu kopieren.                                                                                                                  | [Prism-Dokumentation in Englisch](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                              |
+| [porthd-icalendarevent](#parameter-in-porthd-icalendarevent)            | HTML-Event-Daten als ics-Datei anbieten  | Erstellt einen Events-Termin-Datei und wandelt eine inkludierte Liste mit Daten zu einem oder mehreren Events in eine downloadbare ics-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                    | [Spezifikation](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20ist%20ein%20Datenformat%20zum%20Austausch%20von%20Kalenderinhalten%2C,wurde%20urspr%C3%BCnglich%201998%20in%20RFC%202445%20%5B10%5D%20definiert.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
+| [porthd-infomodal](#parameter-in-porthd-infomodal)                 | Info-Popup per Template definieren       | erfordert die Definition von einem Template für das Modalfenster mit Schließen-Button und einem inkludierten Startbutton, um so die Ausgabe von einem Modal-Fenster zur Information zur Verfügung zu stellen. Über die Attribute `data-*` und gleichnamigen Slots im &lt;template&gt; sind dynamische Modal-Fenster möglich. | [Erläuterungen zu Modal-Fenstern in Deutsch](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                                                                                                                              |
+| [porthd-listselect](#parameter-in-porthd-listselect)               | Mega-Menüs interaktiv steuern/filtern    | Beschränkte die Ausgabe von langen verschachtelten Listen auf einen definierten Level und erlaubt die Suche verborgenen Teilüberschriften.                                                                                                                                                                                   | [Übersicht zu Menüs im Web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown-Menü für große Verschachtelung](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Mediaevent zu Menüs](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                                                                                                     |
+| [porthd-timezone](#parameter-in-porthd-timezone)                   | Zeitzoneumrechnung für Datum             | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Erläuterungen zur Zeitzone in Deutsch](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                                                                                                                                          |
+| [porthd-tocgenerator](#Parameter-in-porthd-tocgenerator)           | Inhaltsverzeichnis                       | Erstelle für einen definierten Block ein unnumeriertes oder nummerierte Inhaltsverzeichnis.                                                                                                                                                                                                                                  | [Artikel zum Inhaltsverzeichnis](https://ichi.pro/de/erstellen-eines-inhaltsverzeichnisses-mit-html-und-css-127834089968964)                                                                                                                                                                                                                                                                              |
+| [porthd-vcard](#parameter-in-porthd-vcard)                         | HTML-Kontaktdaten als vcf-Datei anbieten | Erstelt eine Kontakt-Datei und wandelt die inkludierte Liste von Daten in eine downloadbare vcf-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                                                           | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) ---  [RFC6350-Spezifikation](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                                                                                                                                    |
 
-### Parameter in porthd-vcard
-Das Web-Component `<porthd-vcard>` inkludiert eine Liste von HTML-Tags, die die einzelnen Parameter in der vcard-Datei definieren.
-Die Nutzungsbeispiele findet man hier in der Dokumentation in ['Examples/WebcomponentVCard.html'](./Examples/WebcomponentVCard.html)
-Der Wert in `data-id` bestimmt den jeweiligen Parameter in der späteren vcard-Datei.
-Gegebenenfalls können im Hauptparameter noch weitere Parameter erlaubt sein, wie zum Beispiel der TYPE-Parameter oder der VALUE-Parameter oder ähnliches, wie aus der nachfolgenden Tabelle zu ersehen ist.
-Im Gegensatz zum in dieser Extension definierten iCalendar-Web Component werden außer den genannten data-Attributen keinen weiteren akzeptiert.
-Wenn sie bei den inkludierten Elementen weitere Data-Attribute einfügen, dann werden diese ungeprüft nach folgenden Schema eingefügt:
-`<div data-id="ATTACH" data-fmttype="application/postscript">ftp://example.com/pub/reports/r-960812.ps</div>`
-führt zu folgenden Eintrag im iCalendar
-`ATTACH;FMTTYPE=application/postscript:ftp://example.com/pub/reports/r-960812.ps`.
-Bitte stellen sie sicher, dass immer eine valide Kombination genutzt wird.
+---
+
+### Parameter in porth-ajax
+Das Web-Component `<porthd-ajax>` erlaubt die Integration von Daten, die aktiv per Ajax nachgeladen werden. Die Abfrage kann automatisch oder aber erst nach Klick auf einen Button erfolgen, wobei der Button gestylt, betextet und in seiner Nutzungshäufigkeit beschränkt werden kann. Auch ist es möglich, die empfangenen Daten mit Hilfe einer JavaScript-Funktion für die Ausgabe umzuformen. Auch lassen sich die Hilfstexte frei definieren.
+Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentAjax.html'](./Examples/WebcomponentAjax.html)
 
 Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
 
-**Tabelle mit den validierten IDs für inkludierte Elemente**
+**Attribute in `<porthd-ajax>`**
+Die nachfolgende Tabelle beschreibt die verschiedenen unterstützten Attribute und ihre Funktion.
 
-| Parameter     | Definiton | `data-value` | `data-type` | `data-`*|
-|---------------|--|--|--|--|
-| ADR           | Adresse | 0 | 1 ||
-| ANNIVERSARY   | Jahrestag | 1 | 0 ||
-| BDAY          | Geburtstag | 1 | 0 ||
-| BIRTHPLACE    | Geburtsort der Person | 0 | 0 ||
-| CALADRURI     | URL zum Senden einer Terminanfrage an den Kalender der Person | 0 | 0 ||
-| CALURI        | URL zum Kalender der Person | 0 | 0 ||
-| CATEGORIES    | Liste von Tags zur Beschreibung des durch diese vCard repräsentierten Objekts | 0 | 0 ||
-| CLIENTPIDMAP  | Wird zum Synchronisieren verschiedener Revisionen derselben vCard verwendet. | 0 | 0 ||
-| DEATHDATE     | Sterbedatum der Person | 0 | 0 ||
-| DEATHPLACE    | Sterbeort der Person | 0 | 0 ||
-| EMAIL         | E-Mail-Adresse | 0 | 1 ||
-| EXPERTISE     | Fachgebiet der Person | 0 | 0 ||
-| FBURL         | Definiert eine URL, die anzeigt, wann Die Person ist in ihrem Kalender frei oder beschäftigt., 0, 0 ||
-| **FN**        | **Full Name (Required)** | **0** | **0** | ** **|
-| GENDER        | Geschlecht | 0 | 0 ||
-| GEO           | Geokoordinaten (V4.0) | 0 | 0 ||
-| HOBBY         | Freizeitbeschäftigung der Person | 0 | 0 ||
-| IMPP          | Benutzername für einen Instant Messenger. Dieser wurde in der offiziellen vCard-Spezifikation in Version 4.0 aufgenommen. | 0 | 0 ||
-| INTEREST      | Freizeitbeschäftigung, an der die Person interessiert ist, die sie aber nicht unbedingt ausübt. | 0 | 0 ||
-| KEY           | Öffentlicher Verschlüsselungsschlüssel (V4.0) | 0 | 0 | MEDIATYPE,ENCODING|
-| KIND          | Definiert den Entitätstyp, den diese vCard repräsentiert: 'Anwendung' | Einzelperson' | Gruppe' | Standort' oder 'Organisation'; experimentell., 0, 0 | ',|
-| LABEL         | Sprache | 0 | 1 ||
-| LANG          | Sprache | 0 | 0 ||
-| LOGO          | Firmenlogo (V4.0) | 1 | 0 | ENCODING|
-| MEMBER        | Definiert ein Mitglied der Gruppe, die diese vCard repräsentiert. | 0 | 0 ||
-| N             | Name (V4.0 – optional) | 0 | 0 ||
-| NICKNAME      | Spitzname | 0 | 0 ||
-| NOTE          | Notiz | 1 | 0 | LANGUAGE|
-| ORG           | Organisation | 0 | 1 ||
-| ORG-DIRECTORY | URI für den Arbeitsplatz der Person; hierüber können Informationen über die Mitarbeiter der Person abgerufen werden | 0 | 0 ||
-| PHOTO         | Foto | 1 | 1 | ENCODING,MEDIATYPE|
-| RELATED       | Eine andere Entität, mit der die Person in Beziehung steht. | 0 | 1 ||
-| REV           | Letzte Aktualisierung | 1 | 0 ||
-| ROLE          | Rolle | 0 | 0 ||
-| SOUND         | Es Gibt die Aussprache der FN an., 0, 0 ||
-| SOURCE        | Eine URL, über die die neueste Version dieser vCard abgerufen werden kann. | 0 | 0 ||
-| TEL           | Telefonnummer | 0 | 1 ||
-| TITEL         | Titel | 0 | 0 ||
-| TZ            | Zeitzone | 0 | 0 ||
-| URL           | Website | 0 | 1 | TITEL|
-| XML           | Alle XML-Daten, die mit der vCard verknüpft sind | 0 | 1 | TITEL|
+|  Attribute     | Funktion|
+|----------------|--|
+|  url           | URL für den https-Request, von wo die gewünschten Daten heruntergeladen werden können.|
+|  loading-text  | Text, der während der Wartezeit beim Laden der Daten angezeigt wird. Der Text kann HTML-Tags enthalten.|
+|  error-text    | Text, der während der Wartezeit beim Laden der Daten angezeigt wird. Der Text kann HTML-Tags enthalten.|
+|  callback      | Optional. Funktion vom Typ `data = callback(data);`. Die Funktion dient dazu die ankommenden Daten für die Anzeige im Web-Component vorzubereiten.|
+|  button-text   | Wenn hier mindestens ein Nicht-Weißzeichen steht, wird im Web-Component ein Button mit dem dargebotenen Text angezeigt. Der Text kann HTML-Tags enthalten. Erst nach dem Klick auf den Button wird der Ajax-Request gestartet.|
+|  button-style  | Die angegeben Eigenschaften werden dem `style`-Attribut des Buttons zugeordnet und erlauben so ein individuelles Styling.|
+|  max-click     | Durch Angabe ein Zahl kann die Zahl der Klicks auf den Button beschränkt werden. Wenn die Maximalzahl erreicht ist, wird der Button ausgeblendet. Wenn as Attribut fehlt oder leer ist, gibt es keine Beschränkung der Klickzahlen.|
 
-Zur genauen inhaltlichen Nutzung sei auf die Definition der vCard [bei wikipedia](https://en.wikipedia.org/wiki/VCard) oder [bei der Spezifikation](https://www.rfc-editor.org/rfc/rfc6350.html) verwiesen.
 
-Um die Datei zur Verfügung zu stellen, wird im web-component ein Button im Shadow-DOM definiert.
-Über die Attribute kann das Aussehen und der Text des Buttons definiert werden.
+#### 🧪 Beispiel: Maximale Verwendung mit Styling
 
-**Attribute in `<porthd-vcard>`**
+```html
+<porthd-ajax
+    url="https://example.com/data.html"
+    loading-text="⏳ Daten werden geladen..."
+    error-text="❌ Fehler beim Abrufen der Daten."
+    callback="transformiereDaten"
+    button-text="🔄 Daten neu laden"
+    button-style="
+        background: linear-gradient(to right, #ff6a00, #ee0979);
+        color: white;
+        font-size: 1.2rem;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 999px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    "
+    max-click="3">
+</porthd-ajax>
+```
 
-| Attribute    | Funktion|
-|--------------|--|
-| button-label | Text des Buttons, wobei der TEXT auch HTML- und SVG-Tags enhalten kann.|
-| button-style | CSS-Eigenschaften für das style-Element des Buttons im Shadow-DOM|
-| file-name    | Name für die Datei, die heruntergeladen wird|
+#### 💡 Optional: Callback-Funktion
+```javascript
+function transformiereDaten(data) {
+    return `<pre style="white-space: pre-wrap; font-family: monospace;">${data}</pre>`;
+}
+```
+---
 
-### Parameter in porthd-icalendar
-Das Web-Component `<porthd-icalendar>` inkludiert eine Liste von HTML-Tags, die die einzelnen Parameter in der icalendar-Datei definieren.
-Die Nutzungsbeispiele findet man hier in der Dokumentation in ['Examples/WebcomponentICalendar.html'](./Examples/WebcomponentICalendar.html)
-Wenn sie bei den inkludierten Elemente weitere Data-Attribute einfügen, dann werden diese ungeprüft nach folgenden Schema eingefügt:
-`<div data-id="ATTACH" data-fmttype="application/postscript">ftp://example.com/pub/reports/r-960812.ps</div>`
-führt zu folgenden Eintrag im iCalendar
-`ATTACH;FMTTYPE=application/postscript:ftp://example.com/pub/reports/r-960812.ps`.
-Bitte stellen sie sicher, dass immer eine valide Kombination genutzt wird.
+### Parameter in porthd-barchart-from-table
 
-Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
+Diese Web Component wandelt eine HTML-Tabelle in ein interaktives Balkendiagramm mit **Chart.js** um. Die Anzeige ist dynamisch, flexibel und durch Checkboxen & Radiobuttons steuerbar.
 
-**Tabelle mit den validierten IDs für inkludierte Elemente**
+#### ⚙️ Verwendete Attribute
+
+| Attribut        | Typ     | Beschreibung                                                                 |
+|-----------------|---------|------------------------------------------------------------------------------|
+| `title-column`  | Number  | Index der Spalte, die als Beschriftung verwendet wird (beginnend bei 0)     |
+| `value-column`  | Number  | Index der Spalte, die als Wertequelle dient                                  |
+| `colors`        | String  | Komma-separierte Farbwerte                                                   |
+| `orientation`   | String  | `horizontal` oder `vertical`                                                |
+| `transpose`     | Flag    | Zeilen und Spalten werden getauscht                                          |
+| `button-text`   | String  | Optional: Zeigt einen Button zum Ein-/Ausblenden der Tabelle                 |
+| `chartjs-url`   | String  | URL zur Chart.js-Bibliothek (Standard: CDN)                                 |
+
+#### 🧪 Beispiel: Maximale Konfiguration
+
+```html
+<porthd-barchart-from-table
+  title-column="0"
+  value-column="2"
+  colors="crimson,orange,gold,forestgreen,dodgerblue,purple"
+  orientation="horizontal"
+  transpose
+  button-text="📋 Tabelle anzeigen/ausblenden"
+  chartjs-url="https://cdn.jsdelivr.net/npm/chart.js"
+>
+  <table>
+    <thead>
+      <tr><th>Produkt</th><th>Januar</th><th>Februar</th><th>März</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Apfel</td><td>120</td><td>150</td><td>180</td></tr>
+      <tr><td>Birne</td><td>90</td><td>130</td><td>160</td></tr>
+      <tr><td>Kirsche</td><td>70</td><td>110</td><td>140</td></tr>
+    </tbody>
+  </table>
+</porthd-barchart-from-table>
+```
+
+#### 🎨 Dynamisches Styling
+
+- Jeder Balken kann mit einer Farbe aus der `colors`-Liste gestylt werden
+- `button-text` zeigt einen Toggle-Button für die Tabelle
+- Die Tabelle wird geklont und im Shadow DOM dargestellt
+
+#### ✨ Features
+
+- **Automatisches Laden** von Chart.js, wenn es nicht bereits verfügbar ist
+- **Checkboxen** zur Auswahl von Zeilen oder Spalten
+- **Radiobuttons** zur Auswahl der Wertequelle (Spalte oder Zeile)
+- **Responsives Layout**, orientierbar an X- oder Y-Achse
+- **Volle Kontrolle** über Anzeige durch Attribute
+
+#### 🧠 Hinweise
+
+- Die Komponente benutzt Shadow DOM – Styles müssen inline oder per JS gesetzt werden.
+- Die Tabelle im Light DOM bleibt erhalten – Änderungen dort wirken sich nicht automatisch aus.
+- Du kannst `chartjs-url` setzen, wenn du eine bestimmte Chart.js-Version laden willst.
+
+#### 📌 Mögliche Erweiterungen
+
+- Unterstützung für mehrere Datensätze
+- Export-Funktion (PNG/SVG)
+- Dynamische Farbpaletten je nach Wert
+- Tooltip-Anpassung
+
+---
+
+### Parameter in porthd-breadcrumb
+
+Die Webkomponente `<porthd-breadcrumb>` generiert eine breadcrumb-Navigation basierend auf einer angegebenen URL. Sie unterstützt dynamische Styling-Optionen, Callback-Verarbeitung und Anzeige von Domaininformationen.
+
+#### Beispielhafte Verwendung
+
+```html
+<porthd-breadcrumb
+    href="https://example.com/produkte/kategorie/item123?ref=abc"
+    separator=" &gt; "
+    show-domain="true"
+    parameter-text="mit Parametern"
+    error-text="Ungültige URL"
+    callback="formatBreadcrumbLabel">
+</porthd-breadcrumb>
+```
+
+##### Beispielhafter Callback im Fenster-Kontext:
+
+```js
+window.formatBreadcrumbLabel = function(text) {
+    return text.replace(/-/g, ' ').toUpperCase();
+};
+```
+
+#### Erklärung der Attribute
+
+| Attribut         | Beschreibung                                                                 |
+|------------------|------------------------------------------------------------------------------|
+| `href`           | Die URL, aus der der Breadcrumb generiert wird. Muss gültig sein.            |
+| `separator`      | HTML-Inhalt als Trennzeichen zwischen Breadcrumb-Elementen. Standard: `/`    |
+| `show-domain`    | `true` oder `1`, um die Domain als erstes Element anzuzeigen.                |
+| `parameter-text` | Text, der angezeigt wird, wenn URL-Parameter vorhanden sind.                |
+| `error-text`     | Text, der angezeigt wird, wenn die URL ungültig ist.                         |
+| `callback`       | Name einer Funktion im globalen Scope, die Pfadsegmente modifizieren kann.  |
+
+#### Dynamisch generierter HTML-Code
+
+##### Beispielausgabe bei aktivierter Domainanzeige und URL-Parametern:
+
+```html
+<span class="breadcrumb">
+  <a href="https://example.com">example.com</a>
+  <span>&nbsp;/&nbsp;</span>
+  <a href="https://example.com/produkte/">PRODUKTE</a>
+  <span>&nbsp;/&nbsp;</span>
+  <a href="https://example.com/produkte/kategorie/">KATEGORIE</a>
+  <span>&nbsp;/&nbsp;</span>
+  <a href="https://example.com/produkte/kategorie/item123/">ITEM123</a>
+  <span>&nbsp;/&nbsp;</span>
+  <a href="https://example.com/produkte/kategorie/item123?ref=abc">mit Parametern</a>
+</span>
+```
+
+#### Styling-Hinweis
+
+Die Komponente fügt dem Container standardmäßig die Klasse `breadcrumb` hinzu. Beispielhaftes CSS:
+
+```css
+.breadcrumb {
+    font-family: sans-serif;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #0366d6;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    margin: 0 4px;
+    color: #aaa;
+}
+
+.breadcrumb .error {
+    color: red;
+}
+```
+
+Diese Komponente eignet sich hervorragend, um dynamisch Pfadnavigationen für Webanwendungen zu erzeugen, besonders bei CMS- oder SPA-Systemen.
+
+---
+
+---
+
+### Parameter in porthd-codeview
+
+Diese Dokumentation zeigt ein maximales Beispiel für die Ausgabe des dynamisch generierten Codes der Webkomponente `<porthd-codeview>` inklusive aller Styling-Elemente und interaktiven Features.
+
+#### Beispiel-HTML zur Nutzung der Komponente
+
+```html
+<porthd-codeview
+  language="javascript"
+  theme="dark"
+  line-numbers
+  button-label="Copy Code"
+  theme-button-label="Switch Theme"
+  cdn="https://cdn.jsdelivr.net/npm/prismjs"
+>
+  <script type="text/plain">
+    // Beispielhafter JavaScript-Code
+    function greet(name) {
+      console.log(`Hello, ${name}!`);
+    }
+    greet('World');
+  </script>
+</porthd-codeview>
+```
+
+#### Dynamisch generierter DOM-Inhalt (Shadow DOM)
+
+Nach dem Einfügen der Komponente wird der folgende DOM-Abschnitt im Shadow DOM generiert:
+
+```html
+<style>
+  :host {
+    display: block;
+    position: relative;
+  }
+  button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    margin: 0 0.5em;
+    z-index: 1;
+    padding: 0.5em 1em;
+    cursor: pointer;
+  }
+  pre {
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+  }
+</style>
+<button class="theme-toggle">Switch Theme</button>
+<button class="copy-button" style="right: 2.5em;">Copy Code</button>
+<pre class="line-numbers"><code class="language-javascript">
+// Beispielhafter JavaScript-Code
+function greet(name) {
+  console.log(`Hello, ${name}!`);
+}
+greet('World');
+</code></pre>
+```
+
+#### Funktionen
+
+- Syntax-Highlighting mit Prism.js (dynamisch geladen)
+- Umschalten zwischen `light` und `dark` Theme
+- Zeilennummern über Plugin
+- Kopierfunktion mit Feedback (✓)
+- Unterstützung für mehrere Sprachen über `<script type="text/plain">`
+
+#### Styling-Details
+
+Die Buttons werden absolut über dem Codeblock positioniert. Das Theme kann dynamisch gewechselt werden, indem unterschiedliche CSS-Dateien von Prism eingebunden werden.
+
+#### Hinweis
+
+PrismJS und Plugins werden nur geladen, wenn sie nicht bereits vorhanden sind.
+
+ℹ️ Oben ist ein vollständiges Beispiel für die maximal generierte Struktur dieser Komponente zu sehen.
+
+---
+
+### Parameter in porthd-icalendarevent
+
+Dieses Beispiel zeigt eine vollständige Verwendung der Webkomponente `<porthd-icalendarevent>`, inklusive maximal generiertem dynamischen iCalendar-Code, validierten Datenfeldern und eingebautem Styling.
+
+#### Beispiel HTML
+
+```html
+<porthd-icalendarevent
+  button-label="iCal herunterladen"
+  button-style="background: green; color: white; padding: 12px 20px; border-radius: 6px; border: none;"
+  file-name="mein-event"
+  prodid="-//Beispiel Firma//iCal Generator//DE">
+
+  <div data-id="UID">123e4567-e89b-12d3-a456-426614174000</div>
+  <div data-id="DTSTAMP">20250415T120000Z</div>
+  <div data-id="DTSTART">20250501T090000Z</div>
+  <div data-id="DTEND">20250501T100000Z</div>
+  <div data-id="SUMMARY">Meeting mit Team</div>
+  <div data-id="DESCRIPTION">Besprechung der Q2-Ziele und Strategie</div>
+  <div data-id="LOCATION">Konferenzraum A</div>
+  <div data-id="STATUS">CONFIRMED</div>
+  <div data-id="CLASS">PUBLIC</div>
+  <div data-id="ORGANIZER" data-cn="Max Mustermann">mailto:max@example.com</div>
+  <div data-id="ATTENDEE" data-role="REQ-PARTICIPANT" data-cn="Erika Beispiel">mailto:erika@example.com</div>
+
+</porthd-icalendarevent>
+```
+
+#### Erläuterung
+
+- Das Button-Styling kann über `button-style` angepasst werden.
+- Das Attribut `prodid` legt die PRODUKT-ID des iCalendar-Exports fest.
+- Jeder `data-id` Container repräsentiert eine iCalendar-Zeile. Weitere Parameter werden über `data-` Attribute hinzugefügt.
+
+#### Generierter iCal-Inhalt
+
+Wenn korrekt verwendet, wird beim Klick auf den Button ein `.ics`-Dateidownload erzeugt mit folgendem Muster:
+
+```ics
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Beispiel Firma//iCal Generator//DE
+BEGIN:VEVENT
+UID:123e4567-e89b-12d3-a456-426614174000
+DTSTAMP:20250415T120000Z
+DTSTART:20250501T090000Z
+DTEND:20250501T100000Z
+SUMMARY:Meeting mit Team
+DESCRIPTION:Besprechung der Q2-Ziele und Strategie
+LOCATION:Konferenzraum A
+STATUS:CONFIRMED
+CLASS:PUBLIC
+ORGANIZER;CN=Max Mustermann:mailto:max@example.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;CN=Erika Beispiel:mailto:erika@example.com
+END:VEVENT
+END:VCALENDAR
+```
+#### Erklärung zu Parametern
+
+**Tabelle mit den erlaubten data-id`s für inkludierte Elemente**
 
 | data-id       | Beschreibung|
 |---------------|-----|
@@ -152,7 +424,7 @@ Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprü
 | X-WR-CALNAME  | Anzeigename des Kalenders|
 | X-WR-TIMEZONE | Kalenderzeitzone|
 
-**Attribute in `<porthd-vcard>`**
+#### Erklärung zu Attributen
 Dieses Webcomponent bringt vier Attribute mit. Zwei dienen der Definition des Buttons, eines der ProdID für den iCalendar-Eintrag
 
 | Attribute    | Funktion |
@@ -162,71 +434,11 @@ Dieses Webcomponent bringt vier Attribute mit. Zwei dienen der Definition des Bu
 |file-name    | Name für die Datei, die heruntergeladen wird; wobei die Endung '.ics' immer angefügt wird. |
 |prodid       | Identifier für die Generierung der iCalendar-Datei. Dieser Eintrag ist nicht genormt. |
 
-### Parameter in porthd-listselect
+#### Fehlerbehandlung
 
-Das Web-Component `<porthd-listselect>` inkludiert eine verschachtelte Liste von HTML-Tags, die zum Beispiel ein komplexes Menü, die Sitemap einer Seite, ein Organigram oder ein Inhaltsverzeichnis repräsentieren können. Es erlaubt die einfache Filterung nach Level und/oder Schlagworten, die gemäß dem Autocomplete-Prinzip angeboten werden.
-Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentListSelectFilter.html'](./Examples/WebcomponentListSelectFilter.html)
-Das Web-Component bringt relativ viele Attribute mit, um das Filterformular einstellen zu können.
+Die Komponente prüft automatisch auf erforderliche Felder (`UID`, `DTSTAMP`, `DTSTART`, `SUMMARY`) und meldet Fehler in einem `alert`-Fenster.
 
-Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
-
-**Attribute in `<porthd-listselect>`**
-
-| Attribute     | Funktion |
-|---------------|---------- |
-| level         | Ebene, die bei verschachtelten Listen per Default oder nach einem Reset angezeigt werden soll |
-| filter        | Begriff, der in die Suchbox beim Filter eingetragen wird |
-| list-tags     | Selektoren bzw. HTML-Tags, die jeweils ein Listenelement und/oder einen verschachtelten Liste umklammern. Es wird die Pseudoklasse :where() zur Selektion genutzt. |
-| search-length | Zahl der Buchstaben, die mindestens in die Suchbox eingegeben werden müssen |
-| label-range   | Text-Bezeichner vor dem Schieberegler zur Einstellung der angezeigen Verschachtelungstiefe |
-| label-search  | Text-Bezeichner vor dem Eingabefeld für die Filterung |
-| label-reset   | Text-Bezeichner für den Reset-Button |
-| placeholder   | Text, der im leeren Eingabefeld für die Filterung angezeigt wird |
-| label-style   | Liste der CSS-Eigenschaften, die man den beiden Label-Felder zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
-| input-style   | Liste der CSS-Eigenschaften, die man den Input-Feld zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
-| range-style   | Liste der CSS-Eigenschaften, die man den Range-Feld zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. Pseudoklasse werden nicht übertragen. |
-| button-style  | Liste der CSS-Eigenschaften, die man den Reset-Button zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
-| trim          | Die Worte für das Autocomplete können um die Zeichen getrimmt werden, so dass zum Beispiel Klammern ohne Leerzeichen vor einem Wort im Autocomplete nicht auftauchen. |
-
-### Parameter in porth-ajax
-Das Web-Component `<porthd-ajax>` erlaubt die Integration von Daten, die aktiv per Ajax nachgeladen werden. Die Abfrage kann automatisch oder aber erst nach Klick auf einen Button erfolgen, wobei der Button gestylt, betextet und in seiner Nutzungshäufigkeit beschränkt werden kann. Auch ist es möglich, die empfangenen Daten mit Hilfe einer JavaScript-Funktion für die Ausgabe umzuformen. Auch lassen sich die Hilfstexte frei definieren.
-Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentAjax.html'](./Examples/WebcomponentAjax.html)
-
-Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
-
-**Attribute in `<porthd-ajax>`**
-Die nachfolgende Tabelle beschreibt die verschiedenen unterstützten Attribute und ihre Funktion.
-
-|  Attribute     | Funktion|
-|----------------|--|
-|  url           | URL für den https-Request, von wo die gewünschten Daten heruntergeladen werden können.|
-|  loading-text  | Text, der während der Wartezeit beim Laden der Daten angezeigt wird. Der Text kann HTML-Tags enthalten.|
-|  error-text    | Text, der während der Wartezeit beim Laden der Daten angezeigt wird. Der Text kann HTML-Tags enthalten.|
-|  callback      | Optional. Funktion vom Typ `data = callback(data);`. Die Funktion dient dazu die ankommenden Daten für die Anzeige im Web-Component vorzubereiten.|
-|  button-text   | Wenn hier mindestens ein Nicht-Weißzeichen steht, wird im Web-Component ein Button mit dem dargebotenen Text angezeigt. Der Text kann HTML-Tags enthalten. Erst nach dem Klick auf den Button wird der Ajax-Request gestartet.|
-|  button-style  | Die angegeben Eigenschaften werden dem `style`-Attribut des Buttons zugeordnet und erlauben so ein individuelles Styling.|
-|  max-click     | Durch Angabe ein Zahl kann die Zahl der Klicks auf den Button beschränkt werden. Wenn die Maximalzahl erreicht ist, wird der Button ausgeblendet. Wenn as Attribut fehlt oder leer ist, gibt es keine Beschränkung der Klickzahlen.|
-
-### Parameter in porth-timezone
-Das Web-Component `<porthd-timezone>` erlaubt die Konvertierung eines Datums mit Uhrzeit einer bestimmten Zeitzone in ein Datum einer anderen Zeitzone. Laut KI sollen dabei Aspekte wie die Sommerzeit beachtet werden.
-Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentTimeZone.html'](./Examples/WebcomponentTimeZone.html)
-
-Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
-
-**Attribute in `<porthd-timezone>`**
-Die nachfolgende Tabelle beschreibt die verschiedenen unterstützten Attribute und ihre Funktion.
-
-| Attribute       | Funktion|
-|-----------------|--|
-| datetime        | Attribut mit der aktuellen Zeitangabe, die in einen Zielzeit konvertiert werden soll. Wenn dies Attribut fehlt|
-| to-timezone     | Definiert die Zeitzone, in welche die angebene Uhrzeit konvertiert werden soll.|
-| source-timezone | Definiert die Zeitzone, in welche die angebene Uhrzeit vorliegt.|
-| aria-text       | Hinweistext für Screenreader zur Funktion des Web-Components. Der Text kann auch HTML-Tags enthalten.|
-| error-text      | Hinweistext, wenn ein Fehler aufgetreten ist. Der Text kann auch HTML-Tags enthalten.|
-| parse-format    | Neben den gängigen ISO-Formaten kann man folgende fordefinierte Formate verwenden: 'Y-m-d', 'Y-m-d H:i', 'H:i:s', 'd.m.Y', 'm/d/Y' und 'Y-m-d H:i:s'. Auch ist die Angabe `Tag Monatsname Jahr` erlaubt, sofern eine Liste mit Monatsnamen im Attribut `month-names` hinterlegt ist.|
-| month-names     | Definiert einen Liste von Monatsnamen in sortierter Reihenfolge. Man kann mehrere Listen mit allen Monaten des Jahres in sortierter Reihenfolge verketten. Folgendes ist also erlaubt: 'jan,feb.mär,apr,mai,jun,jul,aug,sep,okt,nov,dez,jan,feb.mar,apr,may,jun,jul,aug,sep,oct,nov,dec'.|
-
-
+---
 
 ### Parameter in porthd-infomodal
 
@@ -389,256 +601,219 @@ Mit `error-hide` (nur Console-Log):
 - **Performance-Optimierung**: Lazy-Loading und DOM-Optimierungen.
 - **Erweiterte Barrierefreiheit**: Weitere ARIA-Attribute und Screenreader-Unterstützung.
 
+---
 
-### Parameter in porth-breadcrumb
+### Parameter in porthd-listselect
 
-Das Web-Component `<porthd-breadcrumb>` wandelt eine übergebene URL (absolut oder relativ) in eine strukturierte, klickbare Breadcrumb-Navigation um.
+Das Web-Component `<porthd-listselect>` inkludiert eine verschachtelte Liste von HTML-Tags, die zum Beispiel ein komplexes Menü, die Sitemap einer Seite, ein Organigram oder ein Inhaltsverzeichnis repräsentieren können. Es erlaubt die einfache Filterung nach Level und/oder Schlagworten, die gemäß dem Autocomplete-Prinzip angeboten werden.
+Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentListSelectFilter.html'](./Examples/WebcomponentListSelectFilter.html)
+Das Web-Component bringt relativ viele Attribute mit, um das Filterformular einstellen zu können.
 
-Die einzelnen Pfade der URL werden als `<a>`-Elemente ausgegeben, die jeweils auf den Pfad bis zu dieser Ebene verlinken. Optionale Parameter, Domains und Trennzeichen lassen sich über Attribute steuern.
+Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
 
-Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentBreadcrumb.html'](./Examples/WebcomponentBreadcrumb.html)
+**Attribute in `<porthd-listselect>`**
+
+| Attribute     | Funktion |
+|---------------|---------- |
+| level         | Ebene, die bei verschachtelten Listen per Default oder nach einem Reset angezeigt werden soll |
+| filter        | Begriff, der in die Suchbox beim Filter eingetragen wird |
+| list-tags     | Selektoren bzw. HTML-Tags, die jeweils ein Listenelement und/oder einen verschachtelten Liste umklammern. Es wird die Pseudoklasse :where() zur Selektion genutzt. |
+| search-length | Zahl der Buchstaben, die mindestens in die Suchbox eingegeben werden müssen |
+| label-range   | Text-Bezeichner vor dem Schieberegler zur Einstellung der angezeigen Verschachtelungstiefe |
+| label-search  | Text-Bezeichner vor dem Eingabefeld für die Filterung |
+| label-reset   | Text-Bezeichner für den Reset-Button |
+| placeholder   | Text, der im leeren Eingabefeld für die Filterung angezeigt wird |
+| label-style   | Liste der CSS-Eigenschaften, die man den beiden Label-Felder zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
+| input-style   | Liste der CSS-Eigenschaften, die man den Input-Feld zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
+| range-style   | Liste der CSS-Eigenschaften, die man den Range-Feld zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. Pseudoklasse werden nicht übertragen. |
+| button-style  | Liste der CSS-Eigenschaften, die man den Reset-Button zuordnen möchte. Es ist analog zum style-Feld in normalen Tags. |
+| trim          | Die Worte für das Autocomplete können um die Zeichen getrimmt werden, so dass zum Beispiel Klammern ohne Leerzeichen vor einem Wort im Autocomplete nicht auftauchen. |
+
+---
+
+### Parameter in porth-timezone
+Das Web-Component `<porthd-timezone>` erlaubt die Konvertierung eines Datums mit Uhrzeit einer bestimmten Zeitzone in ein Datum einer anderen Zeitzone. Laut KI sollen dabei Aspekte wie die Sommerzeit beachtet werden.
+Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentTimeZone.html'](./Examples/WebcomponentTimeZone.html)
+
+Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
+
+**Attribute in `<porthd-timezone>`**
+Die nachfolgende Tabelle beschreibt die verschiedenen unterstützten Attribute und ihre Funktion.
+
+| Attribute       | Funktion|
+|-----------------|--|
+| datetime        | Attribut mit der aktuellen Zeitangabe, die in einen Zielzeit konvertiert werden soll. Wenn dies Attribut fehlt|
+| to-timezone     | Definiert die Zeitzone, in welche die angebene Uhrzeit konvertiert werden soll.|
+| source-timezone | Definiert die Zeitzone, in welche die angebene Uhrzeit vorliegt.|
+| aria-text       | Hinweistext für Screenreader zur Funktion des Web-Components. Der Text kann auch HTML-Tags enthalten.|
+| error-text      | Hinweistext, wenn ein Fehler aufgetreten ist. Der Text kann auch HTML-Tags enthalten.|
+| parse-format    | Neben den gängigen ISO-Formaten kann man folgende fordefinierte Formate verwenden: 'Y-m-d', 'Y-m-d H:i', 'H:i:s', 'd.m.Y', 'm/d/Y' und 'Y-m-d H:i:s'. Auch ist die Angabe `Tag Monatsname Jahr` erlaubt, sofern eine Liste mit Monatsnamen im Attribut `month-names` hinterlegt ist.|
+| month-names     | Definiert einen Liste von Monatsnamen in sortierter Reihenfolge. Man kann mehrere Listen mit allen Monaten des Jahres in sortierter Reihenfolge verketten. Folgendes ist also erlaubt: 'jan,feb.mär,apr,mai,jun,jul,aug,sep,okt,nov,dez,jan,feb.mar,apr,may,jun,jul,aug,sep,oct,nov,dec'.|
+
+---
+
+### Parameter in Porthd-TocGenerator
+
+Eine benutzerdefinierte Web Component zur dynamischen Erstellung eines Inhaltsverzeichnisses (Table of Contents, TOC) aus HTML-Überschriften (`h1` bis `h6`) innerhalb eines bestimmten DOM-Blocks.
+Das Web Component sollte leer sein, weil der Platz für das dynamisch generierte Inhaltsverzeichnis vorgesehen ist.
+
+#### Features
+
+- Unterstützt alle Überschriftenebenen von `h1` bis `h6`
+- Verschachtelte Liste je nach Ebenentiefe
+- Optionale Kapitelnummerierung (`add-number`)
+- Startnummerierung via `chapter-start`
+- Mehrere TOCs pro Seite möglich
+- Fehlerbehandlung mit anpassbarem Text & CSS
+- Unterstützt dynamische Änderungen durch Attribut `rebuild`
 
 #### Verwendung
 
 ```html
-<porthd-breadcrumb
-  href="https://example.com/dokumentation/kapitel/artikel?param=1"
-  separator=" &raquo; "
-  parameter-text="Details anzeigen"
-  show-domain="true"
-  error-text="Fehlerhafte URL">
-</porthd-breadcrumb>
+<porthd-tocgenerator
+  block="#mein-inhalt"
+  add-number="true"
+  chapter-start="1.0.0.0.0.0"
+  pretext="mein_anker_"
+  error-text="<strong>Fehler:</strong> Überschriften nicht gefunden."
+  error-style="color: red; font-style: italic;"
+></porthd-tocgenerator>
 ```
-
-#### Attribute
-| Attribut         | Typ       | Beschreibung                                                                                     | Optional | Standardwert                       |
-|------------------|-----------|--------------------------------------------------------------------------------------------------|----------|------------------------------------|
-| `href`           | String    | Die zu analysierende URL (absolut oder relativ).                                                 | ❌        | —                                  |
-| `separator`      | String    | HTML-Inhalt als Trenner zwischen Breadcrumb-Ebenen. Kann HTML-Entities oder SVG-Code enthalten. | ✅        | `<span>&nbsp;/&nbsp;</span>`       |
-| `parameter-text` | String    | Wenn gesetzt und die URL Parameter enthält (`?param=...`), wird dieser Text als letzter Link gezeigt. | ✅   | `"plus parameter"`                 |
-| `show-domain`    | Boolean   | Wenn `true` oder `1`, wird die Domain als erste Breadcrumb-Ebene ausgegeben.                     | ✅        | `false`                            |
-| `error-text`     | String    | Text, der angezeigt wird, wenn `href` fehlt oder keine gültige URL darstellt.                   | ✅        | `"URL missing or not valid"`       |
-
-#### Verhalten
-
-- **Pfad-Aufteilung:** Jeder Verzeichnisteil wird als eigene Breadcrumb-Ebene mit Link angezeigt.
-- **Parameter:** Wenn die URL Parameter enthält (`?param=...`) und `parameter-text` gesetzt ist, erscheint eine zusätzliche Breadcrumb-Ebene.
-- **Trennzeichen:** Über `separator` steuerbar. Standardmäßig wird ` / ` verwendet.
-- **Domain:** Wenn `show-domain` aktiviert ist und eine absolute URL verwendet wird, wird die Domain (z. B. `example.com`) als erste Ebene angezeigt.
-- **Ungültige URL:** Bei fehlender oder ungültiger URL erscheint `error-text` oder der Standardtext.
-
-#### Beispiel-Ausgabe
-
-Für folgende Komponente:
 
 ```html
-<porthd-breadcrumb
-  href="https://example.com/docs/kapitel/artikel?x=1"
-  show-domain="true"
-  parameter-text="Filter aktiv">
-</porthd-breadcrumb>
+<div id="mein-inhalt">
+  <h2>Einleitung</h2>
+  <h3>Motivation</h3>
+  <h2>Hauptteil</h2>
+</div>
 ```
 
-Ergibt folgende Breadcrumb-Navigation:
+#### Attribute-Referenz
 
-```html
-<a href="https://example.com">example.com</a>
-<span>/</span>
-<a href="https://example.com/docs/">docs</a>
-<span>/</span>
-<a href="https://example.com/docs/kapitel/">kapitel</a>
-<span>/</span>
-<a href="https://example.com/docs/kapitel/artikel/">artikel</a>
-<span>/</span>
-<a href="https://example.com/docs/kapitel/artikel?x=1">Filter aktiv</a>
+| Attribut       | Typ      | Beschreibung                                                                 |
+|----------------|----------|------------------------------------------------------------------------------|
+| `block`        | CSS-Selector | Ziel-Container, aus dem die Überschriften gelesen werden. Standard: `body`. |
+| `add-number`   | `true/false` | Aktiviert Kapitelnummerierung. Standard: `false`.                          |
+| `chapter-start`| `X.X.X.X.X.X` | Startpunkt der Nummerierung (nur bei `add-number=true`).                  |
+| `pretext`      | String   | Präfix für Anchor-IDs. Ermöglicht mehrere TOCs gleichzeitig.               |
+| `error-text`   | HTML     | Optionaler HTML-Fehlertext, wenn kein Block oder keine Überschrift gefunden wird. |
+| `error-style`  | CSS      | Inline-CSS-Styles für das Fehler-DIV.                                       |
+| `rebuild`      | beliebig | Bei jeder Änderung dieses Attributs wird das TOC neu aufgebaut.            |
+
+#### Dynamisches Rebuild
+
+Wenn sich der DOM innerhalb des Ziel-Blocks ändert (z. B. neue Überschrift per Button), kann das TOC durch Setzen des `rebuild`-Attributs neu aufgebaut werden:
+
+```js
+const toc = document.querySelector('#mein-toc');
+toc.setAttribute('rebuild', Date.now().toString());
 ```
 
-#### Testfälle
+#### Anchor-Verhalten
 
-Die Komponente wurde gegen folgende Tests validiert:
+Jede Überschrift erhält ein unsichtbares `<span>`-Element mit einer eindeutigen ID als Anker. Diese ID setzt sich zusammen aus:
 
-1. Mit absoluter URL und allen Attributen
-2. Mit relativer URL und allen Attributen
-3. Ohne `separator` → Standard-Trennzeichen
-4. Ohne `parameter-text` → `"plus parameter"` wird angezeigt
-5. Ohne `show-domain` → Domain wird nicht angezeigt
-6. Ohne `error-text` → `"URL missing or not valid"` wird angezeigt
-7. Ohne `href` → Fehleranzeige
+```
+[pretext][zufälligerTeil]_[laufendeNummer]
+```
+
+Beispiel: `mein_anker_kd93kfj2_0`
+
+#### Fehlerbehandlung
+
+Wird der `block` nicht gefunden oder enthält keine Überschriften, wird ein `<div>` mit dem Fehlertext angezeigt. Sowohl Inhalt (`error-text`) als auch Stil (`error-style`) sind vollständig anpassbar.
 
 #### Styling
 
-Die Komponente verwendet kein Shadow DOM und kann somit direkt über CSS-Klassen von außen gestylt werden.
-
-##### Beispiel:
+Die TOC-Liste nutzt die Klasse `toc`. Eigene CSS-Regeln können dafür definiert werden:
 
 ```css
-.breadcrumb a {
-  color: red;
-  text-decoration: none;
+ul.toc {
+  list-style: none;
+  padding-left: 1em;
 }
-.breadcrumb span {
-  margin: 0 4px;
-}
-.breadcrumb .error {
-  color: darkred;
-  font-style: italic;
+ul.toc li {
+  margin-bottom: 0.3em;
 }
 ```
 
-#### Integration
+#### Test-Setup
 
-Das Web-Component kann direkt in HTML eingebunden oder als Modul in moderne JavaScript-Frameworks integriert werden.
-
-##### Direkt im HTML:
-
-```html
-<script>
-  // Definition hier einfügen oder über externes JS-Modul einbinden
-</script>
-```
-
-##### Vorteile:
-
-- Kein Shadow DOM → vollständige Kontrolle über Styling
-- Kompatibel mit statischen Seiten und Frameworks wie React, Vue oder Angular
-- HTML-API: einfache Nutzung über deklarative Attribute
-
-#### Erweiterungsmöglichkeiten
-
-- Unterstützung für benutzerdefinierte Templates
-- Mehrsprachigkeit (i18n)
-- Dynamisches Nachladen der URL oder automatisches Lesen aus `window.location`
-
-### Parameter in `PorthDCodeView`
-
-Die Klasse `PorthDCodeView` ist eine individuelle Webkomponente, die Quellcode mit Syntax-Hervorhebung anzeigt. Sie bietet Funktionen wie **Thema-Umschaltung**, **Kopier-Button** und Unterstützung für **Zeilennummern**. Dank des **Shadow DOM** wird eine isolierte und sichere Darstellung garantiert. Die Komponente verwendet **PrismJS** zur Syntax-Hervorhebung.
-
-Beispiele zur Nutzung finden Sie hier in der Dokumentation unter ['Examples/WebcomponentCodeview.html'](./Examples/WebcomponentCodeview.html).
+Mehrere Testfälle können gleichzeitig auf einer HTML-Seite getestet werden. Achte bei mehreren TOCs auf unterschiedliche `pretext`-Werte, um ID-Kollisionen zu vermeiden.
 
 ---
 
-#### Übersicht
+### Parameter in porthd-vcard
+Das Web-Component `<porthd-vcard>` inkludiert eine Liste von HTML-Tags, die die einzelnen Parameter in der vcard-Datei definieren.
+Die Nutzungsbeispiele findet man hier in der Dokumentation in ['Examples/WebcomponentVCard.html'](./Examples/WebcomponentVCard.html)
+Der Wert in `data-id` bestimmt den jeweiligen Parameter in der späteren vcard-Datei.
+Gegebenenfalls können im Hauptparameter noch weitere Parameter erlaubt sein, wie zum Beispiel der TYPE-Parameter oder der VALUE-Parameter oder ähnliches, wie aus der nachfolgenden Tabelle zu ersehen ist.
+Im Gegensatz zum in dieser Extension definierten iCalendar-Web Component werden außer den genannten data-Attributen keinen weiteren akzeptiert.
+Wenn sie bei den inkludierten Elementen weitere Data-Attribute einfügen, dann werden diese ungeprüft nach folgenden Schema eingefügt:
+`<div data-id="ATTACH" data-fmttype="application/postscript">ftp://example.com/pub/reports/r-960812.ps</div>`
+führt zu folgenden Eintrag im iCalendar
+`ATTACH;FMTTYPE=application/postscript:ftp://example.com/pub/reports/r-960812.ps`.
+Bitte stellen sie sicher, dass immer eine valide Kombination genutzt wird.
 
-Die `PorthDCodeView`-Klasse ist eine benutzerdefinierte `HTMLElement`-Erweiterung, die es ermöglicht, Code direkt in der eigenen Applikation hervorzuheben. Zusätzlich können Light/Dark-Themes und Zeilennummern mit wenig Aufwand konfiguriert werden.
+Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprüft.
 
----
+**Tabelle mit den validierten IDs für inkludierte Elemente**
 
-#### Attribute
+| Parameter     | Definiton | `data-value` | `data-type` | `data-`*|
+|---------------|--|--|--|--|
+| ADR           | Adresse | 0 | 1 ||
+| ANNIVERSARY   | Jahrestag | 1 | 0 ||
+| BDAY          | Geburtstag | 1 | 0 ||
+| BIRTHPLACE    | Geburtsort der Person | 0 | 0 ||
+| CALADRURI     | URL zum Senden einer Terminanfrage an den Kalender der Person | 0 | 0 ||
+| CALURI        | URL zum Kalender der Person | 0 | 0 ||
+| CATEGORIES    | Liste von Tags zur Beschreibung des durch diese vCard repräsentierten Objekts | 0 | 0 ||
+| CLIENTPIDMAP  | Wird zum Synchronisieren verschiedener Revisionen derselben vCard verwendet. | 0 | 0 ||
+| DEATHDATE     | Sterbedatum der Person | 0 | 0 ||
+| DEATHPLACE    | Sterbeort der Person | 0 | 0 ||
+| EMAIL         | E-Mail-Adresse | 0 | 1 ||
+| EXPERTISE     | Fachgebiet der Person | 0 | 0 ||
+| FBURL         | Definiert eine URL, die anzeigt, wann Die Person ist in ihrem Kalender frei oder beschäftigt., 0, 0 ||
+| **FN**        | **Full Name (Required)** | **0** | **0** | ** **|
+| GENDER        | Geschlecht | 0 | 0 ||
+| GEO           | Geokoordinaten (V4.0) | 0 | 0 ||
+| HOBBY         | Freizeitbeschäftigung der Person | 0 | 0 ||
+| IMPP          | Benutzername für einen Instant Messenger. Dieser wurde in der offiziellen vCard-Spezifikation in Version 4.0 aufgenommen. | 0 | 0 ||
+| INTEREST      | Freizeitbeschäftigung, an der die Person interessiert ist, die sie aber nicht unbedingt ausübt. | 0 | 0 ||
+| KEY           | Öffentlicher Verschlüsselungsschlüssel (V4.0) | 0 | 0 | MEDIATYPE,ENCODING|
+| KIND          | Definiert den Entitätstyp, den diese vCard repräsentiert: 'Anwendung' | Einzelperson' | Gruppe' | Standort' oder 'Organisation'; experimentell., 0, 0 | ',|
+| LABEL         | Sprache | 0 | 1 ||
+| LANG          | Sprache | 0 | 0 ||
+| LOGO          | Firmenlogo (V4.0) | 1 | 0 | ENCODING|
+| MEMBER        | Definiert ein Mitglied der Gruppe, die diese vCard repräsentiert. | 0 | 0 ||
+| N             | Name (V4.0 – optional) | 0 | 0 ||
+| NICKNAME      | Spitzname | 0 | 0 ||
+| NOTE          | Notiz | 1 | 0 | LANGUAGE|
+| ORG           | Organisation | 0 | 1 ||
+| ORG-DIRECTORY | URI für den Arbeitsplatz der Person; hierüber können Informationen über die Mitarbeiter der Person abgerufen werden | 0 | 0 ||
+| PHOTO         | Foto | 1 | 1 | ENCODING,MEDIATYPE|
+| RELATED       | Eine andere Entität, mit der die Person in Beziehung steht. | 0 | 1 ||
+| REV           | Letzte Aktualisierung | 1 | 0 ||
+| ROLE          | Rolle | 0 | 0 ||
+| SOUND         | Es Gibt die Aussprache der FN an., 0, 0 ||
+| SOURCE        | Eine URL, über die die neueste Version dieser vCard abgerufen werden kann. | 0 | 0 ||
+| TEL           | Telefonnummer | 0 | 1 ||
+| TITEL         | Titel | 0 | 0 ||
+| TZ            | Zeitzone | 0 | 0 ||
+| URL           | Website | 0 | 1 | TITEL|
+| XML           | Alle XML-Daten, die mit der vCard verknüpft sind | 0 | 1 | TITEL|
 
-Die Web-Komponente unterstützt mehrere HTML-Attribute zur Konfiguration. Nachfolgend eine detaillierte Auflistung dieser Attribute:
+Zur genauen inhaltlichen Nutzung sei auf die Definition der vCard [bei wikipedia](https://en.wikipedia.org/wiki/VCard) oder [bei der Spezifikation](https://www.rfc-editor.org/rfc/rfc6350.html) verwiesen.
 
-| **Attribut**           | **Typ**       | **Erforderlich?** | **Beschreibung**                                                                                                                                                    | **Standardwert**                  |
-|-------------------------|---------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `language`             | `String`      | Nein               | Gibt die Sprache des Codes an. Beispiele: `markup`, `javascript`, `php`, `css`. PrismJS-Komponenten werden entsprechend geladen.                                     | `markup`                          |
-| `theme`                | `String`      | Nein               | Bestimmt das anfängliche Thema der Syntax-Hervorhebung. Werte: `light`, `dark`.                                                                                     | `light`                           |
-| `line-numbers`         | `Boolean`     | Nein               | Wenn dieses Attribut gesetzt ist, werden **Zeilennummern** eingeblendet.                                                                                           | Nicht gesetzt                     |
-| `button-label`         | `String`      | Nein               | Definiert den Text, der für den Kopieren-Button angezeigt wird. Beispiel: `Copy`.                                                                                   | `Copy`                            |
-| `theme-button-label`   | `String`      | Nein               | Text für den Theme-Umschalter. Sollte den Zweck für Nutzer verdeutlichen. Beispiele: `🌞/🌜`, `Toggle Theme`.                                                        | `Toggle Theme`                    |
-| `cdn`                  | `String`      | Nein               | Gibt die Basis-URL an, von der PrismJS und seine Komponenten geladen werden. Falls keine Angabe erfolgt, wird das offizielle CDN von PrismJS verwendet.              | `https://cdn.jsdelivr.net/npm/prismjs` |
+Um die Datei zur Verfügung zu stellen, wird im web-component ein Button im Shadow-DOM definiert.
+Über die Attribute kann das Aussehen und der Text des Buttons definiert werden.
 
----
+**Attribute in `<porthd-vcard>`**
 
-#### Funktionsweise
-
-##### 1. **Syntaxhervorhebung**
-- Die Syntaxhervorhebung wird durch PrismJS umgesetzt.
-- Bei der Initialisierung wird das Attribut `language` verwendet, um die richtige Sprachkomponente zu laden.
-- Der Codeinhalt wird standardmäßig in ein `<code>`-Tag innerhalb eines `<pre>`-Containers eingefügt und anschließend hervorgehoben.
-
-##### 2. **Thema-Umschaltung**
-- Die Attribute `theme` und `theme-button-label` erlauben die Konfiguration eines Theme-Toggles zwischen `light` und `dark`.
-- Das Umschalten des Themes wird asynchron ausgeführt, wobei das korrekt zugehörige PrismJS-CSS nachgeladen wird.
-
-##### 3. **Zeilennummern**
-- Wenn das Attribut `line-numbers` gesetzt ist, wird dem `<pre>`-Element die Klasse `line-numbers` zugewiesen.
-- Zeilennummern werden mithilfe des PrismJS-Plugins automatisch generiert.
-
-##### 4. **Kopierbutton**
-- Der Text des Kopier-Buttons wird über `button-label` definiert.
-- Der Button kopiert den vollständigen Codeinhalt in die Zwischenablage.
-
----
-
-#### Verwendung
-
-##### **Code-Block mit Standard-Light-Theme**
-```html
-<porthd-codeview language="javascript">
-    <script type="text/plain">
-console.log("Hallo Welt!");
-    </script>
-</porthd-codeview>
-```
-
-##### **Dark-Theme mit Zeilennummern und angepasstem Button-Text**
-```html
-<porthd-codeview language="php" theme="dark" line-numbers button-label="Kopiere Code" theme-button-label="Wechseln">
-    <script type="text/plain">
-<?php
-echo "Hallo Welt!";
-?>
-    </script>
-</porthd-codeview>
-```
-
-##### **Anpassen des PrismJS-CDN**
-```html
-<porthd-codeview language="html" cdn="https://example-cdn.com/prismjs" theme="light">
-    <script type="text/plain">
-<div>
-    <h1>Hallo Welt!</h1>
-</div>
-    </script>
-</porthd-codeview>
-```
+| Attribute    | Funktion|
+|--------------|--|
+| button-label | Text des Buttons, wobei der TEXT auch HTML- und SVG-Tags enhalten kann.|
+| button-style | CSS-Eigenschaften für das style-Element des Buttons im Shadow-DOM|
+| file-name    | Name für die Datei, die heruntergeladen wird|
 
 ---
-
-#### Methodendetails
-
-##### `connectedCallback()`
-Die Methode wird automatisch ausgeführt, wenn das Element in das DOM eingefügt wird. Sie initialisiert die Komponente, indem sie folgende Schritte ausführt:
-1. **Attribute laden**: Ermittelt alle relevanten Attribute wie `theme`, `language`, etc.
-2. **Shadow-DOM erstellen**: Baut sicher ein Shadow-DOM für isolierte Styles und Inhalte.
-3. **PrismJS laden**, wenn es nicht verfügbar ist:
-    - PrismJS-Core, Sprachkomponenten (`markup`, `javascript`, `css`) und das Plugin für Zeilennummern werden dynamisch geladen.
-4. **Interne Buttons hinzufügen**:
-    - Ein **Kopier-Button** wird erstellt und mit einem Event-Listener versehen, um den Code in die Zwischenablage zu kopieren.
-    - Ein **Theme-Toggle-Button** schaltet das Theme und lädt die entsprechenden CSS-Dateien nach.
-5. **Code übernehmen**:
-    - Entweder vom `<script>`-Tag oder dem Inhalt des Tags, in dem die Komponente definiert wird.
-6. **Syntax-Hervorhebung** mit PrismJS auf den Code anwenden.
-
-##### `applyTheme(theme: string)`
-Private Hilfsmethode, die das entsprechende PrismJS-Stylesheet (entweder `light` oder `dark`) basierend auf dem gewünschten `theme` lädt. Die Methode wird sowohl beim Initialisieren als auch beim Umschalten zwischen den Themen aufgerufen.
-
-```javascript
-const applyTheme = async theme => {
-    const themeHref =
-        theme === 'dark'
-            ? `${cdnBase}/themes/prism-okaidia.css`
-            : `${cdnBase}/themes/prism.css`;
-    await loadCSS(themeHref);
-};
-```
-
----
-
-#### Tests
-
-Hier sind Beispiele, um sicherzustellen, dass die Komponente wie erwartet funktioniert:
-
-##### **Test: Kopier-Button**
-1. Richte eine `porthd-codeview`-Instanz ein und stelle sicher, dass ein Button mit der Beschriftung des `button-label` sichtbar ist.
-2. Klicke auf den Button und überzeug dich, dass der Code in die Zwischenablage kopiert wurde.
-
-##### **Test: Theme-Toggle**
-1. Richte eine Instanz mit `theme="dark"` ein und überprüfe, dass das `prism-okaidia.css`-Theme geladen wird.
-2. Klicke auf den Theme-Toggle-Button und überprüfe, ob das `light`-Theme geladen wird.
-
----
-
-#### Einschränkungen
-- Themes werden asynchron geladen, was zu kurzem Flackern führen kann.
-- Benutzer müssen sicherstellen, dass PrismJS über das definierte CDN verfügbar ist.
-- Nur standardmäßige Sprachkomponenten (`markup`, `javascript`, `css`) werden automatisch geladen. Zusätzliche Sprachen müssen manuell angepasst werden.

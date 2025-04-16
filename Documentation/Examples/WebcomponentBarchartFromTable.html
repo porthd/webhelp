@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>porthd-barchart-from-table mit Chart.js</title>
+    <style>
+        /*body { font-family: sans-serif; padding: 2rem; }*/
+        /*table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }*/
+        /*th, td { border: 1px solid #ccc; padding: 0.5rem; }*/
+        /*button { margin: 0.5rem 0; }*/
+    </style>
+</head>
+<body>
+
+<h1>Demo: &lt;porthd-barchart-from-table&gt; mit Chart.js</h1>
+
+<h2>1️⃣ Balken (horizontal)</h2>
+<porthd-barchart-from-table orientation="horizontal">
+    <table>
+        <thead><tr><th>Produkt</th><th>Wert</th></tr></thead>
+        <tbody>
+        <tr><td>Alpha</td><td>35</td></tr>
+        <tr><td>Beta</td><td>60</td></tr>
+        <tr><td>Gamma</td><td>90</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>2️⃣ Säulen (vertikal mit eigenen Farben)</h2>
+<porthd-barchart-from-table colors="#3498db,#2ecc71,#e74c3c">
+    <table>
+        <thead><tr><th>Stadt</th><th>Einwohner</th></tr></thead>
+        <tbody>
+        <tr><td>Berlin</td><td>3800</td></tr>
+        <tr><td>Hamburg</td><td>1800</td></tr>
+        <tr><td>Köln</td><td>1100</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>3️⃣ Titel in Spalte 3, Zahlen in Spalte 5</h2>
+<porthd-barchart-from-table title-column="2" value-column="4">
+    <table>
+        <thead>
+        <tr><th>ID</th><th>Kategorie</th><th>Name</th><th>Status</th><th>Score</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>1</td><td>A</td><td>Objekt X</td><td>Aktiv</td><td>42</td></tr>
+        <tr><td>2</td><td>B</td><td>Objekt Y</td><td>Inaktiv</td><td>65</td></tr>
+        <tr><td>3</td><td>A</td><td>Objekt Z</td><td>Aktiv</td><td>30</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>4️⃣ Vertauschte Zeilen/Spalten (3 Balken)</h2>
+<porthd-barchart-from-table transpose>
+    <table>
+        <thead>
+        <tr><th>Eigenschaft</th><th>Leistung</th><th>Reichweite</th><th>Preis</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>Auto A</td><td>150</td><td>400</td><td>30</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>5️⃣ Nur eine Farbe</h2>
+<porthd-barchart-from-table colors="#ff9900">
+    <table>
+        <thead><tr><th>Name</th><th>Punkte</th></tr></thead>
+        <tbody>
+        <tr><td>Anna</td><td>77</td></tr>
+        <tr><td>Tom</td><td>88</td></tr>
+        <tr><td>Lisa</td><td>92</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>6️⃣ 10 Datenpunkte</h2>
+<porthd-barchart-from-table>
+    <table>
+        <thead><tr><th>ID</th><th>Wert</th></tr></thead>
+        <tbody>
+        <tr><td>Item 1</td><td>45</td></tr>
+        <tr><td>Item 2</td><td>67</td></tr>
+        <tr><td>Item 3</td><td>21</td></tr>
+        <tr><td>Item 4</td><td>34</td></tr>
+        <tr><td>Item 5</td><td>55</td></tr>
+        <tr><td>Item 6</td><td>88</td></tr>
+        <tr><td>Item 7</td><td>29</td></tr>
+        <tr><td>Item 8</td><td>73</td></tr>
+        <tr><td>Item 9</td><td>61</td></tr>
+        <tr><td>Item 10</td><td>39</td></tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+<h2>Beispiel: Nicht transponiert</h2>
+<porthd-barchart-from-table title-column="0">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Wert A</th>
+            <th>Wert B</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Alice</td>
+            <td>10</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>20</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>Clara</td>
+            <td>30</td>
+            <td>25</td>
+        </tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<h2>Beispiel: Transponiert</h2>
+<porthd-barchart-from-table transpose title-column="0" button-text="weg/da Tabelle">
+    <table>
+        <thead>
+        <tr>
+            <th>Person</th>
+            <th>Alice</th>
+            <th>Bob</th>
+            <th>Clara</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Wert A</td>
+            <td>10</td>
+            <td>20</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>Wert B</td>
+            <td>5</td>
+            <td>15</td>
+            <td>25</td>
+        </tr>
+        </tbody>
+    </table>
+</porthd-barchart-from-table>
+
+<script>
+    class PorthDBarChartFromTable extends HTMLElement {
+        constructor() {
+            super();
+            this.attachShadow({mode: 'open'});
+            this.defaultColors = ['red', 'orange', 'green', 'blue', 'violet', 'pink'];
+            this.chartJsUrl = this.getAttribute('chartjs-url') || 'https://cdn.jsdelivr.net/npm/chart.js';
+        }
+
+        connectedCallback() {
+            if (window.Chart) {
+                console.log('Chart.js ist bereits verfügbar!');
+                this.render();
+            } else {
+                this.loadChartJsScript().then(() => {
+                    console.log('Chart.js wurde erfolgreich geladen.');
+                    this.render();
+                });
+            }
+        }
+
+        async loadChartJsScript() {
+            if (window.Chart) {
+                console.log("Chart.js ist bereits geladen.");
+                return Promise.resolve();
+            }
+
+            return new Promise(resolve => {
+                const script = document.createElement('script');
+                script.src = this.chartJsUrl;
+                script.onload = () => {
+                    if (window.Chart) {
+                        console.log("Chart.js wurde erfolgreich geladen.");
+                        resolve();
+                    } else {
+                        console.error("Chart.js konnte nicht geladen werden!");
+                    }
+                };
+                document.body.appendChild(script);
+            });
+        }
+
+        static get observedAttributes() {
+            return ['title-column', 'value-column', 'colors', 'orientation', 'transpose', 'chartjs-url'];
+        }
+
+        attributeChangedCallback() {
+            this.render();
+        }
+
+        render() {
+            const titleIndex = parseInt(this.getAttribute('title-column') || '0');
+            const orientation = this.getAttribute('orientation') || 'vertical';
+            const transpose = this.hasAttribute('transpose');
+            const colorList = (this.getAttribute('colors') || this.defaultColors.join(',')).split(',');
+
+            const table = this.querySelector('table');
+            if (!table) return;
+
+            const shadow = this.shadowRoot;
+            shadow.innerHTML = '';
+
+            const container = document.createElement('div');
+
+            const buttonText = this.getAttribute('button-text') ;
+            let toggleBtn;
+            if (buttonText && buttonText.trim()) {
+                toggleBtn = document.createElement('button');
+                toggleBtn.innerHTML = buttonText;
+                toggleBtn.addEventListener('click', () => {
+                    tableVisible = !tableVisible;
+                    tableClone.style.display = tableVisible ? 'table' : 'none';
+                });
+            }
+
+            const tableClone = table.cloneNode(true);
+            tableClone.style.display = 'table';
+
+            let tableVisible = true;
+
+            const chartCanvas = document.createElement('canvas');
+            chartCanvas.style.width = '100%';
+            if  (typeof toggleBtn !== 'undefined') {
+                container.appendChild(toggleBtn);
+            }
+            container.appendChild(tableClone);
+            container.appendChild(chartCanvas);
+            shadow.appendChild(container);
+
+            const ctx = chartCanvas.getContext('2d');
+            let chart;
+
+            const rows = tableClone.querySelectorAll('tbody tr');
+            let selectedValueColumn = 1;
+            let selectedRowIndex = 0;
+
+            if (transpose) {
+
+                const thead = tableClone.querySelector('thead');
+                const originalHeaderRow = tableClone.querySelector('thead tr:last-child');
+                const checkboxRow = document.createElement('tr');
+
+                const emptyTh = document.createElement('th');
+                checkboxRow.appendChild(emptyTh);
+
+                const ths = originalHeaderRow.querySelectorAll('th');
+                for (let i = 0; i < ths.length; i++) {
+                    const cb = document.createElement('input');
+                    cb.type = 'checkbox';
+                    cb.checked = true;
+                    cb.addEventListener('change', () => updateChart());
+                    const th = document.createElement('th');
+                    if (i > 0) {
+                        th.appendChild(cb);
+                    }
+                    checkboxRow.appendChild(th);
+                }
+
+                thead.insertBefore(checkboxRow, originalHeaderRow);
+
+                rows.forEach((row, idx) => {
+                    const td = document.createElement('td');
+                    const rb = document.createElement('input');
+                    rb.type = 'radio';
+                    rb.name = 'value-row';
+                    rb.checked = idx === 0;
+                    rb.addEventListener('change', () => {
+                        selectedRowIndex = idx;
+                        updateChart();
+                    });
+                    td.appendChild(rb);
+                    row.insertBefore(td, row.firstChild);
+                });
+
+                const th = document.createElement('th');
+                th.textContent = '';
+                originalHeaderRow.insertBefore(th, originalHeaderRow.firstChild);
+
+            } else {
+                rows.forEach(row => {
+                    const cb = document.createElement('input');
+                    cb.type = 'checkbox';
+                    cb.checked = true;
+                    cb.addEventListener('change', () => updateChart());
+                    const td = document.createElement('td');
+                    td.appendChild(cb);
+                    row.insertBefore(td, row.firstChild);
+                });
+
+                const headerRow = tableClone.querySelector('thead tr');
+                if (headerRow) {
+                    const th = document.createElement('th');
+                    th.textContent = '';
+                    headerRow.insertBefore(th, headerRow.firstChild);
+
+                    let flag = true;
+                    for (let i = 1; i < headerRow.cells.length; i++) {
+                        let radio;
+                        if (i>1) {
+                            radio = document.createElement('input');
+                            radio.type = 'radio';
+                            radio.name = 'value-column';
+                            radio.checked = flag;
+                            flag = false;
+                            radio.addEventListener('change', () => {
+                                selectedValueColumn = i;
+                                updateChart();
+                            });
+                        } else {
+                            radio = document.createElement('span');
+                            radio.innerHTML="&nbsp;";
+                        }
+                        headerRow.cells[i].insertBefore(document.createElement('br'), headerRow.cells[i].firstChild);
+                        headerRow.cells[i].insertBefore(radio, headerRow.cells[i].firstChild);
+                    }
+                    selectedValueColumn = 2;
+                }
+
+            }
+
+            const updateChart = () => {
+                let labels = [];
+                let values = [];
+
+                if (transpose) {
+                    const checkboxRow = tableClone.querySelector('thead tr:first-child');
+                    const colCheckboxes = checkboxRow.querySelectorAll('input[type="checkbox"]');
+                    const labelCells = tableClone.querySelectorAll('thead tr:last-child th');
+
+                    const selectedRow = tableClone.querySelectorAll('tbody tr')[selectedRowIndex];
+                    if (!selectedRow) return;
+                    const cells = selectedRow.querySelectorAll('td');
+
+                    for (let i = 1; i < cells.length; i++) {
+                        const cb = colCheckboxes[i - 2];
+                        if (!cb || !cb.checked) continue;
+
+                        const label = labelCells[i].textContent.trim();
+                        const val = parseFloat(cells[i].textContent);
+                        if (label && !isNaN(val)) {
+                            labels.push(label);
+                            values.push(val);
+                        }
+                    }
+                } else {
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        const cb = cells[0].querySelector('input[type="checkbox"]');
+                        if (!cb || !cb.checked) return;
+
+                        const label = cells[titleIndex + 1]?.textContent?.trim();
+                        const val = parseFloat(cells[selectedValueColumn]?.textContent);
+                        if (label && !isNaN(val)) {
+                            labels.push(label);
+                            values.push(val);
+                        }
+                    });
+                }
+
+                if (chart) chart.destroy();
+
+                chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Werte',
+                            data: values,
+                            backgroundColor: labels.map((_, i) => colorList[i % colorList.length])
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            title: {
+                                display: false,
+                            }
+                        },
+                        responsive: true,
+                        indexAxis: orientation === 'horizontal' ? 'y' : 'x',
+                        scales: {
+                            x: {beginAtZero: true},
+                            y: {beginAtZero: true}
+                        }
+                    }
+                });
+            };
+
+            updateChart();
+        }
+    }
+
+    customElements.define('porthd-barchart-from-table', PorthDBarChartFromTable);
+</script>
+
+</body>
+</html>

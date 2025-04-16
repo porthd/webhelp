@@ -1,3 +1,4 @@
+
 class PorthDBreadcrumb extends HTMLElement {
   connectedCallback() {
     const hrefAttr = this.getAttribute('href');
@@ -72,4 +73,4 @@ class PorthDBreadcrumb extends HTMLElement {
   }
 }
 
-customElements.define('porthd-breadcrumb', PorthDBreadcrumb);
+export default PorthDBreadcrumb;

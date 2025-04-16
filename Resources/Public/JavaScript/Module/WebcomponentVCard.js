@@ -1,3 +1,4 @@
+
 class PorthdVCardGenerator extends HTMLElement {
   constructor() {
     super();
@@ -160,5 +161,5 @@ class PorthdVCardGenerator extends HTMLElement {
   }
 }
 
-customElements.define("porthd-vcard", PorthdVCardGenerator);
 
+export default PorthdVCardGenerator;

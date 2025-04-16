@@ -94,5 +94,4 @@ class PorthDAjax extends HTMLElement {
 }
 
 
-customElements.define('porthd-ajax', PorthDAjax);
-
+export default PorthDAjax;

@@ -1,3 +1,4 @@
+
 class PorthDListSelectFilter extends HTMLElement {
   constructor() {
     super();
@@ -119,4 +120,5 @@ class PorthDListSelectFilter extends HTMLElement {
   }
 }
 
-customElements.define("porthd-listselect", PorthDListSelectFilter);
+
+export default PorthDListSelectFilter;

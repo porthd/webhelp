@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>TOC Generator – Final</title>
+</head>
+<body>
+
+<h1>📄 Inhaltsverzeichnis Generator – Final</h1>
+
+<!-- Beispiel 1: Startet mit h4 -->
+<h2>Beispiel : Dynamischer TOC mit Button</h2>
+<button onclick="addHeadlineAndRebuild()">Neue Überschrift hinzufügen</button>
+<porthd-tocgenerator
+    id="toc-dynamic"
+    add-number="true"
+    pretext="dyn_"
+    error-style="color:red;font-style:italic;"
+>
+    <div class="content-block">
+        <h4>Deeplink</h4>
+        <h2>Einleitung</h2>
+        <h3>Grundlagen</h3>
+    </div>
+
+</porthd-tocgenerator>
+
+<h2>Beispiel 1: Dynamischer TOC mit Button</h2>
+<button onclick="addHeadlineAndRebuild()">Neue Überschrift hinzufügen</button>
+<porthd-tocgenerator
+    id="toc-dynamic"
+    block="#dynamic-block"
+    add-number="true"
+    pretext="dyn_"
+    error-style="color:red;font-style:italic;"
+></porthd-tocgenerator>
+<div id="dynamic-block" class="content-block">
+    <h4>Deeplink</h4>
+    <h2>Einleitung</h2>
+    <h3>Grundlagen</h3>
+</div>
+
+<!-- Beispiel 2: add-number="true" ohne chapter-start -->
+<h2>Beispiel 2: Automatische Nummerierung</h2>
+<porthd-tocgenerator
+    block="#auto-number"
+    add-number="true"
+    pretext="auto_"
+></porthd-tocgenerator>
+<div id="auto-number" class="content-block">
+    <h1>Kapitel</h1>
+    <h2>Teil</h2>
+    <h3>Abschnitt</h3>
+</div>
+
+<!-- Beispiel 3: add-number mit chapter-start -->
+<h2>Beispiel 3: Start bei 9.8.7.6.5.4</h2>
+<porthd-tocgenerator
+    block="#custom-start"
+    add-number="true"
+    chapter-start="9.8.7.6.5.4"
+    pretext="custom_"
+></porthd-tocgenerator>
+<div id="custom-start" class="content-block">
+    <h4>deeplink</h4>
+    <h1>Kapitel</h1>
+    <h2>Unterkapitel</h2>
+</div>
+
+<!-- Beispiel 4: Fehlerfall -->
+<h2>Beispiel 4: Fehlerhafte Block-Auswahl</h2>
+<porthd-tocgenerator
+    block="#notexistant"
+    add-number="true"
+    pretext="fail_"
+    error-text="<strong>Fehler:</strong> Der angegebene Block wurde nicht gefunden!"
+    error-style="border: 1px solid red; background: #fee; color: darkred; padding: 1em;"
+></porthd-tocgenerator>
+
+<script>
+    class PorthDTocGenerator extends HTMLElement {
+        static observedAttributes = ['rebuild'];
+
+        constructor() {
+            super();
+            this.idPrefix = this.getAttribute('pretext') || 'toc_';
+            this.randomIdPart = Math.random().toString(36).substring(2, 10);
+            this.counter = [0, 0, 0, 0, 0, 0];
+        }
+
+        connectedCallback() {
+            this.buildTOC();
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            if (name === 'rebuild') {
+                this.buildTOC();
+            }
+        }
+
+        buildTOC() {
+            this.innerHTML = '';
+            const blockSelector = this.getAttribute('block') || 'body';
+            const block = document.querySelector(blockSelector);
+
+            if (!block) {
+                this.showError();
+                return;
+            }
+
+            const headings = block.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (!headings.length) {
+                this.showError();
+                return;
+            }
+
+            const addNumber = this.getAttribute('add-number') === 'true';
+            const start = this.getAttribute('chapter-start');
+            if (addNumber && start && /^\d+\.\d+\.\d+\.\d+\.\d+\.\d+$/.test(start)) {
+                this.counter = start.split('.').map(Number);
+            } else {
+                this.counter = [0, 0, 0, 0, 0, 0];
+            }
+
+            const tocList = document.createElement('ul');
+            tocList.className = 'toc';
+
+            let currentLists = Array(6).fill(null);
+            currentLists[0] = tocList;
+
+            let lastListItems = Array(6).fill(null);
+
+            headings.forEach((heading, index) => {
+                const level = parseInt(heading.tagName[1]) - 1;
+                const anchorId = `${this.idPrefix}${this.randomIdPart}_${index}`;
+
+                const anchorSpan = document.createElement('span');
+                anchorSpan.id = anchorId;
+                anchorSpan.className = 'anchor';
+                heading.insertBefore(anchorSpan, heading.firstChild);
+
+                if (addNumber) {
+                    this.counter[level]++;
+                    for (let i = level + 1; i < 6; i++) {
+                        this.counter[i] = 0;
+                    }
+                }
+
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `#${anchorId}`;
+                const numbering = addNumber ? this.counter.slice(0, level + 1).join('.') + ' ' : '';
+                link.textContent = numbering + heading.textContent;
+                listItem.appendChild(link);
+
+                // Fallback auf gültige höhere Liste oder top-level
+                let parentList = null;
+                for (let i = level - 1; i >= 0; i--) {
+                    if (currentLists[i]) {
+                        parentList = currentLists[i];
+                        break;
+                    }
+                }
+                if (!parentList) parentList = tocList;
+
+                parentList.appendChild(listItem);
+
+                // Neue Liste für tiefere Ebene
+                const subList = document.createElement('ul');
+                subList.className = 'toc';
+                listItem.appendChild(subList);
+                currentLists[level] = subList;
+                lastListItems[level] = listItem;
+
+                for (let i = level + 1; i < 6; i++) {
+                    currentLists[i] = null;
+                    lastListItems[i] = null;
+                }
+            });
+
+            this.appendChild(tocList);
+        }
+
+        showError() {
+            const errorText = this.getAttribute('error-text') ||
+                'Directory can not be created. Missing block or missing headline-tag.';
+            const errorStyle = this.getAttribute('error-style') || 'color: red; font-weight: bold;';
+
+            const error = document.createElement('div');
+            error.className = 'error';
+            error.setAttribute('style', errorStyle);
+            error.innerHTML = errorText;
+            this.appendChild(error);
+        }
+    }
+
+    customElements.define('porthd-tocgenerator', PorthDTocGenerator);
+
+    // Button: Headline hinzufügen + rebuild triggern
+    function addHeadlineAndRebuild() {
+        const block = document.querySelector('#dynamic-block');
+        const newHeading = document.createElement('h2');
+        newHeading.textContent = 'Neue dynamische Überschrift';
+        block.appendChild(newHeading);
+
+        const toc = document.querySelector('#toc-dynamic');
+        toc.setAttribute('rebuild', Date.now().toString());
+    }
+</script>
+</body>
+</html>

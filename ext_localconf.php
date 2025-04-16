@@ -2,11 +2,15 @@
 
 defined('TYPO3') || defined('TYPO3_MODE') || die('Access denied in ' . __FILE__ . '.');
 
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2020 Dr. Dieter Porthd <info@mobger.de>
+ *  (c) 2025 Dr. Dieter Porthd <info@mobger.de>
  *
  *  All rights reserved
  *
@@ -23,29 +27,36 @@ defined('TYPO3') || defined('TYPO3_MODE') || die('Access denied in ' . __FILE__ 
 
 call_user_func(function () {
     $extensionName = 'webhelp';
-    $extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    $extensionConfiguration = GeneralUtility::makeInstance(
+        ExtensionConfiguration::class
     );
     $pageName = (string)$extensionConfiguration->get($extensionName, 'typoscriptPageName');
     $pageName = empty($pageName) ? 'page' : trim($pageName);
-    foreach ([
-                 'flagAjax' => 'WebcomponentAjax.js',
-                 'flagBreadcrumb' => 'WebcomponentBreadcrumb.js',
-                 'flagCodeview' => 'WebcomponentCodeview.js',
-                 'flagICalendar' => 'WebcomponentICalendar.js',
-                 'flagInfomodal' => 'WebcomponentInfomodal.js',
-                 'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',
-                 'flagTimeZone' => 'WebcomponentTimeZone.js',
-                 'flagVCard' => 'WebcomponentVCard.js',
-             ] as $webComponentId => $webComponentJsFile) {
-        $flagComponent = (bool)$extensionConfiguration->get($extensionName, $webComponentId);
-
-        if ($flagComponent) {
-            $typoScript = $pageName . '.includeJSFooter.webhelp_' . $webComponentId .
-                ' = EXT:webhelp/Resources/Public/JavaScript/' . $webComponentJsFile;
-            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-                $typoScript
-            );
+    $path = trim(
+        (string)$extensionConfiguration->get($extensionName, 'modulePathImportWebcomponents')
+    );
+    if (empty($path)) {
+        $typoScript = '';
+        foreach ([
+                     'flagAjax' => 'WebcomponentAjax.js',
+                     'flagBarchartFromTable' => 'WebcomponentBarchartFromTable.js',
+                     'flagBreadcrumb' => 'WebcomponentBreadcrumb.js',
+                     'flagCodeview' => 'WebcomponentCodeview.js',
+                     'flagICalendar' => 'WebcomponentICalendar.js',
+                     'flagInfomodal' => 'WebcomponentInfomodal.js',
+                     'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',
+                     'flagTimeZone' => 'WebcomponentTimeZone.js',
+                     'flagTocGenerator' => 'WebcomponentTocGenerator.js',
+                     'flagVCard' => 'WebcomponentVCard.js',
+                 ] as $webComponentId => $webComponentJsFile) {
+                $typoScript .= $pageName . '.includeJSFooter.webhelp_Single_import_' . $webComponentId .
+                    ' = EXT:webhelp/Resources/Public/JavaScript/' . $webComponentJsFile ."\n";
         }
+    } else {
+        $typoScript = $pageName . '.includeJSFooter.webhelp_default_module_path_import = ' . $path;
+        $typoScript = $typoScript . "\n" . $pageName . '.includeJSFooter.webhelp_default_module_path_import.type = module';
     }
+    ExtensionManagementUtility::addTypoScriptSetup(
+        $typoScript
+    );
 });

@@ -6,39 +6,11 @@
 		<body>
 			<trans-unit id="extension.template.constants.typoscriptPageName" resname="extension.template.constants.typoscriptPageName">
 				<source>Name of the PAGE object: Typically, the name of the PAGE object in TypoScript is 'page'; this can be overwritten if the name for the frontend output in TypoScript is different.</source>
-				<target>Name des PAGE-Object: Typischerweise ist der Name des PAGE-objekt im Typoscript 'page'; hier kann der Name überschrieben werden, wenn Name für die Ausgabe des Frontends im Typoscript abweichend ist.</target>
+				<target>Name des PAGE-Object: Typischerweise ist der Name des PAGE-Objekts im Typoscript 'page'; hier kann der Name überschrieben werden, wenn Name für die Ausgabe des Frontends im Typoscript abweichend ist.</target>
 			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_ajax" resname="extension.template.constants.flag.webcomponent_ajax">
-				<source>porthd-ajax: Should the JavaScript for the web component 'porthd-ajax' be loaded to include Ajax results? (0 = no; 1 = yes).</source>
-				<target>porthd-ajax: Soll das JavaScript für das Webcomponent 'porthd-ajax' zum Einbinden von Ajax-Ergebnissen geladen werden? (0 = nein; 1 = ja). </target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_breadcrumb" resname="extension.template.constants.flag.webcomponent_breadcrumb">
-				<source>porthd-breadcrumb: Should the JavaScript for the web component 'porthd-breadcrumb' be loaded to generate a breadcrumb menu? (0 = no; 1 = yes).</source>
-				<target>porthd-breadcrumb: Soll das JavaScript für das Web-Component 'porthd-breadcrumb' zur Generierung eine Brotkrumen-Menüs (breadcrumb-menu) geladen werden? (0 = nein; 1 = ja).</target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_codeview" resname="extension.template.constants.flag.webcomponent_codeview">
-				<source>porthd-codeview: Should the JavaScript for the web component 'porthd-codeview' be loaded to display code snippets? (0 = no; 1 = yes).</source>
-				<target>porthd-codeview: Soll das JavaScript für das Web-Component 'porthd-codeview' zur Anzeige von Code-Schnipseln geladen werden? (0 = nein; 1 = ja).</target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_listselectfilter" resname="extension.template.constants.flag.webcomponent_listselectfilter">
-				<source>porthd-porthd-listselect: Should the JavaScript for the web component 'porthd-listselect' be loaded for mega menus and complex lists? (0 = no; 1 = yes).</source>
-				<target>porthd-porthd-listselect: Soll das JavaScript für das Webcomponent 'porthd-listselect' für Mega-Menüs und komplexe Listen geladen werden? (0 = nein; 1 = ja). </target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_icalendar" resname="extension.template.constants.flag.webcomponent_icalendar">
-				<source>porthd-icalendar: Should the JavaScript for the web component 'porthd-icalendar' be loaded to generate ics files? (0 = no; 1 = yes).</source>
-				<target>porthd-icalendar: Soll das JavaScript für das Webcomponent 'porthd-icalendar' zum Generieren von ics-Dateien geladen werden? (0 = nein; 1 = ja). </target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_infomodal" resname="extension.template.constants.flag.webcomponent_infomodal">
-				<source>porthd-infomodal: Should the JavaScript for the web component 'porthd-infomodal' be loaded for a template-controlled popup with additional information? (0 = no; 1 = yes).</source>
-				<target>porthd-infomodal: Soll das JavaScript für das Web-Component 'porthd-infomodal' für ein über Templates gesteuertes Popup mit Zusatzinfos geladen werden? (0 = nein; 1 = ja).</target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_timezone" resname="extension.template.constants.flag.webcomponent_timezone">
-				<source>porthd-timezone: Should the JavaScript for the 'porthd-timezone' web component be loaded for time zone conversion? (0 = no; 1 = yes).</source>
-				<target>porthd-timezone: Soll das JavaScript für das Webcomponent 'porthd-timezone' zur Zeitzone-Konvertierung geladen werden? (0 = nein; 1 = ja). </target>
-			</trans-unit>
-			<trans-unit id="extension.template.constants.flag.webcomponent_vcard" resname="extension.template.constants.flag.webcomponent_vcard">
-				<source>porthd-vcard: Should the JavaScript for the web component 'porthd-vcard' be loaded to generate vcf files? (0 = no; 1 = yes).</source>
-				<target>porthd-vcard: Soll das JavaScript für das Webcomponent 'porthd-vcard' zum Generieren von vcf-Dateien geladen werden? (0 = nein; 1 = ja). </target>
+			<trans-unit id="extension.template.constants.moduleOrClassicFallback" resname="extension.template.constants.moduleOrClassicFallback">
+				<source>Include web components as a module or classically?: Include the path using the module mechanism of JavaScript via TypoScript. If the path is missing, the modules are included classically via TypoScript.</source>
+				<target>Webcomponents als Modul oder klassisch einbinden?: Inkludiere den Pfad mithilfe des Modul-Mechaninsmusses von JavaScript über Typoscript. Wenn Pfad fehlt, werden die Module klassisch via Typoscript eingebunden.</target>
 			</trans-unit>
 
 		</body>

@@ -9,20 +9,6 @@
             display: none;
         }
 
-        porthd-listselect label {
-            font-weight: bold;
-        }
-
-        porthd-listselect ul strong {
-            font-weight: lighter;
-        }
-
-        porthd-listselect label {
-            font-style:italic;
-        }
-        porthd-listselect input {
-            color:blue;
-        }
     </style>
 </head>
 <body>
@@ -322,7 +308,7 @@
                 .hidden { display: none; }
             </style>
             <form>
-            <label for="levelRange">${this.getAttribute('label-range') || 'level'} [<span id="levelDisplay"></span>]</label>
+            <label for="levelRange">${this.getAttribute('label-range') || 'level'} </label>
             <input id="levelRange" style="background: #0078d7;" type="range" min="1" step="1" value="${this.defaultLevel}" />
             <label for="searchInMenu">${this.getAttribute('label-search') || 'search'}</label>
             <input type="search" id="searchInMenu" value="${this.getAttribute('filter') || ''}" placeholder="${this.getAttribute('placeholder') || 'input search text'}" list="autocompleteList" autocomplete="off"/>
@@ -332,7 +318,6 @@
             </form>
         `;
             this.levelRange = this.shadowRoot.getElementById("levelRange");
-            this.levelDisplay = this.shadowRoot.getElementById("levelDisplay");
             this.searchInMenu = this.shadowRoot.getElementById("searchInMenu");
             this.autocompleteList = this.shadowRoot.getElementById("porthd-listselectfilter-autocompleteList");
             let charset = this.getAttribute('trim') || '({[]})*+-.,';
@@ -361,7 +346,6 @@
             });
             this.levelRange.max = maxDepth;
             this.levelRange.value = Math.min(this.defaultLevel, maxDepth);
-            this.levelDisplay.textContent = this.levelRange.value;
         }
         trimCustomCharacters(testString) {
             // return testString.replace(new RegEx, '');
@@ -402,7 +386,6 @@
 
         filterLevels() {
             const maxLevel = parseInt(this.levelRange.value);
-            this.levelDisplay.textContent = maxLevel;
             const listItems = this.querySelectorAll(this.listTags);
             const searchText = this.searchInMenu.value.toLowerCase();
 

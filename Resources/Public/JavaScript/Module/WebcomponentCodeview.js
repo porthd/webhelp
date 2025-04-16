@@ -1,3 +1,4 @@
+
 class PorthDCodeView extends HTMLElement {
   async connectedCallback() {
     // Standardwerte für Attribute
@@ -108,5 +109,5 @@ class PorthDCodeView extends HTMLElement {
   }
 }
 
-customElements.define('porthd-codeview',PorthDCodeView);
 
+export default PorthDCodeView;

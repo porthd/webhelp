@@ -7,14 +7,14 @@
 </head>
 <body>
 
-<porthd-icalevent button-label="Termin speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
+<porthd-icalendarevent button-label="Termin speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Zwei <strong>minimal definierte</strong> Termine speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Zwei <strong>minimal definierte</strong> Termine speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
@@ -26,8 +26,8 @@
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting 2</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehler wegen fehlender UID bei zwei minimal definierten Termine speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehler wegen fehlender UID bei zwei minimal definierten Termine speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
@@ -38,8 +38,8 @@
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting 2</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehler wegen Zusatzzeile wischen END und Beginn bei Einlesen von zwei minimal definierten Terminen speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehler wegen Zusatzzeile wischen END und Beginn bei Einlesen von zwei minimal definierten Terminen speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
@@ -52,32 +52,32 @@
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting 2</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehlende UID bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehlende UID bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehlende DTSTAMP bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehlende DTSTAMP bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTART">20240401T090000Z</div>
     <div data-id="SUMMARY">My Meeting</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehlende DTSTART bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehlende DTSTART bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="SUMMARY">My Meeting</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehlende SUMMARY bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehlende SUMMARY bei Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
     <div data-id="DTSTART">20240401T090000Z</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Unerlaubtes Zusatzfeld - Fehler Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Unerlaubtes Zusatzfeld - Fehler Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="bad-or-good">Error</div>
     <div data-id="UID">87654321@example.com</div>
@@ -88,15 +88,15 @@
     <div data-id="METHOD">PUBLISH</div>
     <div data-id="X-WR-CALNAME">Beispiel-Kalender</div>
     <div data-id="X-WR-TIMEZONE">Europe/Berlin</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Fehlende benötigte Felder - Fehler beim Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Fehlende benötigte Felder - Fehler beim Termin speichern" button-style="background: red; color: white; padding: 15px; border-radius: 8px;"
                  file-name="meeting">
     <div data-id="METHOD">PUBLISH</div>
     <div data-id="X-WR-CALNAME">Beispiel-Kalender</div>
     <div data-id="X-WR-TIMEZONE">Europe/Berlin</div>
-</porthd-icalevent><br />
+</porthd-icalendarevent><br />
 
-<porthd-icalevent button-label="Volldefinierten Termin speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
+<porthd-icalendarevent button-label="Volldefinierten Termin speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
                  file-name="fullmeeting" prodid="-//Example Corp//NONSGML Event//EN">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
@@ -121,8 +121,8 @@
     <div data-id="EXDATE">20240408T090000Z</div>
     <div data-id="CREATED">20240301T100000Z</div>
     <div data-id="LAST-MODIFIED">20240329T110000Z</div>
-</porthd-icalevent><br />
-<porthd-icalevent button-label="Zwei voll definierte Termine speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
+</porthd-icalendarevent><br />
+<porthd-icalendarevent button-label="Zwei voll definierte Termine speichern" button-style="background: green; color: white; padding: 15px; border-radius: 8px;"
                  file-name="fullmeeting" prodid="-//Example Corp//NONSGML Event//EN">
     <div data-id="UID">87654321@example.com</div>
     <div data-id="DTSTAMP">20240329T120000Z</div>
@@ -172,7 +172,7 @@
     <div data-id="EXDATE">20240408T090000Z</div>
     <div data-id="CREATED">20240301T100000Z</div>
     <div data-id="LAST-MODIFIED">20240329T110000Z</div>
-</porthd-icalevent><br />
+</porthd-icalendarevent><br />
 
 <script>
     class PorthDICalendarEventGenerator extends HTMLElement {
@@ -248,7 +248,7 @@
             if (prodid) {
                 icalData += `PRODID:${prodid}\n`;
             } else {
-                icalData += `PRODID:-//PorthDieter porthd//webhelp porthd-icalevent//DE\n`;
+                icalData += `PRODID:-//PorthDieter porthd//webhelp porthd-icalendarevent//DE\n`;
             }
             // Beginne das Event
             icalData += "BEGIN:VEVENT\n";
@@ -349,7 +349,7 @@
         }
     }
 
-    customElements.define("porthd-icalevent", PorthDICalendarEventGenerator);
+    customElements.define("porthd-icalendarevent", PorthDICalendarEventGenerator);
 </script>
 
 </body>

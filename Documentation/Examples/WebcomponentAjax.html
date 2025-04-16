@@ -6,12 +6,38 @@
     <title>Porthd - AJAX Web Component</title>
 </head>
 <body>
-<h1>AJAX Datenabruf</h1>
-<porthd-ajax url="https://jsonplaceholder.typicode.com/posts/1" loading-text="Daten werden geladen..." error-text="Fehler beim Abrufen" callback="customTransform" button-text="<span>Lade Daten</span>" button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"></porthd-ajax><br />
-<porthd-ajax url="https://jsonplaceholder.typicode.com/posts/1" loading-text="Daten werden geladen..." error-text="Fehler beim Abrufen" callback="customTransform" button-text="<span>Lade Daten</span>" button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;" max-click=" "></porthd-ajax><br />
-<porthd-ajax url="https://jsonplaceholder.typicode.com/posts/1" loading-text="Daten werden geladen..." error-text="Fehler beim Abrufen" callback="customTransform" button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"></porthd-ajax><br />
+<h1><strong>porthd-ajax:</strong> Zeige per Ajax geladene `Sitemap.xml` unter Callback-Nutzung mit Button</h1>
+<h2>fehlerhafter Ajax-Import ohne Button</h2>
 
-<porthd-ajax url="https://jsonplaceholder.typicode.com/posts/1" loading-text="Daten werden geladen..." error-text="Fehler beim Abrufen" callback="customTransform" button-text="<span>Lade Daten</span>" button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;" max-click="3"></porthd-ajax><br />
+<porthd-ajax url="././foobarsfre87w354tsdbsfbnkdf.html" loading-text="Daten werden geladen..."
+             error-text="Fehler beim Abrufen"
+             button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"
+             callback="escapeForPorthdInfoModal"
+></porthd-ajax>
+<h2>Ajax-Import mit Button (Nachlader für Google-Maps oder Social-Media</h2>
+<porthd-ajax url="https://düddelei.de/sitemap.xml" loading-text="Daten werden geladen..."
+             error-text="Fehler beim Abrufen"
+             button-text="<span>Lade Daten</span>"
+             button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"
+             callback="escapeForPorthdInfoModal"
+></porthd-ajax>
+
+<h2>Ohne Button</h2>
+<porthd-ajax url="https://düddelei.de/sitemap.xml" loading-text="Daten werden geladen..."
+             error-text="Fehler beim Abrufen"
+             button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"
+             callback="escapeForPorthdInfoModal"
+></porthd-ajax>
+<h2>Mit Button und mit Starttext und maximal 3 Klickevent</h2>
+
+<porthd-ajax url="./sitemap.xml"
+             loading-text="Daten werden geladen..." error-text="Fehler beim Abrufen" callback="escapeForPorthdInfoModal"
+             button-text="<span>Lade Daten</span>"
+             button-style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px;"
+             max-click="3">
+    <h4>Der Ajax-Request wird aus Gründen des Datenschutzes erst ausgeführt, wenn sie auf den Button klicken. </h4>
+</porthd-ajax>
+
 
 <script>
     function customTransform(data) {
@@ -21,7 +47,7 @@
     class PorthDAjax extends HTMLElement {
         constructor() {
             super();
-            this.attachShadow({ mode: 'open' });
+            this.attachShadow({mode: 'open'});
             this.clickCount = 0;
         }
 
@@ -76,14 +102,16 @@
             output.innerHTML = `<div aria-live="polite">${loadingText}</div>`;
 
             try {
+                console.log('url', url);
                 const response = await fetch(url);
                 if (!response.ok) throw new Error('net work error');
+                console.log('response', response);
                 let data = await response.text();
-
+                console.log('data', data);
                 if (callback && typeof window[callback] === 'function') {
                     data = window[callback](data);
                 }
-
+                console.log('data', data);
                 output.innerHTML = `<div aria-live="polite">${data}</div>`;
             } catch (error) {
                 output.innerHTML = `<div aria-live="assertive">${errorText}</div>`;
@@ -92,6 +120,21 @@
     }
 
     customElements.define('porthd-ajax', PorthDAjax);
+
+
+    function escapeForPorthdInfoModal(inputString) {
+
+        const escapeHtml = str => str.replace(/[&<>"']/g, match => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[match]));
+
+        return `<pre>${escapeHtml(inputString)}</pre>`;
+    }
+
 </script>
 </body>
 </html>
