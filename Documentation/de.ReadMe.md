@@ -29,12 +29,17 @@ Die Webcomponents wurde via [vibe coding](https://en.wikipedia.org/wiki/Vibe_cod
 | [porthd-bar-chart-table](#parameter-in-porthd-barchart-from-table) | Chart zu Tabelle                         | Transformiere Daten aus einer Tabelle in ein Balkendiagramm und biete dem Nutzer verschiedene Auswahlmöglichkeiten.                                                                                                                                                                                                          | ---                                                                                                                                                                                                                                                                                                                                                                                                       |
 | [porthd-breadcrumb](#parameter-in-porthd-breadcrumb)               | Sprechenden Lin in Breadcrumb            | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Gedanken zur Breadcrumb-Navigation in Englisch](https://www.smashingmagazine.com/2009/03/breadcrumbs-in-web-design-examples-and-best-practices/) [Codebeispiel für gute Breadcrumb-Navigationshilfe in Deutsch](https://web.dev/patterns/components/breadcrumbs?hl=de)                                                                                                                                  |
 | [porthd-codeview](#parameter-in-porthd-codeview)                   | Code-Ansicht                             | Es handelt sich um eine anpassbare Webkomponente zur Darstellung von Code mit Syntax-Hervorhebung, unterstützt durch Themes, Zeilennummern und die Möglichkeit, den Code in die Zwischenablage zu kopieren.                                                                                                                  | [Prism-Dokumentation in Englisch](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                              |
-| [porthd-icalendarevent](#parameter-in-porthd-icalendarevent)            | HTML-Event-Daten als ics-Datei anbieten  | Erstellt einen Events-Termin-Datei und wandelt eine inkludierte Liste mit Daten zu einem oder mehreren Events in eine downloadbare ics-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                    | [Spezifikation](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20ist%20ein%20Datenformat%20zum%20Austausch%20von%20Kalenderinhalten%2C,wurde%20urspr%C3%BCnglich%201998%20in%20RFC%202445%20%5B10%5D%20definiert.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
+| [porthd-icalendarevent](#parameter-in-porthd-icalendarevent)       | HTML-Event-Daten als ics-Datei anbieten  | Erstellt einen Events-Termin-Datei und wandelt eine inkludierte Liste mit Daten zu einem oder mehreren Events in eine downloadbare ics-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                    | [Spezifikation](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20ist%20ein%20Datenformat%20zum%20Austausch%20von%20Kalenderinhalten%2C,wurde%20urspr%C3%BCnglich%201998%20in%20RFC%202445%20%5B10%5D%20definiert.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
 | [porthd-infomodal](#parameter-in-porthd-infomodal)                 | Info-Popup per Template definieren       | erfordert die Definition von einem Template für das Modalfenster mit Schließen-Button und einem inkludierten Startbutton, um so die Ausgabe von einem Modal-Fenster zur Information zur Verfügung zu stellen. Über die Attribute `data-*` und gleichnamigen Slots im &lt;template&gt; sind dynamische Modal-Fenster möglich. | [Erläuterungen zu Modal-Fenstern in Deutsch](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                                                                                                                              |
 | [porthd-listselect](#parameter-in-porthd-listselect)               | Mega-Menüs interaktiv steuern/filtern    | Beschränkte die Ausgabe von langen verschachtelten Listen auf einen definierten Level und erlaubt die Suche verborgenen Teilüberschriften.                                                                                                                                                                                   | [Übersicht zu Menüs im Web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown-Menü für große Verschachtelung](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Mediaevent zu Menüs](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                                                                                                     |
+| [porthd-tabnavi](#parameter-in-porthd-tabnavi)                     | Element mit Tab-Navigation               | Verschiebe Kind-Element in Tabs und erstelle einen Tab-Navigation               |                                                                                                                                                                                                                                                                                                           |
 | [porthd-timezone](#parameter-in-porthd-timezone)                   | Zeitzoneumrechnung für Datum             | Konvertiere einen Zeit von einer Zeitzone in eine andere Zeitzone und präsentiere das Ergebnis innerhalb des Tags des Web-Component, wobei die Startzeit entwender vom Tag inkludiert sein muss oder aber im Attribut `datetime` stehen muss.                                                                                | [ Erläuterungen zur Zeitzone in Deutsch](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                                                                                                                                          |
 | [porthd-tocgenerator](#Parameter-in-porthd-tocgenerator)           | Inhaltsverzeichnis                       | Erstelle für einen definierten Block ein unnumeriertes oder nummerierte Inhaltsverzeichnis.                                                                                                                                                                                                                                  | [Artikel zum Inhaltsverzeichnis](https://ichi.pro/de/erstellen-eines-inhaltsverzeichnisses-mit-html-und-css-127834089968964)                                                                                                                                                                                                                                                                              |
 | [porthd-vcard](#parameter-in-porthd-vcard)                         | HTML-Kontaktdaten als vcf-Datei anbieten | Erstelt eine Kontakt-Datei und wandelt die inkludierte Liste von Daten in eine downloadbare vcf-Datei um. Die inkludierten Daten werden validiert.                                                                                                                                                                           | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) ---  [RFC6350-Spezifikation](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                                                                                                                                    |
+
+## Definierter Symfony-Befehl
+
+[TYPO3-Konsolenbefehl fox xlf-Refactoringstatistiken](#typo3-konsolenbefehl-fox-xlf-refactoringstatistiken) Erstellt Statistiken zu Aspekten des Refactorings Ihrer xlf-Dateien. (Dieser Befehl ist ab TYPO3 10.4 verfügbar.)
 
 ---
 
@@ -631,6 +636,144 @@ Der Code ist per vibe-coding entstanden und wurde bisher nicht sogfältig geprü
 
 ---
 
+### Parameter in porthd-tabnavi
+
+#### Übersicht
+
+`<porthd-tabnavi>` ist ein benutzerdefiniertes HTML-Webcomponent, das eingebettete Inhalte auf Basis eines strukturellen Markers (`startpanel`) in responsive Tabs umwandelt. Es bietet erweiterte Steuerung durch Attribute, automatische Benennung, Styling-Optionen und dynamisches CSS-Injektionsverhalten.
+
+#### Funktionsweise
+
+Beim Einfügen eines `<porthd-tabnavi>`-Elements in das DOM wird:
+
+1. Das definierte `startpanel`-Element gesucht (z.B. `h2`, `.tab`, etc.).
+2. Alle Kind-Elemente anhand dieser Markierung in Panels gruppiert.
+3. Eine Navigation aus Buttons (`<button>`) in einem `<nav>` erzeugt.
+4. Die Panels mit zugehöriger ID versehen und entsprechend gesteuert (anzeigen/verstecken).
+5. Optional ein Tab als Starttab festgelegt oder automatisch der erste Tab angezeigt.
+6. Die Tabnavigation bei nur einem Tab ausgeblendet.
+7. Styles dynamisch injiziert, sofern noch nicht vorhanden.
+
+#### Attribute
+
+| Attribut       | Pflicht | Typ      | Beschreibung |
+|----------------|---------|----------|--------------|
+| `startpanel`   | ✅ Ja    | `string` | Selektor (z.B. `h2`, `.tab`) zur Definition von Startpunkten für neue Panels. |
+| `name`         | ❌ Nein | `string` | Name für die Tab-IDs (`name-0`, `name-1`, …). Wenn nicht gesetzt, wird ein zufälliger Name generiert. |
+| `listclass`    | ❌ Nein | `string` | CSS-Klassen für die Tab-Navigation (`<nav>`). |
+| `liststyle`    | ❌ Nein | `string` | Inline-Styling für die Tab-Navigation. |
+| `tabclass`     | ❌ Nein | `string` | CSS-Klasse für Tab-Buttons. |
+| `tabstyle`     | ❌ Nein | `string` | Inline-Styling für Tab-Buttons. |
+| `panelclass`   | ❌ Nein | `string` | CSS-Klasse für Panel-Container. |
+| `panelstyle`   | ❌ Nein | `string` | Inline-Styling für Panel-Container. |
+
+#### Zusätzliche Steuerattribute
+
+| Attribut am Startpanel | Beschreibung |
+|------------------------|--------------|
+| `tabname`              | Optionaler benutzerdefinierter Titel für den Tab. |
+| `starttab`             | Wenn gesetzt (auch leer oder `1`), wird dieses Panel beim Laden angezeigt. |
+
+#### Verhalten bei Sonderfällen
+
+| Fall | Verhalten |
+|------|-----------|
+| `startpanel` fehlt | Fehlermeldung in der Konsole, Inhalt bleibt unverändert. |
+| Kein gültiges Element für `startpanel` | Fehlermeldung, Inhalt bleibt unverändert. |
+| Inhalte **vor dem ersten startpanel** | In einem separaten Tab mit Titel `default` gruppiert. Warnung in der Konsole. |
+| Kein Panel mit `starttab` | Der erste Tab wird automatisch aktiviert. |
+| Nur ein Panel erzeugt | Tabnavigation wird **nicht** eingeblendet. |
+
+#### Beispiele
+
+##### Beispiel 1: Fehlendes `startpanel`
+```html
+<porthd-tabnavi>
+    <div>Dies ist Inhalt ohne startpanel</div>
+</porthd-tabnavi>
+```
+
+##### Beispiel 2: Drei `div`s, `startpanel="h2"`
+```html
+<porthd-tabnavi startpanel="h2" name="demo2">
+    <h2 tabname="Tab A">Titel A</h2>
+    <div>Inhalt A</div>
+    <h2 tabname="Tab B">Titel B</h2>
+    <div>Inhalt B</div>
+    <h2 tabname="Tab C">Titel C</h2>
+    <div>Inhalt C</div>
+</porthd-tabnavi>
+```
+
+##### Beispiel 3: Struktur mit `starttab`
+```html
+<porthd-tabnavi startpanel="h2" name="demo3">
+    <div>Intro-Text</div>
+    <h2 tabname="Start 1" starttab>Panel 1</h2>
+    ...
+</porthd-tabnavi>
+```
+
+#### Dynamische CSS-Injektion
+
+Wird automatisch ins `<head>` eingefügt, falls noch nicht vorhanden:
+
+```css
+porthd-tabnavi nav.tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+porthd-tabnavi nav.tablist button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+porthd-tabnavi nav.tablist button.active {
+  background-color: #ddd;
+  font-weight: bold;
+}
+porthd-tabnavi .tabpanel {
+  display: none;
+}
+porthd-tabnavi .tabpanel.active {
+  display: block;
+}
+```
+
+#### DOM-Struktur nach Initialisierung
+
+```html
+<porthd-tabnavi>
+  <nav class="tablist">
+    <button class="active" data-tab="name-0">Tab A</button>
+    <button data-tab="name-1">Tab B</button>
+    ...
+  </nav>
+  <div id="name-0" class="tabpanel active">...</div>
+  <div id="name-1" class="tabpanel">...</div>
+</porthd-tabnavi>
+```
+
+#### Methodenübersicht
+
+| Methode                  | Funktion |
+|--------------------------|----------|
+| `connectedCallback()`    | Initialisiert die Komponente beim Einfügen ins DOM |
+| `_injectStylesIfNeeded()`| Fügt CSS ein, falls noch nicht vorhanden |
+| `_checkCSSClass()`       | Prüft vorhandene Stylesheets |
+| `_showTab(id)`           | Aktiviert Tab und Panel |
+| `_generateRandomName()`  | Erstellt eindeutigen Namen |
+| `_getTabName(el, index)` | Liefert Tab-Namen oder Fallback |
+
+#### Accessibility (a11y)
+
+- `role="tablist"`, `role="tab"`, `role="tabpanel"`
+- ARIA-Verbesserungen möglich
+
+
+---
+
 ### Parameter in porth-timezone
 Das Web-Component `<porthd-timezone>` erlaubt die Konvertierung eines Datums mit Uhrzeit einer bestimmten Zeitzone in ein Datum einer anderen Zeitzone. Laut KI sollen dabei Aspekte wie die Sommerzeit beachtet werden.
 Ein Nutzungsbeispiel findet man hier in der Dokumentation in ['Examples/WebcomponentTimeZone.html'](./Examples/WebcomponentTimeZone.html)
@@ -702,7 +845,7 @@ Das Web Component sollte leer sein, weil der Platz für das dynamisch generierte
 
 #### Dynamisches Rebuild
 
-Wenn sich der DOM innerhalb des Ziel-Blocks ändert (z. B. neue Überschrift per Button), kann das TOC durch Setzen des `rebuild`-Attributs neu aufgebaut werden:
+Wenn sich der DOM innerhalb des Ziel-Blocks ändert (z.B. neue Überschrift per Button), kann das TOC durch Setzen des `rebuild`-Attributs neu aufgebaut werden:
 
 ```js
 const toc = document.querySelector('#mein-toc');
@@ -815,5 +958,95 @@ Um die Datei zur Verfügung zu stellen, wird im web-component ein Button im Shad
 | button-label | Text des Buttons, wobei der TEXT auch HTML- und SVG-Tags enhalten kann.|
 | button-style | CSS-Eigenschaften für das style-Element des Buttons im Shadow-DOM|
 | file-name    | Name für die Datei, die heruntergeladen wird|
+
+---
+
+## Definierte symfony Kommandos dür die Konsole
+
+
+### TYPO3-Konsolenbefehl fox xlf-Refactoringstatistiken
+
+#### Übersicht
+
+Dieses TYPO3-Konsolenkommando analysiert `.xlf`-Sprachdateien und durchsucht alle Dateien eines angegebenen Startordners, um die Nutzung von Sprach-Keys statistisch auszuwerten. Das Kommando generiert eine CSV-Datei mit verschiedenen Kennzahlen zur Nutzung, Duplizierung und Nichtverwendung von Keys.
+
+Es wird angenommen, dass der Nutzer die CSV-Datei mit einer Tabellekalkulation wie Excel (Microsoft) oder calc (LibriOffice) untersucht.
+
+Hinweis: Der Nutzer sollte die erstellte CSV-Datei aus Sicherheitsgründen aus dem Untersuchungsordner löschen.
+
+
+#### Befehl
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /pfad/zum/startordner [--extensionlist=ext1,ext2,...]
+```
+
+##### Parameter
+
+| Parameter | Typ | Beschreibung |
+|----------|-----|--------------|
+| `path` | Argument (erforderlich) | Pfad zum Startordner |
+| `--extensionlist` | Option (optional) | Kommagetrennte Liste von Dateierweiterungen, in denen Keys gezählt werden sollen.<br>**Standard:** `html,htm,php,js,txt,typoscript,tsconfig,flex,t3s,t3c` |
+
+#### Beschreibung der Analyse
+
+##### Was wird analysiert?
+
+1. Alle `.xlf`-Dateien im angegebenen Verzeichnisbaum (rekursiv).
+2. Automatische Erkennung der unterstützten Sprachen anhand des Dateinamens.
+3. Jede gefundene `trans-unit` mit einem `id`-Attribut wird gezählt – auch bei Mehrfachvorkommen.
+4. Alle anderen Dateien im Projektverzeichnis werden nach diesen Keys durchsucht.
+
+##### Sprachdateibenennung
+
+- `locallang.xlf` → default-Sprache
+- `de.locallang.xlf` → deutsche Sprachvariante
+- `en.locallang.xlf` → englisch usw.
+
+#### Struktur der CSV-Datei
+
+Die erzeugte Datei hat den Namen:
+
+```
+xlf-statistic_YYYY-MM-DD-HH-MM-SS.csv
+```
+
+##### Spaltenübersicht
+
+| Spalte | Beschreibung |
+|--------|--------------|
+| `path` | Pfad zur ursprünglichen XLF-Datei |
+| `basename` | Basename: `dateiname:key` |
+| `{language}` | Je eine Spalte pro Sprache – Anzahl der Vorkommen in dieser Sprachdatei |
+| `{extension}` | Je eine Spalte pro definierter Extension – Anzahl der Vorkommen im jeweiligen Dateityp |
+| `otherExtension` | Anzahl der Vorkommen in Dateien mit nicht gelisteter Extension |
+| `countAll` | Summe der Vorkommen in allen Nicht-XLF-Dateien |
+| `unused` | Zeigt `"Löschen?"`, wenn `countAll == 0`, sonst leer |
+| `doubleUse` | Zeigt `"Reduzieren"`, wenn der Key in einer Sprachdatei mehrfach vorkommt |
+
+#### Beispiele
+
+##### Standardaufruf
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /var/www/html
+```
+
+##### Mit eigener Extension-Liste
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /var/www/html --extensionlist=php,html,twig
+```
+
+#### Hinweise für Entwickler
+
+- Der Befehl nutzt `simplexml_load_file()` zur Analyse der XML-Dateien.
+- Die Ausführung kann bis zu **30 Minuten** dauern (`set_time_limit(1800)`).
+- Keys werden exakt anhand des Vorkommens im Dateitext gezählt (kein Parsing/Tokenizing).
+- Die Datei wird im Zielverzeichnis gespeichert.
+
+#### Letzte Aktualisierung
+
+2025-05-31
 
 ---

@@ -29,6 +29,7 @@ course, not my fault as the developer, but the AI's, because it didn't take all 
    By default, TypoScript uses the `page = PAGE` object to load the JavaScript.
 3. Use the web component tags in your Fluid templates. See the `Resources/Private/Examples` folder for how to use the
    web component tags in Fluid templates or HTML.
+4. The
 
 ## Defined Web Components
 
@@ -38,12 +39,17 @@ course, not my fault as the developer, but the AI's, because it didn't take all 
 | [porthd-bar-chart-table](#parameters-in-porthd-barchart-from-table) | Chart to Table                          | Transforms data from a table into a bar chart and offers the user various selection options.                                                                                                                                                                                                | ---                                                                                                                                                                                                                                                                                                                                                                                                 |
 | [porthd-breadcrumb](#parameters-in-porthd-breadcrumb)               | Talking link in breadcrumb              | Convert a time from one time zone to another and present it                                                                                                                                                                                                                                 |
 | [porthd-codeview](#parameters-in-porthd-codeview)                   | Code viewer                             | It is a customizable web component for rendering syntax-highlighted code snippets with support for themes, line numbers, and clipboard copying.                                                                                                                                             | [prism-Dokumentation in English](https://prismjs.com/docs/)                                                                                                                                                                                                                                                                                                                                         |
-| [porthd-icalendarevent](##parameters-in-porthd-icalendarevent)           | Provide HTML event data as an ics file  | Creates an events appointment file and converts an included list of data for one or more events into a downloadable ics file. The included data is validated.                                                                                                                               | [Specification](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20is%20a%20data%20format%20for%20exchange%20of%20calendar%20contents%2C,was%20originally%20defined%20in%20RFC%202445%20%5B10%5D%20in%201998.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
+| [porthd-icalendarevent](##parameters-in-porthd-icalendarevent)      | Provide HTML event data as an ics file  | Creates an events appointment file and converts an included list of data for one or more events into a downloadable ics file. The included data is validated.                                                                                                                               | [Specification](https://icalendar.org/RFC-Specifications/all/) --- [en-Wikipedia](https://en.wikipedia.org/wiki/ICalendar#:~:text=iCalendar%20is%20a%20data%20format%20for%20exchange%20of%20calendar%20contents%2C,was%20originally%20defined%20in%20RFC%202445%20%5B10%5D%20in%201998.) --- [de-Wikipedia-Media](https://de.wikipedia.org/wiki/ICalendar#/media/Datei:ICalendarSpecification.png) |
 | [porthd-infomodal](#parameters-in-porthd-infomodal)                 | Define info popups using a template     | requires the definition of a template for the modal window with a close button and an included start button to provide the output of a modal window for information purposes. Dynamic modal windows are possible using the `data-*` attribute and slots of the same name in the <template>. | [Explanations of modal windows in German](https://ichi.pro/de/4-moglichkeiten-zum-erstellen-eines-modalen-popup-felds-mit-html-css-und-vanilla-javascript-83364935438226)                                                                                                                                                                                                                           |
 | [porthd-listselect](#parameters-in-porthd-listselect)               | Interactively control/filter mega menus | Restricts the output of long nested lists to a defined level and allows searching hidden subheadings.                                                                                                                                                                                       | [Overview of menus on the web](https://sketch.media/index.php?option=com_content&view=article&id=851) --- [Dropdown menu for large nesting](https://wiki.selfhtml.org/wiki/Navigation/Dropdown-Men%C3%BC) --- [Media event on menus](https://www.mediaevent.de/tutorial/css-responsive-menu.html)                                                                                                   |
+| [porthd-tabnavi](#parameters-in-porthd-tabnavi)                         | tabnavigation-element                   | Generate from included content-tags the tabs with the corrosponding tabnavigation                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                    |
 | [porthd-timezone](#parameters-in-porthd-timezone)                   | Time zone conversion for dates          | Convert a time from one time zone to another and present the result within the web component's tag. The start time must either be included in the tag or be in the `datetime` attribute.                                                                                                    | [Explanations of the time zone in German](https://www.mediaevent.de/javascript/get-timezone.html)                                                                                                                                                                                                                                                                                                   |
 | [porthd-tocgenerator](#Parameter-in-porthd-tocgenerator)            | Table of Contents                       | Create an unnumbered or numbered table of contents for a defined block.                                                                                                                                                                                                                     | [Article on the table of contents](https://ichi.pro/de/erstellen-eines-inhaltsverzeichnisses-mit-html-und-css-127834089968964)                                                                                                                                                                                                                                                                      |
 | [porthd-vcard](#parameters-in-porthd-vcard)                         | Provide HTML contact data as a vcf file | Creates a contact file and converts the included list of data into a downloadable vcf file. The included data is validated.                                                                                                                                                                 | [de-Wikipedia](https://de.wikipedia.org/wiki/VCard#Spezifikation) --- [RFC6350 Specification](https://www.rfc-editor.org/rfc/rfc6350)                                                                                                                                                                                                                                                               |
+
+## Defined symfony command for console
+
+[TYPO3 Console Command fox xlf-refactoring-statistics](#typo3-console-command-fox-xlf-refactoring-statistics) make statistics about aspects of refactoring for your xlf-files. (This command is available from TYPO3 10.4 or later.)
 
 ---
 
@@ -718,6 +724,146 @@ The code was created using vibe-coding and has not been thoroughly tested yet.
 
 ---
 
+### Parameters in porthd-tabnavi
+
+#### Overview
+
+`<porthd-tabnavi>` is a custom HTML web component that converts embedded content into responsive tabs based on a structural marker (`startpanel`). It offers advanced control through attributes, automatic naming, styling options, and dynamic CSS injection behavior.
+
+#### How it Works
+
+When a `<porthd-tabnavi>` element is inserted into the DOM, the following is done:
+
+1. The defined `startpanel` element is searched for (e.g., `h2`, `.tab`, etc.).
+2. All child elements are grouped into panels based on this marker.
+3. A navigation of buttons (`<button>`) is created in a `<nav>`.
+4. The panels are assigned an associated ID and controlled accordingly (show/hide).
+5. Optionally, a tab can be set as the start tab, or the first tab can be displayed automatically.
+6. Tab navigation is hidden if only one tab is present.
+7. Styles are dynamically injected if not already present.
+
+#### Attributes
+
+| Attribute | Required | Type | Description |
+|----------------|---------|-----------|---------------|
+| `startpanel` | ✅ Yes | `string` | Selector (e.g., `h2`, `.tab`) for defining starting points for new panels. |
+| `name` | ❌ No | `string` | Name for the tab IDs (`name-0`, `name-1`, ...). If not set, a random name is generated. |
+| `listclass` | ❌ No | `string` | CSS classes for tab navigation (`<nav>`). |
+| `liststyle` | ❌ No | `string` | Inline styling for tab navigation. |
+| `tabclass` | ❌ No | `string` | CSS class for tab buttons. |
+| `tabstyle` | ❌ No | `string` | Inline styling for tab buttons. |
+| `panelclass` | ❌ No | `string` | CSS class for panel containers. |
+| `panelstyle` | ❌ No | `string` | Inline styling for panel containers. |
+
+#### Additional control attributes
+
+| Attribute on the start panel | Description |
+|------------------------|--------------|
+| `tabname` | Optional custom title for the tab. |
+| `starttab` | If set (also empty or `1`), this panel will be displayed on load. |
+
+#### Behavior in special cases
+
+| Case | Behavior |
+|------|-----------|
+| `startpanel` is missing | Error message in the console, content remains unchanged. |
+| No valid element for `startpanel` | Error message, content remains unchanged. |
+| Content **before the first startpanel** | Grouped in a separate tab with the title `default`. Warning in the console. |
+| No panel with `starttab` | The first tab is activated automatically. |
+| Only one panel is created | Tab navigation is **not** displayed. |
+
+#### Examples
+
+##### Example 1: Missing `startpanel`
+```html
+<porthd-tabnavi>
+<div>This is content without a startpanel</div>
+</porthd-tabnavi>
+```
+
+##### Example 2: Three `div`s, `startpanel="h2"`
+```html
+<porthd-tabnavi startpanel="h2" name="demo2">
+<h2 tabname="Tab A">Title A</h2>
+<div>Content A</div>
+<h2 tabname="Tab B">Title B</h2>
+<div>Content B</div>
+<h2 tabname="Tab C">Title C</h2>
+<div>Content C</div>
+</porthd-tabnavi>
+```
+
+##### Example 3: Structure with `starttab`
+```html
+<porthd-tabnavi startpanel="h2" name="demo3">
+<div>Intro text</div>
+<h2 tabname="Start 1" starttab>Panel 1</h2>
+...
+</porthd-tabnavi>
+```
+
+#### Dynamic CSS injection
+
+Will be automatically inserted into the `<head>` if it isn't already there:
+
+```css
+porthd-tabnavi nav.tablist {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 0.5rem;
+
+margin-bottom: 1rem;
+
+}
+porthd-tabnavi nav.tablist button {
+... }
+porthd-tabnavi nav.tablist button.active {
+background-color: #ddd;
+font-weight: bold;
+}
+porthd-tabnavi .tabpanel {
+display: none;
+}
+porthd-tabnavi .tabpanel.active {
+display: block;
+}
+```
+
+#### DOM structure after initialization
+
+```html
+<porthd-tabnavi>
+<nav class="tablist">
+<button class="active" data-tab="name-0">Tab A</button>
+<button data-tab="name-1">Tab B</button>
+...
+</nav>
+<div id="name-0" class="tabpanel active">...</div>
+<div id="name-1" class="tabpanel">...</div>
+</porthd-tabnavi>
+```
+
+#### Method overview
+
+| Method | Function |
+|--------------------------|----------|
+| `connectedCallback()` | Initializes the component when inserted into the DOM |
+| `_injectStylesIfNeeded()`| Inserts CSS if not already present |
+| `_checkCSSClass()` | Checks existing stylesheets |
+| `_showTab(id)` | Activates tab and panel |
+| `_generateRandomName()` | Creates a unique name |
+| `_getTabName(el, index)` | Returns tab name or fallback |
+
+#### Accessibility (a11y)
+
+- `role="tablist"`, `role="tab"`, `role="tabpanel"`
+- ARIA enhancements possible
+
+---
+
 ### Parameters in porthd-timezone
 
 The web component `<porthd-timezone>` allows the conversion of a date and time from a specific time zone to a date in
@@ -922,3 +1068,90 @@ The attributes can be used to define the appearance and text of the button.
 
 ---
 
+## symfony command
+
+### TYPO3 Console Command fox xlf-refactoring-statistics
+
+#### Overview
+
+This TYPO3 console command analyzes `.xlf` language files and searches all files in a specified start folder to statistically evaluate the usage of language keys. The command generates a CSV file with various metrics for key usage, duplication, and non-usage.
+
+It is assumed that the user is analyzing the CSV file with a spreadsheet such as Excel (Microsoft) or Calc (LibriOffice).
+
+Note: The user should delete the created CSV file from the analysis folder for security reasons.
+
+#### Command
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /path/to/startfolder [--extensionlist=ext1,ext2,...]
+```
+
+##### Parameters
+
+| Parameter | Type | Description |
+|----------|-----|---------------|
+| `path` | Argument (required) | Path to the starting folder |
+| `--extensionlist` | Option (optional) | Comma-separated list of file extensions in which keys should be counted.<br>**Default:** `html,htm,php,js,txt,typoscript,tsconfig,flex,t3s,t3c` |
+
+#### Description of the analysis
+
+##### What is analyzed?
+
+1. All `.xlf` files in the specified directory tree (recursive).
+2. Automatic detection of supported languages ​​based on the file name.
+3. Every `trans-unit` found with an `id` attribute is counted – even if it occurs multiple times.
+4. All other files in the project directory are searched for these keys.
+
+##### Language file naming
+
+- `locallang.xlf` → default language
+- `de.locallang.xlf` → German language variant
+- `en.locallang.xlf` → English, etc.
+
+#### Structure of the CSV file
+
+The generated file has the name:
+
+```
+xlf-statistic_YYYY-MM-DD-HH-MM-SS.csv
+```
+
+##### Column overview
+
+| Column | Description |
+|--------|---------------|
+| `path` | Path to the original XLF file |
+| `basename` | Basename: `filename:key` |
+| `{language}` | One column per language – number of occurrences in this language file |
+| `{extension}` | One column per defined extension – number of occurrences in the respective file type |
+| `otherExtension` | Number of occurrences in files with an unlisted extension |
+| `countAll` | Total occurrences in all non-XLF files |
+| `unused` | Displays `"Delete?"` if `countAll == 0`, otherwise empty |
+| `doubleUse` | Displays `"Reduce"` if the key occurs multiple times in a language file |
+
+#### Examples
+
+##### Standard call
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /var/www/html
+```
+
+##### With custom extension list
+
+```bash
+vendor/bin/typo3 extension:xlf-statistics /var/www/html --extensionlist=php,html,twig
+```
+
+#### Notes for developers
+
+- The command uses `simplexml_load_file()` to parse XML files.
+- Execution can take up to **30 minutes** (`set_time_limit(1800)`).
+- Keys are counted exactly based on their occurrence in the file text (no parsing/tokenizing).
+- The file is saved in the target directory.
+
+#### Last updated
+
+2025-05-31
+
+---

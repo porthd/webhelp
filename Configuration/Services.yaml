@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Porthd\Webhelp\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+
+  Porthd\Webhelp\Command\XlfStatisticsCommand:
+    tags:
+      - name: console.command
+        command: 'webhelp:xlf-statistics'
+        description: 'This command make a statistic of the usage of xlf-keys in your folder.'
