@@ -1,6 +1,7 @@
 class PorthDTabNavi extends HTMLElement {
 
   selfname = 'porthd-tabnavi';
+
   constructor() {
     super();
   }
@@ -10,10 +11,9 @@ class PorthDTabNavi extends HTMLElement {
     this._injectStylesIfNeeded();
 
 
-
     const startpanel = this.getAttribute('startpanel');
     if (!startpanel) {
-      console.error("Fehler: Attribut 'startpanel' fehlt bei <"+this.selfname+">.");
+      console.error("Fehler: Attribut 'startpanel' fehlt bei <" + this.selfname + ">.");
       return;
     }
 
@@ -122,43 +122,37 @@ class PorthDTabNavi extends HTMLElement {
     panelWrappers.forEach(p => this.appendChild(p));
   }
 
-  _checkCSSClass(className) {
-    for (let sheet of document.styleSheets) {
-      for (let rule of sheet.cssRules) {
-        if (rule.selectorText && rule.selectorText.includes(className)) {
-          return true; // Klasse existiert
-        }
-      }
-    }
-    return false; // Klasse nicht gefunden
-  }
-
-
   _injectStylesIfNeeded() {
     const stylePart = this.selfname;
-    if (this._checkCSSClass(stylePart)) {
+    const styleId = `${stylePart}-styles`;
+
+    // Überprüfen, ob die Styles bereits definiert wurden
+    if (!document.getElementById(styleId)) {
       const style = document.createElement('style');
       style.id = styleId;
       style.textContent = `
         ${stylePart} nav.tablist {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
         ${stylePart} nav.tablist button {
-          cursor: pointer;
-          padding: 0.5rem 1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
         }
         ${stylePart} nav.tablist button.active {
-          background-color: #ddd;
-          font-weight: bold;
+            background-color: #ddd;
+            font-weight: bold;
         }
         ${stylePart} .tabpanel {
-          display: none;
+            display: none;
         }
         ${stylePart} .tabpanel.active {
-          display: block;
+            display: block;
         }
       `;
       document.head.appendChild(style);
