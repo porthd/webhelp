@@ -9,6 +9,7 @@ import PorthDListSelectFilter from "./Module/WebcomponentListSelectFilter.js";
 import PorthDTimezone from "./Module/WebcomponentTimeZone.js";
 import PorthDTocGenerator from "./Module/WebcomponentTocGenerator.js";
 import PorthdVCardGenerator from "./Module/WebcomponentVCard.js";
+import PorthDTabNavi from "./Module/WebcomponentTabNavi";
 
 customElements.define('porthd-ajax', PorthDAjax);
 customElements.define('porthd-breadcrumb', PorthDBreadcrumb);
@@ -17,6 +18,7 @@ customElements.define('porthd-codeview',PorthDCodeView);
 customElements.define("porthd-icalendarevent", PorthDICalendarEventGenerator);
 customElements.define('porthd-infomodal', PorthDInfoModal);
 customElements.define("porthd-listselect", PorthDListSelectFilter);
+customElements.define('porthd-tabnavi', PorthDTabNavi);
 customElements.define('porthd-timezone', PorthDTimezone);
 customElements.define('porthd-tocgenerator', PorthDTocGenerator);
 customElements.define("porthd-vcard", PorthdVCardGenerator);

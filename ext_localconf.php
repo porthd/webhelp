@@ -45,6 +45,7 @@ call_user_func(function () {
                      'flagICalendar' => 'WebcomponentICalendar.js',
                      'flagInfomodal' => 'WebcomponentInfomodal.js',
                      'flagListSelectFilter' => 'WebcomponentListSelectFilter.js',
+                     'flagTabNavi' => 'WebcomponentTabNavi.js.js',
                      'flagTimeZone' => 'WebcomponentTimeZone.js',
                      'flagTocGenerator' => 'WebcomponentTocGenerator.js',
                      'flagVCard' => 'WebcomponentVCard.js',
